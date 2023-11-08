@@ -1,4 +1,4 @@
 @extends('layouts.app')
-<title>Dashboard - SPPD Puskesmas Ketrowonojoyo</title>
+<title>Admin - SPPD Puskesmas Ketrowonojoyo</title>
 @section('content')
 @endsection

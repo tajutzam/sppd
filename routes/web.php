@@ -21,7 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', function () {
     return view('auth.login');
 });
-
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+Route::get('/', function () {
+    return view('admin.index');
 });
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+})->name('dashboard');
+Route::get('/admin/spt', function () {
+    return view('admin.spt');
+})->name('spt');
