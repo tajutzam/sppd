@@ -27,6 +27,7 @@ Route::get('/', function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard');
 })->name('dashboard');
+
 Route::get('/admin/spt', function () {
     return view('admin.spt');
 })->name('spt');
