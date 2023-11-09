@@ -13,7 +13,7 @@
                                         <img src="images/sppd-logo.png" alt="" style="width: 100px; height: 100px">
                                     </div>
                                     <div class="text-center mb-3">
-                                        <h4 style="font-weight: bold ">PUSKESMAS KETROWONOJOYO</h4>
+                                        <h4 style="font-weight: bold ">PUSKESMAS <br> KETROWONOJOYO</h4>
                                     </div>
 
 

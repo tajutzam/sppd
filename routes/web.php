@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/login', [AuthController::class , 'login'])->middleware('guest');
-Route::post('/login', [AuthController::class , 'postLogin'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->middleware('guest');
+Route::post('/login', [AuthController::class, 'postLogin'])->name('login');
 
 // Route::get('/dashboard', function () {
 //     // return view('admin.dashboard');
@@ -32,7 +32,18 @@ Route::post('/login', [AuthController::class , 'postLogin'])->name('login');
 Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('dashboard', function () {
         return view('admin.dashboard');
+    })->name('dashboard');
+    Route::get('index', function () {
+        return view('admin.dashboard');
     });
+    Route::prefix("master")->group(function () {
+        Route::get("destination", function () {
+
+        });
+    });
+    Route::get("spt", function () {
+        return view('admin.spt');
+    })->name('spt');
 });
 
 

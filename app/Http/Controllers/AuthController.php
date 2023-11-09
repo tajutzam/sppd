@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\WebException;
 use App\Services\AuthService;
+// use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -32,7 +34,8 @@ class AuthController extends Controller
         $data = $this->validate($request, $rules);
         $successLogin = $this->authService->login($data['email'], $data['password']);
         if ($successLogin) {
-            return redirect('admin/dashboard');
+            Alert::success("Sukses", "Berhasil Login");
+            return redirect('admin/index');
         }
         throw new WebException('Email Atau Password Anda Salah');
     }

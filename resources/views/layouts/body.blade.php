@@ -13,14 +13,7 @@
     <div id="main-wrapper">
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <svg class="logo-abbr" width="55" height="55" viewbox="0 0 55 55" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M27.5 0C12.3122 0 0 12.3122 0 27.5C0 42.6878 12.3122 55 27.5 55C42.6878 55 55 42.6878 55 27.5C55 12.3122 42.6878 0 27.5 0ZM28.0092 46H19L19.0001 34.9784L19 27.5803V24.4779C19 14.3752 24.0922 10 35.3733 10V17.5571C29.8894 17.5571 28.0092 19.4663 28.0092 24.4779V27.5803H36V34.9784H28.0092V46Z"
-                        fill="url(#paint0_linear)"></path>
-                    <defs>
-                    </defs>
-                </svg>
+                <img src="{{ asset('/') }}images/sppd-logo.png" alt="" style="width: 55px; height: 55px;">
                 <div class="brand-title">
                     <h2 class="">SPPD</h2>
                     <span class="brand-sub-title">Puskesmas Ketrowonojoyo</span>
@@ -38,9 +31,9 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-                            <div class="dashboard_bar">
+                            {{-- <div class="dashboard_bar">
                                 Dashboard
-                            </div>
+                            </div> --}}
                         </div>
                         <ul class="navbar-nav header-right">
                             {{-- <li class="nav-item d-flex align-items-center">
@@ -258,18 +251,7 @@
                                         </svg>
                                         <span class="ms-2">Profil </span>
                                     </a>
-                                    <a href="email-inbox.html" class="dropdown-item ai-icon">
-                                        <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success"
-                                            width="18" height="18" viewbox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path
-                                                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
-                                            </path>
-                                            <polyline points="22,6 12,13 2,6"></polyline>
-                                        </svg>
-                                        <span class="ms-2">Inbox </span>
-                                    </a>
+
                                     <a href="page-error-404.html" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger"
                                             width="18" height="18" viewbox="0 0 24 24" fill="none"
@@ -299,25 +281,14 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    <li><a href="{{ route('dashboard') }}" class="" aria-expanded="false">
                             <i class="fas fa-home"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
-                        <ul aria-expanded="false">
-                            <li><a href="index.html">Dashboard Light</a></li>
-                            <li><a href="index-2.html">Dashboard Dark</a></li>
-                            <li><a href="project-page.html">Project</a></li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="kanban.html">Kanban</a></li>
-                            <li><a href="calendar-page.html">Calendar</a></li>
-                            <li><a href="message.html">Messages</a></li>
-                        </ul>
-
                     </li>
-
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                            <i class="fas fa-info-circle"></i>
-                            <span class="nav-text">Apps</span>
+                            <i class="fas fa-table"></i>
+                            <span class="nav-text">Master Data</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="app-profile.html">Profile</a></li>
@@ -343,7 +314,15 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+
+                    <li><a class=" " href="{{ route('spt') }}" aria-expanded="false">
+                            <i class="fas fa-file-alt"></i>
+                            <span class="nav-text">SPT</span>
+                        </a>
+                    </li>
+
+
+                    {{-- <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-chart-line"></i>
                             <span class="nav-text">Charts</span>
                         </a>
@@ -355,8 +334,8 @@
                             <li><a href="chart-sparkline.html">Sparkline</a></li>
                             <li><a href="chart-peity.html">Peity</a></li>
                         </ul>
-                    </li>
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    </li> --}}
+                    {{-- <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                             <i class="fab fa-bootstrap"></i>
                             <span class="nav-text">Bootstrap</span>
                         </a>
@@ -379,8 +358,8 @@
                             <li><a href="ui-grid.html">Grid</a></li>
 
                         </ul>
-                    </li>
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    </li> --}}
+                    {{-- <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-heart"></i>
                             <span class="nav-text">Plugins</span>
                         </a>
@@ -393,13 +372,13 @@
                             <li><a href="map-jqvmap.html">Jqv Map</a></li>
                             <li><a href="uc-lightgallery.html">Light Gallery</a></li>
                         </ul>
-                    </li>
-                    <li><a href="widget-basic.html" class="" aria-expanded="false">
+                    </li> --}}
+                    {{-- <li><a href="widget-basic.html" class="" aria-expanded="false">
                             <i class="fas fa-user-check"></i>
                             <span class="nav-text">Widget</span>
                         </a>
-                    </li>
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    </li> --}}
+                    {{-- <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-file-alt"></i>
                             <span class="nav-text">Forms</span>
                         </a>
@@ -410,17 +389,9 @@
                             <li><a href="form-pickers.html">Pickers</a></li>
                             <li><a href="form-validation.html">Form Validate</a></li>
                         </ul>
-                    </li>
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                            <i class="fas fa-table"></i>
-                            <span class="nav-text">Table</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
-                            <li><a href="table-datatable-basic.html">Datatable</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                    </li> --}}
+
+                    {{-- <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-clone"></i>
                             <span class="nav-text">Pages</span>
                         </a>
@@ -439,9 +410,9 @@
                             <li><a href="page-lock-screen.html">Lock Screen</a></li>
                             <li><a href="empty-page.html">Empty Page</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
-                <div class="side-bar-profile">
+                {{-- <div class="side-bar-profile">
                     <div class="d-flex align-items-center justify-content-between mb-3">
                         <div class="side-bar-profile-img">
                             <img src="{{ asset('/') }}images/user.jpg" alt="">
@@ -464,13 +435,12 @@
                             <span class="sr-only">45% Complete</span>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
-                <div class="copyright">
-                    <p><strong>Fillow Saas Admin</strong> © 2021 All Rights Reserved</p>
-                    <p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p>
-                </div>
+
             </div>
         </div>
-        @yield('content')
+        <div class="content-body">
+            @yield('content')
+        </div>
     </div>
