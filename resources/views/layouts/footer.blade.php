@@ -1,3 +1,8 @@
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright © Puskesmas Ketrowonojoyo Developed by <a href="" target="_blank"></a> 2023</p>
+        </div>
+    </div>
     <script src="{{ asset('/') }}vendor/global/global.min.js"></script>
     <script src="{{ asset('/') }}vendor/chart.js/Chart.bundle.min.js"></script>
     <script src="{{ asset('/') }}vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
@@ -13,6 +18,21 @@
     <script src="{{ asset('/') }}js/dashboard/dashboard-1.js"></script>
 
     <script src="{{ asset('/') }}vendor/owl-carousel/owl.carousel.js"></script>
+
+    <script src="{{ asset('/') }}js/custom.min.js"></script>
+    <script src="{{ asset('/') }}js/dlabnav-init.js"></script>
+    <script src="{{ asset('/') }}js/demo.js"></script>
+    <script src="{{ asset('/') }}js/styleSwitcher.js"></script>
+    <script src="vendor/global/global.min.js"></script>
+    <script src="vendor/chart.js/Chart.bundle.min.js"></script>
+    <!-- Apex Chart -->
+    <script src="vendor/apexchart/apexchart.js"></script>
+
+    <!-- Datatable -->
+    <script src="{{ asset('/') }}vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('/') }}js/plugins-init/datatables.init.js"></script>
+
+    <script src="{{ asset('/') }}vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 
     <script src="{{ asset('/') }}js/custom.min.js"></script>
     <script src="{{ asset('/') }}js/dlabnav-init.js"></script>

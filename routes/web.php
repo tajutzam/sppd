@@ -38,12 +38,21 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     });
     Route::prefix("master")->group(function () {
         Route::get("destination", function () {
-
         });
+        Route::get("employee", function () {
+            return view('admin.master.employee');
+        })->name('employee');
+        Route::get("cadress", function () {
+            return view('admin.master.cadress');
+        })->name('cadress');
+        Route::get("type-destination", function () {
+            return view('admin.master.type-destination');
+        })->name('type-destination');
+        Route::get("place", function () {
+            return view('admin.master.place');
+        })->name('place');
     });
     Route::get("spt", function () {
         return view('admin.spt');
     })->name('spt');
 });
-
-
