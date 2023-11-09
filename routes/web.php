@@ -27,7 +27,9 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login');
 //     // return view('admin.dashboard');
 // });
 
-
+Route::get('/forgotpassword', function () {
+    return view('auth.forgotpassword');
+})->name('forgotpassword');
 
 Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('dashboard', function () {
@@ -51,6 +53,31 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::get("place", function () {
             return view('admin.master.place');
         })->name('place');
+
+        Route::get("bank-account", function () {
+            return view('admin.master.bank-account');
+        })->name('bank-account');
+
+        Route::get("cost", function () {
+            return view('admin.master.cost');
+        })->name('cost');
+
+        Route::get("transportation", function () {
+            return view('admin.master.transportation');
+        })->name('transportation');
+
+        Route::get("categories", function () {
+            return view('admin.master.categories');
+        })->name('categories');
+
+        Route::get("account", function () {
+            return view('admin.master.account');
+        })->name('account');
+
+
+        Route::get("user", function () {
+            return view('admin.master.user');
+        })->name('user');
     });
     Route::get("spt", function () {
         return view('admin.spt');

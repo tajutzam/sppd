@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<title>Data Pegawai - SPPD Puskesmas Ketrowonojoyo</title>
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -62,7 +63,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
+                                        <th>Nama Pegawai</th>
                                         <th>Jabatan</th>
                                         <th>Status</th>
                                         <th>Aksi</th>
@@ -82,7 +83,8 @@
                                                 <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                         class="fas fa-pencil-alt"></i></a>
                                                 <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash"></i></a>
+                                                        class="fa fa-trash" data-bs-toggle="modal"
+                                                        data-bs-target="#delete-employee"></i></a>
                                             </div>
                                         </td>
 
@@ -100,7 +102,8 @@
                                                 <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                         class="fas fa-pencil-alt"></i></a>
                                                 <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash"></i></a>
+                                                        class="fa fa-trash" data-bs-toggle="modal"
+                                                        data-bs-target="#delete-employee"></i></a>
                                             </div>
                                         </td>
 
@@ -109,6 +112,26 @@
                             </table>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="delete-employee">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Hapus Pegawai</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="pt-3" style="font-size: 17px">Apakah anda yakin ingin menghapus [Nama pengguna] ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
+                    <button type="button" class="btn btn-primary">Hapus</button>
                 </div>
             </div>
         </div>

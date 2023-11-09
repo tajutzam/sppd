@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Data Tempat - SPPD Puskesmas Ketrowonojoyo</title>
+<title>Data Kategori - SPPD Puskesmas Ketrowonojoyo</title>
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -55,7 +55,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h2 class="card-title " style="font-weight: bold; font-size: 25px">Data Tempat</h2>
+                        <h2 class="card-title " style="font-weight: bold; font-size: 25px">Data Kategori</h2>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -63,7 +63,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Tempat</th>
+                                        <th>Nama Kategori</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -77,7 +77,7 @@
                                                         class="fas fa-pencil-alt"></i></a>
                                                 <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
                                                         class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-place"></i></a>
+                                                        data-bs-target="#delete-categories"></i></a>
                                             </div>
                                         </td>
 
@@ -90,8 +90,8 @@
                                                 <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                         class="fas fa-pencil-alt"></i></a>
                                                 <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-place"></i></a>
+                                                        class="fa fa-trash"data-bs-toggle="modal"
+                                                        data-bs-target="#delete-categories"></i></a>
                                             </div>
                                         </td>
 
@@ -105,17 +105,16 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="delete-place">
+    <div class="modal fade" id="delete-categories">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Hapus Tempat</h5>
+                    <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Hapus Kategori</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="pt-3" style="font-size: 17px">Apakah anda yakin ingin menghapus [Nama Tempat] ini?</p>
+                    <p class="pt-3" style="font-size: 17px">Apakah anda yakin ingin menghapus Kategori ini?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
