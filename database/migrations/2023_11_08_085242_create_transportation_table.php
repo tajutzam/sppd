@@ -10,12 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('transportation', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->enum('role', ['admin', 'super-admin']);
+            $table->foreignUuid('type_transportation')->references('id')->on('type_transportation');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('transportation');
     }
 };

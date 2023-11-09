@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -25,6 +26,16 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+
+        });
+
+
+        $this->renderable(function (Throwable $e) {
+            if ($e instanceof WebException) {
+                // mengirim error sesuai message web exceptions
+                DB::rollBack();
+                return back()->withErrors($e->getMessage());
+            }
         });
     }
 }

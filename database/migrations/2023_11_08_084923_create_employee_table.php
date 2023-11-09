@@ -10,12 +10,16 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('employee', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->enum('role', ['admin', 'super-admin']);
+            $table->string('nip');
+            $table->string('rank');
+            $table->string('group');
+            $table->string('position');
+            $table->integer('daily_money')->default(0);
+            $table->integer('transport_money')->default(0);
+            $table->integer('food_money')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('employee');
     }
 };

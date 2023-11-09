@@ -15,8 +15,18 @@
                                     <div class="text-center mb-3">
                                         <h4 style="font-weight: bold ">PUSKESMAS KETROWONOJOYO</h4>
                                     </div>
+
+
+                                    @if ($errors->any())
+                                        <div class="alert alert-danger border-0 bg-danger alert-dismissible fade show">
+                                            <div class="text-white">{{ $errors->first() }}</div>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                        </div>
+                                    @endif
                                     <h4 class="text-center mb-4"></h4>
-                                    <form action="index.html">
+                                    <form action="{{ route('login') }}" method="post">
+                                        @csrf
                                         <div class="mb-3">
                                             <label for="inputEmailAddress" class="form-label">Username</label>
                                             <input type="email" class="form-control" id="inputEmailAddress"
@@ -64,6 +74,7 @@
             </div>
         </div>
     </div>
+
 
 
 

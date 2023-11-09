@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +20,19 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/login', function () {
-    return view('auth.login');
+Route::get('/login', [AuthController::class , 'login'])->middleware('guest');
+Route::post('/login', [AuthController::class , 'postLogin'])->name('login');
+
+// Route::get('/dashboard', function () {
+//     // return view('admin.dashboard');
+// });
+
+
+
+Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
+    Route::get('dashboard', function () {
+        return view('admin.dashboard');
+    });
 });
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-});
+
