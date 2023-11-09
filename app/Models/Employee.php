@@ -19,7 +19,8 @@ class Employee extends Model
         'position',
         'daily_money',
         'food_money',
-        'transport_money'
+        'transport_money',
+        'role'
     ];
 
     protected $table = 'employee';

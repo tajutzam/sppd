@@ -8,5 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Destination extends Model
 {
-    use HasFactory,Uuids;
+    use HasFactory, Uuids;
+
+
+    protected $fillable = [
+        'type_destination_id',
+        'places_id',
+        'type'
+    ];
+
+    protected $table = 'destination';
 }

@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->integer('daily_money')->default(0);
             $table->integer('transport_money')->default(0);
             $table->integer('food_money')->default(0);
+            $table->enum('role', ['cadres', 'employee']);
             $table->timestamps();
         });
     }

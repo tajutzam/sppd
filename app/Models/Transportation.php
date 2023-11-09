@@ -8,5 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transportation extends Model
 {
-    use HasFactory,Uuids;
+    use HasFactory, Uuids;
+
+
+    protected $fillable = [
+        'name',
+        'type_transportation'
+    ];
+
+    protected $table = 'transportation';
 }

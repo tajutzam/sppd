@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class BankAccount extends Model
 {
     use HasFactory, Uuids;
+
+    protected $fillable = [
+        'account_number'
+    ];
+    protected $table = 'bank_account';
 }

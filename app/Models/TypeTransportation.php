@@ -9,5 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class TypeTransportation extends Model
 {
     use HasFactory, Uuids;
-    
+
+    protected $fillable = [
+        'name'
+    ];
+
+    protected $table = 'type_destination';
+
 }

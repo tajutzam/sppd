@@ -8,7 +8,7 @@ use App\Models\Employee;
 
 use function PHPUnit\Framework\isNull;
 
-class EmployeeService
+class EmployeeService implements Service
 {
 
     private Employee $employee;
@@ -61,7 +61,7 @@ class EmployeeService
     public function findById($id)
     {
         $employee = $this->employee->where('id', $id)->first();
-        
+
 
         if (!isset($employee)) {
             throw new WebException('Pegawai Tidak Ditemukan');

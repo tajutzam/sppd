@@ -11,7 +11,10 @@ class Account extends Model
     use HasFactory, Uuids;
 
 
-    protected $fillable = [];
+    protected $fillable = 
+    [
+        'name'
+    ];
 
 
     protected $table = "account";

@@ -29,7 +29,8 @@ class EmployeeServiceTest extends TestCase
             'position' => 'ob',
             'daily_money' => 0,
             'food_money' => 1000,
-            'transport_money' => 12000
+            'transport_money' => 12000,
+            'role' => 'cadres'
         ]);
         assertNotNull($create);
     }
@@ -47,7 +48,8 @@ class EmployeeServiceTest extends TestCase
                 'position' => 'ob',
                 'daily_money' => 0,
                 'food_money' => 1000,
-                'transport_money' => 12000
+                'transport_money' => 12000 , 
+                'role' => 'employee'
             ]
         );
         $service->update(
@@ -70,7 +72,7 @@ class EmployeeServiceTest extends TestCase
                 'name' => 'employe-test-new',
                 'nip' => '123123123123',
             ],
-            1
+            123213
         );
     }
 

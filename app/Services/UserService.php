@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UserService
+class UserService implements Service
 {
 
     private User $user;
@@ -43,7 +43,23 @@ class UserService
         throw new WebException('Ops , Password Lama Tidak Sesuai');
     }
 
-    public function findAll(){
+    public function create(array $data)
+    {
+
+    }
+
+    public function update($id, $request)
+    {
+
+    }
+
+    public function delete($id)
+    {
+
+    }
+
+    public function findAll()
+    {
         return $this->user->all();
     }
 

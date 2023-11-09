@@ -3,31 +3,31 @@
 namespace App\Services;
 
 use App\Exceptions\WebException;
-use App\Models\Places;
+use App\Models\TypeDestination;
 
-class PlacesService implements Service
+class TypeDestinationService implements Service
 {
 
-    private Places $places;
+    private TypeDestination $typeDestination;
 
 
     public function __construct()
     {
-        $this->places = new Places();
+        $this->typeDestination = new TypeDestination();
     }
 
 
     public function findAll()
     {
-        return $this->places->all();
+        return $this->typeDestination->all();
     }
 
 
     public function findById($id)
     {
-        $place = $this->places->where('id', $id)->first();
+        $place = $this->typeDestination->where('id', $id)->first();
         if (!isset($place)) {
-            throw new WebException('Ops , Tempat Tidak Ditemukan');
+            throw new WebException('Ops , Tipe Tujuan Tidak Ditemukan');
         }
         return $place;
     }
@@ -37,7 +37,7 @@ class PlacesService implements Service
     {
         try {
             //code...
-            $this->places->create($request);
+            $this->typeDestination->create($request);
 
         } catch (\Throwable $th) {
             //throw $th;
@@ -50,7 +50,7 @@ class PlacesService implements Service
     {
         $place = $this->findById($id);
         if (!isset($place)) {
-            throw new WebException("Ops , Id Tempat Tidak Ditemukan");
+            throw new WebException("Ops , Id Tipe Tujuan Tidak Ditemukan");
         }
         $updated = $place->update(
             $request
@@ -58,7 +58,7 @@ class PlacesService implements Service
         if ($updated) {
             return;
         }
-        throw new WebException('Ops , Gagal Memperbarui Tempat Terjadi Kesalahan');
+        throw new WebException('Ops , Gagal Memperbarui Tipe Tujuan Terjadi Kesalahan');
     }
 
     public function delete($id)
@@ -71,5 +71,7 @@ class PlacesService implements Service
             throw new WebException($th->getMessage());
         }
     }
+
+
 
 }

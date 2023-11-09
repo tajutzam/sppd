@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Places extends Model
 {
-    use HasFactory;
+    use HasFactory , Uuids;
+
+    protected $fillable = [
+        'name'
+    ];
+
+    protected $table = 'places';
 }

@@ -10,9 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('instructions_employees', function (Blueprint $table) {
+        Schema::create('instructions_employees_cadres', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('users')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('users')->nullable()->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('instructions')->references('id')->on('instructions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
@@ -23,6 +23,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('instructions_employees');
+        Schema::dropIfExists('instructions_employees_cadres');
     }
 };
