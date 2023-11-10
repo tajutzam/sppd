@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\WebException;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankAccountController;
@@ -52,6 +53,13 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         });
         Route::get("employee", [EmployeeController::class, "employees"])->name('employee');
         Route::delete("employee", [EmployeeController::class, "deleteEmployee"])->name('employee-delete');
+
+        Route::get("employee/create", function () {
+            // throw new WebException("yaa");
+            return view('admin.add.add-employee');
+        })->name('add-employee');
+
+        Route::post("employee/create", [EmployeeController::class, "storeEmployee"])->name("employee-post");
 
         Route::get("cadress", [EmployeeController::class, "cadress"])->name('cadress');
 

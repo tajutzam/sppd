@@ -48,7 +48,7 @@ class EmployeeController extends Controller
     {
         $rules = [
             'name' => 'required',
-            'nip' => 'required|numeric',
+            'nip' => 'required',
             'rank' => 'required',
             'group' => 'required',
             'position' => 'required',
@@ -75,6 +75,7 @@ class EmployeeController extends Controller
         $data = $this->validate($request, $rules, $message);
         $this->employeeService->create($data);
         Alert::success("Sukses", "Berhasil Menambahkan Pegawai");
+        return redirect('/admin/master/employee');
     }
 
 
