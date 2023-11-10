@@ -67,6 +67,20 @@ class CategoryService implements Service
         return $category;
     }
 
+    public function findWithoutId($id)
+    {
+        return $this->category->where('id', '<>', $id)->get();
+    }
+
+    public function validateName($data, $name)
+    {
+        foreach ($data as $key => $value) {
+            # code...
+            if ($value['name'] == $name) {
+                throw new WebException("Ops , Nama Kategori Sudah Digunakan");
+            }
+        }
+    }
 
 
 

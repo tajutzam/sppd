@@ -7,6 +7,7 @@ use App\Models\Cost;
 use App\Services\CostService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CostServiceTest extends TestCase
@@ -20,9 +21,9 @@ class CostServiceTest extends TestCase
 
         $create = $service->create([
             'name' => 'employe-test',
-        
+
         ]);
-    self::assertNotNull($create);
+        self::assertNotNull($create);
     }
 
     public function test_update_success()
@@ -37,8 +38,8 @@ class CostServiceTest extends TestCase
         );
         $service->update(
             [
-                'name' => 'employe-test-new',
-            
+                'name' => Str::random(2),
+
             ],
             $Cost->id
         );

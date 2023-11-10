@@ -55,12 +55,25 @@ class UserService implements Service
 
     public function delete($id)
     {
-
+        $user = $this->findById($id);
+        try {
+            //code...
+            $user->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+            throw new WebException($th->getMessage());
+        }
     }
 
     public function findAll()
     {
         return $this->user->all();
+    }
+
+    public function findAllWithoutId($id)
+    {
+        return $this->user->where('id', '<>', $id)->get();
+
     }
 
     public function findById($id)

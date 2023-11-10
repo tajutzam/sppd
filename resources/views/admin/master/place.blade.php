@@ -49,7 +49,6 @@
                 </div>
             </div>
         </div>
-
         <!-- row -->
         <div class="row">
             <div class="col-12">
@@ -68,35 +67,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-place"></i></a>
-                                            </div>
-                                        </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-place"></i></a>
-                                            </div>
-                                        </td>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item['name'] }}</td>
+                                            <td>
+                                                <div class="d-flex ">
+                                                    <a href="#"
+                                                        class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+                                                    <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-place"
+                                                        data-id="{{ $item['id'] }}" data-name="{{ $item['name'] }}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
 
-
-                                    </tr>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -105,6 +95,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="modal fade" id="delete-place">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -115,13 +106,36 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="pt-3" style="font-size: 17px">Apakah anda yakin ingin menghapus [Nama Tempat] ini?</p>
+                    <p id="name-place" class="pt-3" style="font-size: 17px">Apakah anda yakin ingin menghapus [Nama
+                        Tempat] ini?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Hapus</button>
+                    <form action="{{ route('place-delete', ['id' => 1]) }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <input type="text" name="id" id="id-place-delete" hidden>
+                        <button type="submit" class="btn btn-primary">Hapus</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+
+
+    <script>
+        $(document).ready(function() {
+            // Capture click event on the delete button
+            $('.btn-delete').on('click', function() {
+                // Retrieve the data-id attribute from the clicked button
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+
+                // Update the modal content with the retrieved text
+                $('#name-place').text(`Apakah Anda Yakin Ingin Menghapus Tempat ${name} ini ?`);
+                $('#id-place-delete').val(id);
+            });
+        });
+    </script>
 @endsection

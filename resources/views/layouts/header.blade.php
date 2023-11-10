@@ -26,8 +26,11 @@
     <!-- Custom Stylesheet -->
     <link href="{{ asset('/') }}vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="{{ asset('/') }}css/style.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="vendor/toastr/css/toastr.min.css">
+    
     <!-- Style css -->
     <link href="{{ asset('/') }}css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 </head>

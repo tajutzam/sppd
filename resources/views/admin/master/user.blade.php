@@ -44,27 +44,34 @@
                                         <th>No</th>
                                         <th>Nama Pengguna</th>
                                         <th>Email</th>
+                                        <th>Hak Akses</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            zhaqian@gmail.com
-                                        </td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-user"></i></a>
-                                            </div>
-                                        </td>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item['name'] }}</td>
+                                            <td>
+                                                {{ $item['email'] }}
+                                            </td>
+                                            <td>{{ $item['role'] }}</td>
+                                            <td>
+                                                <div class="d-flex ">
+                                                    <a href="#"
+                                                        class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+                                                    <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-user"
+                                                        data-id="{{ $item['id'] }}" data-name="{{ $item['name'] }}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
 
-                                    </tr>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -82,13 +89,33 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="pt-3" style="font-size: 17px">Apakah anda yakin ingin menghapus [Nama User] ini?</p>
+                    <p id="user-name" class="pt-3" style="font-size: 17px"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Hapus</button>
+                    <form action="{{ route('user-delete') }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <input type="text" name="id" id="id-user" hidden>
+                        <button type="submit" class="btn btn-primary">Hapus</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            // Capture click event on the delete button
+            $('.btn-delete').on('click', function() {
+                // Retrieve the data-id attribute from the clicked button
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+
+                // Update the modal content with the retrieved text
+                $('#user-name').text(`Apakah Anda Yakin Ingin Menghapus User Dengan Nama ${name} ini ?`);
+                $('#id-user').val(id);
+            });
+        });
+    </script>
 @endsection

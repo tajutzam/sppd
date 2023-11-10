@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Services\EmployeeService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 use function PHPUnit\Framework\assertNotEmpty;
@@ -22,7 +23,7 @@ class EmployeeServiceTest extends TestCase
         $service = new EmployeeService();
 
         $create = $service->create([
-            'name' => 'employe-test',
+            'name' => 'kader-test',
             'nip' => '123123123123',
             'rank' => 'asdas',
             'group' => 'asdas',
@@ -31,6 +32,18 @@ class EmployeeServiceTest extends TestCase
             'food_money' => 1000,
             'transport_money' => 12000,
             'role' => 'cadres'
+        ]);
+
+        $create = $service->create([
+            'name' => 'employe-test',
+            'nip' => '123123123123',
+            'rank' => 'asdas',
+            'group' => 'asdas',
+            'position' => 'ob',
+            'daily_money' => 0,
+            'food_money' => 1000,
+            'transport_money' => 12000,
+            'role' => 'employee'
         ]);
         assertNotNull($create);
     }
@@ -48,13 +61,13 @@ class EmployeeServiceTest extends TestCase
                 'position' => 'ob',
                 'daily_money' => 0,
                 'food_money' => 1000,
-                'transport_money' => 12000 , 
+                'transport_money' => 12000,
                 'role' => 'employee'
             ]
         );
         $service->update(
             [
-                'name' => 'employe-test-new',
+                'name' => Str::random(5),
                 'nip' => '123123123123',
             ],
             $employee->id
@@ -92,6 +105,21 @@ class EmployeeServiceTest extends TestCase
             ]
         );
         $response = $service->findAll();
+        assertNotEmpty($response);
+    }
+
+
+    public function test_find_all_employee_success()
+    {
+        $service = new EmployeeService();
+        $response = $service->findAllEmployees();
+        assertNotEmpty($response);
+    }
+
+    public function test_find_all_cadress_success()
+    {
+        $service = new EmployeeService();
+        $response = $service->findAllCadress();
         assertNotEmpty($response);
     }
 }

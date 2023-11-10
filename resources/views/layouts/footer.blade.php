@@ -25,8 +25,6 @@
 
         /*  testimonial one function by = owl.carousel.js */
 
-
-
         jQuery('.card-slider').owlCarousel({
             loop: true,
             margin: 0,

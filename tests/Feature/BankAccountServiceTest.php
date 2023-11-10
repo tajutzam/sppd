@@ -1,27 +1,24 @@
 <?php
 
-namespace Tests\Feature;
 
-use App\Models\Account;
-use App\Services\AccountService;
+
+use App\Models\BankAccount;
+use App\Services\BankAccountService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
-class AccountServiceTest extends TestCase
+class BankAccountServiceTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
     public function test_create_success(): void
     {
-        $service = new AccountService();
+        $service = new BankAccountService();
         $this->expectNotToPerformAssertions();
 
         $service->create(
             [
-                'name' => 'Banyuwangi'
+                'account_number' => 'Banyuwangi'
             ]
         );
     }
@@ -29,23 +26,23 @@ class AccountServiceTest extends TestCase
 
     public function test_findAll_success()
     {
-        $service = new AccountService();
+        $service = new BankAccountService();
         $response = $service->findAll();
         self::assertNotEmpty($response);
     }
 
     public function test_update_success()
     {
-        $service = new AccountService();
+        $service = new BankAccountService();
         $this->expectNotToPerformAssertions();
 
-        $place = Account::create(
-            ['name' => 'Banyuwangi Kota']
+        $place = BankAccount::create(
+            ['account_number' => 'Banyuwangi Kota']
         );
 
         $service->update(
             [
-                'name' => Str::random(5)
+                'account_number' => Str::random(5)
             ],
             $place->id
         );
@@ -54,17 +51,15 @@ class AccountServiceTest extends TestCase
 
     public function test_delete_success()
     {
-        $service = new AccountService();
+        $service = new BankAccountService();
         $this->expectNotToPerformAssertions();
 
-        $place = Account::create(
-            ['name' => 'Banyuwangi Kota']
+        $place = BankAccount::create(
+            ['account_number' => 'Banyuwangi Kota']
         );
 
         $service->delete(
             $place->id
         );
     }
-
-
 }

@@ -1,6 +1,15 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BankAccountController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CostController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\TransportationController;
+use App\Http\Controllers\TypeDestinationController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -41,43 +50,45 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::prefix("master")->group(function () {
         Route::get("destination", function () {
         });
-        Route::get("employee", function () {
-            return view('admin.master.employee');
-        })->name('employee');
-        Route::get("cadress", function () {
-            return view('admin.master.cadress');
-        })->name('cadress');
-        Route::get("type-destination", function () {
-            return view('admin.master.type-destination');
-        })->name('type-destination');
-        Route::get("place", function () {
-            return view('admin.master.place');
-        })->name('place');
+        Route::get("employee", [EmployeeController::class, "employees"])->name('employee');
+        Route::delete("employee", [EmployeeController::class, "deleteEmployee"])->name('employee-delete');
 
-        Route::get("bank-account", function () {
-            return view('admin.master.bank-account');
-        })->name('bank-account');
+        Route::get("cadress", [EmployeeController::class, "cadress"])->name('cadress');
 
-        Route::get("cost", function () {
-            return view('admin.master.cost');
-        })->name('cost');
+        Route::get("type-destination", [TypeDestinationController::class, 'index'])->name('type-destination');
+        Route::delete("type-destination", [TypeDestinationController::class, 'delete'])->name('type-destination-delete');
 
-        Route::get("transportation", function () {
-            return view('admin.master.transportation');
-        })->name('transportation');
-
-        Route::get("categories", function () {
-            return view('admin.master.categories');
-        })->name('categories');
-
-        Route::get("account", function () {
-            return view('admin.master.account');
-        })->name('account');
+        Route::get("place", [PlaceController::class, "index"])->name('place');
+        Route::delete("place", [PlaceController::class, "delete"])->name('place-delete');
 
 
-        Route::get("user", function () {
-            return view('admin.master.user');
-        })->name('user');
+        Route::get("bank-account", [BankAccountController::class, "index"])->name('bank-account');
+        Route::delete("bank-account", [BankAccountController::class, "delete"])->name('bank-account-delete');
+
+
+        Route::get("cost", [CostController::class, "index"])->name('cost');
+        Route::delete("cost", [CostController::class, "delete"])->name('cost-delete');
+
+
+        Route::get("transportation", [TransportationController::class, "index"])->name('transportation');
+        Route::delete("transportation", [TransportationController::class, "delete"])->name('transportation-delete');
+
+
+        Route::get("categories", [CategoryController::class, "index"])->name('categories');
+        Route::delete("categories", [CategoryController::class, "delete"])->name('categories-delete');
+
+
+        Route::get("account", [AccountController::class, "index"])->name('account');
+        Route::delete("account", [AccountController::class, "delete"])->name('account-delete');
+
+
+        Route::get("user", [UserController::class, "index"])->name('user');
+        Route::delete("user", [UserController::class, "delete"])->name('user-delete');
+
+
+
+        Route::post("logout", [AuthController::class, "logout"])->name('logout');
+
     });
     Route::get("spt", function () {
         return view('admin.spt');

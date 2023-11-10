@@ -29,6 +29,11 @@ class BankAccountService implements Service
         if (!isset($bankAccount)) {
             throw new WebException("Ops , Id Bank Account Tidak Ditemukan");
         }
+
+        $data = $this->findWithoutId($id);
+
+        $this->validateAccountNumber($data, $request['account_number']);
+
         $updated = $bankAccount->update(
             $request
         );
@@ -67,6 +72,24 @@ class BankAccountService implements Service
         }
         return $bankAccount;
     }
+
+    private function validateAccountNumber($data, $name)
+    {
+        foreach ($data as $key => $value) {
+            # code...
+            if ($value['account_number'] == $name) {
+                throw new WebException("Ops , Nomor Rekening Sudah Digunakan");
+            }
+        }
+    }
+
+
+    private function findWithoutId($id)
+    {
+        return $this->bankAccount->where('id', '<>', $id)->get();
+    }
+
+
 
 
 

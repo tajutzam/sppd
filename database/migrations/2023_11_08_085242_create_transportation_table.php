@@ -13,7 +13,11 @@ return new class extends Migration {
         Schema::create('transportation', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->foreignUuid('type_transportation')->references('id')->on('type_transportation');
+            $table->enum('type_transportation', [
+                'DARAT',
+                'UDARA',
+                'LAUT'
+            ]);
             $table->timestamps();
         });
     }

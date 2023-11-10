@@ -58,6 +58,17 @@ class EmployeeService implements Service
     }
 
 
+    public function findAllEmployees()
+    {
+        return $this->employee->where('role', 'employee')->get()->toArray();
+    }
+
+    public function findAllCadress()
+    {
+        return $this->employee->where('role', 'cadres')->get()->toArray();
+    }
+
+
     public function findById($id)
     {
         $employee = $this->employee->where('id', $id)->first();

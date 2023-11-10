@@ -52,6 +52,8 @@ class PlacesService implements Service
         if (!isset($place)) {
             throw new WebException("Ops , Id Tempat Tidak Ditemukan");
         }
+        $data = $this->findWithoutId($id);
+        $this->validateName($data, $request['name']);
         $updated = $place->update(
             $request
         );
@@ -69,6 +71,21 @@ class PlacesService implements Service
         } catch (\Throwable $th) {
             //throw $th;
             throw new WebException($th->getMessage());
+        }
+    }
+
+    public function findWithoutId($id)
+    {
+        return $this->places->where('id', '<>', $id)->get();
+    }
+
+    public function validateName($data, $name)
+    {
+        foreach ($data as $key => $value) {
+            # code...
+            if ($value['name'] == $name) {
+                throw new WebException("Ops , Nama Tempat Sudah Digunakan");
+            }
         }
     }
 
