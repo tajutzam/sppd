@@ -9,7 +9,6 @@
                         <div class="row">
                             <div class="col-sm-6">
                             </div>
-
                             <div class="col-sm-6 text-md-end pe-3">
                                 <a href="{{ route('add-employee') }}">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
@@ -82,7 +81,8 @@
                                             </span></td>
                                         <td>
                                             <div class="d-flex ">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
+                                                <a href="{{ route('edit-employee') }}"
+                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                         class="fas fa-pencil-alt"></i></a>
                                                 <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
                                                         class="fa fa-trash" data-bs-toggle="modal"

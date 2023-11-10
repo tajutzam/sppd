@@ -13,13 +13,15 @@
                             <div class="col-sm-6 text-md-end">
                                 <div class="btn" role="group" aria-label="Basic mixed styles example"
                                     style="padding: 1%">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                                            <path
-                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                                        </svg> Tambah
-                                    </button>
+                                    <a href="
+                            {{ route('add-user') }}"> <button type="button"
+                                            class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                                            </svg> Tambah
+                                        </button></a>
 
                                 </div>
                             </div>
@@ -56,7 +58,8 @@
                                         </td>
                                         <td>
                                             <div class="d-flex ">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
+                                                <a href="{{ route('edit-user') }}"
+                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                         class="fas fa-pencil-alt"></i></a>
                                                 <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
                                                         class="fa fa-trash" data-bs-toggle="modal"
