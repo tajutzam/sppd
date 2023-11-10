@@ -35,7 +35,8 @@
                                         </button>
                                     </div>
 
-                                    <button type="button" class="btn btn-warning" data-bs-target="" data-bs-toggle="modal">
+                                    <button type="button" class="btn btn-warning" data-bs-target="#button-import"
+                                        data-bs-toggle="modal">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
                                             <path
@@ -123,6 +124,28 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
                     <button type="button" class="btn btn-primary">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="button-import">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Tipe Tujuan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <div class="form-file">
+                            <input type="file" class="form-file-input form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
+                    <button type="button" class="btn btn-primary">Simpan</button>
                 </div>
             </div>
         </div>
