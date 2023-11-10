@@ -2,13 +2,7 @@
 <title>Dashboard - SPPD Puskesmas Ketrowonojoyo</title>
 @section('content')
     <div class="container-fluid">
-        <div class="row page-titles p-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item" style="font-weight: bold; font-size: 30px"><a
-                        href="javascript:void(0)">Dashboard</a></li>
 
-            </ol>
-        </div>
         <div class="row">
             <div class="col-xl-12">
                 <div class="row">
@@ -39,11 +33,12 @@
                             <div class="col-xl-12">
                                 <div class="row">
                                     <div class="col-xl-6 col-sm-6">
-                                        <div class="widget-stat card bg-danger">
+                                        <div class="widget-stat card bg-success"
+                                            style="background: linear-gradient(45deg, #60CE63, #8c6cc4);">
                                             <div class="card-body  p-4">
                                                 <div class="media">
                                                     <span class="me-3">
-                                                        <i class="flaticon-381-user-7"></i>
+                                                        <i class="fas fa-user-tie"></i>
                                                     </span>
                                                     <div class="media-body text-white text-end">
                                                         <p class="mb-1">JUMLAH PEGAWAI</p>
@@ -54,11 +49,12 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-6 col-sm-6">
-                                        <div class="widget-stat card bg-warning">
+                                        <div class="widget-stat card bg-success"
+                                            style="background: linear-gradient(50deg, #40A6FF, #ff5252);">
                                             <div class="card-body  p-4">
                                                 <div class="media">
                                                     <span class="me-3">
-                                                        <i class="la la-user"></i>
+                                                        <i class="flaticon-381-user-7"></i>
                                                     </span>
                                                     <div class="media-body text-white text-end">
                                                         <p class="mb-1">JUMLAH KADER</p>
@@ -68,8 +64,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-12 col-sm-12">
-                                        <div class="widget-stat card bg-success">
+                                    <div class="col-xl-12 col-sm-12 ">
+                                        <div class="widget-stat card bg-success"
+                                            style="background: linear-gradient(45deg, #FF8340, #FFEB36F3);">
                                             <div class="card-body  p-4">
                                                 <div class="media">
                                                     <span class="me-3">
@@ -83,8 +80,8 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
+
 
                             </div>
 

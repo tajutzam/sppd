@@ -44,6 +44,10 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::get("employee", function () {
             return view('admin.master.employee');
         })->name('employee');
+        Route::get("employee/create", function () {
+            return view('admin.add.add-employee');
+        })->name('add-employee');
+
         Route::get("cadress", function () {
             return view('admin.master.cadress');
         })->name('cadress');

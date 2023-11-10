@@ -8,10 +8,15 @@
 <script src="{{ asset('/') }}vendor/chart.js/Chart.bundle.min.js"></script>
 
 <!-- Chart piety plugin files -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ asset('/') }}vendor/peity/jquery.peity.min.js"></script>
 <!-- Dashboard 1 -->
+<script src="{{ asset('/') }}vendor/toastr/js/toastr.min.js"></script>
 <script src="{{ asset('/') }}js/dashboard/dashboard-1.js"></script>
-
+<script src="{{ asset('/') }}vendor/chartist/js/chartist.min.js"></script>
+<script src="{{ asset('/') }}vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+<script src="{{ asset('/') }}vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="{{ asset('/') }}js/plugins-init/chartist-init.js"></script>
 <script src="{{ asset('/') }}vendor/owl-carousel/owl.carousel.js"></script>
 <script src="{{ asset('/') }}vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 <script src="{{ asset('/') }}vendor/datatables/js/jquery.dataTables.min.js"></script>
