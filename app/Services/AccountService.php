@@ -29,6 +29,11 @@ class AccountService implements Service
         if (!isset($account)) {
             throw new WebException("Ops , Id Account Tidak Ditemukan");
         }
+
+
+        $data = $this->findWithoutId($id);
+        $this->validateName($data, $request['name']);
+
         $updated = $account->update(
             $request
         );
@@ -38,6 +43,22 @@ class AccountService implements Service
         throw new WebException('Ops , Gagal Memperbarui Account Terjadi Kesalahan');
     }
 
+
+    private function validateName($data, $name)
+    {
+        foreach ($data as $key => $value) {
+            # code...
+            if ($value['name'] == $name) {
+                throw new WebException("Ops , Nama Akun Sudah Digunakan");
+            }
+        }
+    }
+
+
+    private function findWithoutId($id)
+    {
+        return $this->account->where('id', '<>', $id)->get();
+    }
 
     public function delete($id)
     {
@@ -59,6 +80,7 @@ class AccountService implements Service
 
     public function findById($id)
     {
+        
         $account = $this->account->where('id', $id)->first();
 
         if (!isset($account)) {

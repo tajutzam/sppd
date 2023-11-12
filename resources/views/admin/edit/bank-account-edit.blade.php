@@ -39,13 +39,16 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="">
-
+                            <form method="post" action="{{ route('bank-account-put', ['id' => $bankAccount->id]) }}"
+                                class="form-valide-with-icon needs-validation" novalidate="">
+                                @method('put')
+                                @csrf   
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Nomor Rekening</label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nomor Rekening">
+                                        placeholder="Masukkan Nomor Rekening" name="account_number"
+                                        value="{{ $bankAccount->account_number }}">
                                 </div>
 
                                 <button type="submit" class="btn me-2 btn-dark">Kembali</button>

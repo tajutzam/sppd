@@ -35,6 +35,8 @@ class TypeDestinationService implements Service
 
     public function create($request)
     {
+        $data = $this->findAll();
+        $this->validate($data, $request['name']);
         try {
             //code...
             $this->typeDestination->create($request);
@@ -52,6 +54,10 @@ class TypeDestinationService implements Service
         if (!isset($place)) {
             throw new WebException("Ops , Id Tipe Tujuan Tidak Ditemukan");
         }
+
+
+        $data = $this->findWithoutId($id);
+        $this->validate($data, $request['name']);
         $updated = $place->update(
             $request
         );
@@ -69,6 +75,20 @@ class TypeDestinationService implements Service
         } catch (\Throwable $th) {
             //throw $th;
             throw new WebException($th->getMessage());
+        }
+    }
+    public function findWithoutId($id)
+    {
+        return $this->typeDestination->where('id', '<>', $id)->get();
+    }
+
+    private function validate($data, $name)
+    {
+        foreach ($data as $key => $value) {
+            # code...
+            if ($value['name'] == $name) {
+                throw new WebException("Ops , Tipe Tujuan Sudah Digunakan");
+            }
         }
     }
 

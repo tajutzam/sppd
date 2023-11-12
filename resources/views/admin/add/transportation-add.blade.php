@@ -39,13 +39,15 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="">
-
+                            <form method="post" action="{{ route('transportation-post') }}"
+                                class="form-valide-with-icon needs-validation" novalidate="">
+                                @method('post')
+                                @csrf
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
                                         Transportasi</label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Transportasi">
+                                        placeholder="Masukkan Nama Transportasi" name="name">
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-12 my-1">
@@ -53,11 +55,12 @@
                                             style="font-size: 19px; font-weight: 500">Jenis Transportasi
                                         </label>
                                         <select class="me-sm-2 default-select form-control wide custom-border"
-                                            id="inlineFormCustomSelect">
+                                            id="inlineFormCustomSelect" name="type_transportation"
+                                            name="type_transportation">
                                             {{-- <option selected="">Choose...</option> --}}
-                                            <option value="1">Darat</option>
-                                            <option value="2">Laut</option>
-                                            <option value="3">Udara</option>
+                                            <option value="DARAT">Darat</option>
+                                            <option value="LAUT">Laut</option>
+                                            <option value="UDARA">Udara</option>
                                         </select>
                                     </div>
                                 </div>

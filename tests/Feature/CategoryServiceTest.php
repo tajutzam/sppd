@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class CategoryServiceTest extends TestCase
@@ -20,7 +21,7 @@ class CategoryServiceTest extends TestCase
 
         $service->create(
             [
-                'name' => 'Banyuwangi'
+                'name' => Str::Random(12)
             ]
         );
     }
@@ -39,12 +40,12 @@ class CategoryServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = Category::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->update(
             [
-                'name' => 'Banyuwangi jaya'
+                'name' => Str::random(5)
             ],
             $place->id
         );
@@ -57,7 +58,7 @@ class CategoryServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = Category::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->delete(

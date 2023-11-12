@@ -23,6 +23,10 @@ class CostService implements Service
         if (!isset($cost)) {
             throw new WebException("Ops , Id Cost Tidak Ditemukan");
         }
+
+
+        $data = $this->findWithoutId($id);
+        $this->validateName($data, $request['name']);
         $updated = $cost->update(
             $request
         );
@@ -64,8 +68,26 @@ class CostService implements Service
 
     public function create($request)
     {
+        $data = $this->findAll();
+        $this->validateName($data , $request['name']);
         $created = $this->cost->create($request);
         return $created;
+    }
+
+
+    public function findWithoutId($id)
+    {
+        return $this->cost->where('id', '<>', $id)->get();
+    }
+
+    public function validateName($data, $name)
+    {
+        foreach ($data as $key => $value) {
+            # code...
+            if ($value['name'] == $name) {
+                throw new WebException("Ops , Nama Angaran Sudah Digunakan");
+            }
+        }
     }
 
 

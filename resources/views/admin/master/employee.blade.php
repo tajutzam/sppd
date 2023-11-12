@@ -72,45 +72,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td> <span class="badge light badge-danger">
-                                                <i class="fa fa-circle text-danger me-1"></i>
-                                                Tidak Tugas
-                                            </span></td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="{{ route('edit-employee') }}"
-                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-employee"></i></a>
-                                            </div>
-                                        </td>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item['name'] }}</td>
+                                            <td>{{ $item['position'] }}</td>
+                                            <td> <span class="badge light badge-danger">
+                                                    <i class="fa fa-circle text-danger me-1"></i>
+                                                    Tidak Tugas
+                                                </span></td>
+                                            <td>
+                                                <div class="d-flex ">
+                                                    <a href="{{ route('edit-employee', ['id' => $item['id']]) }}"
+                                                        class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+                                                    <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-employee"
+                                                        data-id="{{ $item['id'] }}" data-name="{{ $item['name'] }}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td> <span class="badge light badge-success">
-                                                <i class="fa fa-circle text-success me-1"></i>
-                                                Bertugas
-                                            </span></td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="#" class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-employee"></i></a>
-                                            </div>
-                                        </td>
-
-                                    </tr>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -130,15 +115,41 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="pt-3" style="font-size: 17px">Apakah anda yakin ingin menghapus [Nama pengguna] ?</p>
+                    <p class="pt-3" id="title-modal" style="font-size: 17px"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Hapus</button>
+                    <form action="{{ route('employee-delete') }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="text" id="id-employee" name="id" hidden>
+                        <button type="submit" class="btn btn-primary">Hapus</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Your HTML code -->
+
+
+
+    <script>
+        $(document).ready(function() {
+            // Capture click event on the delete button
+            $('.btn-delete').on('click', function() {
+                // Retrieve the data-id attribute from the clicked button
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+
+
+                // Update the modal content with the retrieved text
+                $('#title-modal').text('Apakah anda yakin ingin menghapus ' + name + ' ?');
+                $('#id-employee').val(id);
+
+            });
+        });
+    </script>
 
 
 
@@ -146,21 +157,29 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Pegawai</h5>
+                    <div class="row12">
+                        <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Pegawai</h5>
+                        <a href="{{ route('employee-templates') }}" class="m-2">Download Template</a>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <div class="form-file">
-                            <input type="file" class="form-file-input form-control">
+                <form action="{{ route('employee-import', ['id' => 1]) }}" method="post" enctype="multipart/form-data">
+                    @method('post')
+                    @csrf
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <div class="form-file">
+                                <input type="file" name="file" class="form-file-input form-control"
+                                    accept=".xlsx , .csv , .xls">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Simpan</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

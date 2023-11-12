@@ -39,16 +39,18 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="">
-
+                            <form action="{{ route('type-destination-post') }}" method="post"
+                                class="form-valide-with-icon needs-validation" novalidate="">
+                                @method('post')
+                                @csrf
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
                                         Tipe Tujuan</label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Tipe Tujuan">
+                                        placeholder="Masukkan Nama Tipe Tujuan" name="name">
                                 </div>
 
-                                <button type="submit" class="btn me-2 btn-dark">Kembali</button>
+                                <a href="{{ route('type-destination', ['id'=>1]) }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>

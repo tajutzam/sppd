@@ -8,6 +8,7 @@ use App\Models\TypeDestination;
 use App\Services\DestinationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class DestinationServiceTest extends TestCase
@@ -63,7 +64,7 @@ class DestinationServiceTest extends TestCase
 
         $service->update(
             [
-                'name' => 'Banyuwangi jaya'
+                'name' => Str::random(5)
             ],
             $destination->id
         );

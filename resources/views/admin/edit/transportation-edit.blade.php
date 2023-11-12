@@ -39,13 +39,16 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="">
-
+                            <form method="post" action="{{ route('transportation-put', ['id' => $transportation->id]) }}"
+                                class="form-valide-with-icon needs-validation" novalidate="">
+                                @method('put')
+                                @csrf
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
                                         Transportasi</label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Transportasi">
+                                        placeholder="Masukkan Nama Transportasi" value="{{ $transportation->name }}"
+                                        name="name">
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-12 my-1">
@@ -53,15 +56,24 @@
                                             style="font-size: 19px; font-weight: 500">Jenis Transportasi
                                         </label>
                                         <select class="me-sm-2 default-select form-control wide custom-border"
-                                            id="inlineFormCustomSelect">
+                                            id="inlineFormCustomSelect" name="type_transportation">
                                             {{-- <option selected="">Choose...</option> --}}
-                                            <option value="1">Darat</option>
-                                            <option value="2">Laut</option>
-                                            <option value="3">Udara</option>
+                                            <option value="DARAT"
+                                                {{ $transportation->type_transportation == 'DARAT' ? 'selected' : '' }}>
+                                                Darat
+                                            </option>
+                                            <option value="LAUT"
+                                                {{ $transportation->type_transportation == 'LAUT' ? 'selected' : '' }}>
+                                                Laut
+                                            </option>
+                                            <option value="UDARA"
+                                                {{ $transportation->type_transportation == 'UDARA' ? 'selected' : '' }}>
+                                                Udara
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn me-2 btn-dark">Kembali</button>
+                                <a href="{{ route('transportation') }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>

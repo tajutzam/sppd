@@ -71,37 +71,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="{{ route('edit-categories') }}"
-                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-categories"></i></a>
-                                            </div>
-                                        </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="{{ route('edit-categories') }}"
-                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash"data-bs-toggle="modal"
-                                                        data-bs-target="#delete-categories"></i></a>
-                                            </div>
-                                        </td>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item['name'] }}</td>
+                                            <td>
+                                                <div class="d-flex ">
+                                                    <a href="{{ route('edit-categories', ['id' => $item['id']]) }}"
+                                                        class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+                                                    <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-categories"
+                                                        data-id="{{ $item['id'] }}" data-name="{{ $item['name'] }}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
 
-
-                                    </tr>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -123,30 +112,60 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Hapus</button>
+                    <form action="{{ route('categories-delete') }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <input type="text" name="id" id="id-category" hidden>
+                        <button type="submit" class="btn btn-primary">Hapus</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function() {
+            // Capture click event on the delete button
+            $('.btn-delete').on('click', function() {
+                // Retrieve the data-id attribute from the clicked button
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+
+                // Update the modal content with the retrieved text
+                $('#id-category').val(id);
+            });
+        });
+    </script>
+
     <div class="modal fade" id="button-import">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Kategori</h5>
+                    <div class="row-12">
+                        <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Kategori</h5>
+                        <a href="{{ route('categories-template') }}">Download Template</a>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <div class="form-file">
-                            <input type="file" class="form-file-input form-control">
+                <form action="{{ route('categories-import', ['id' => 1]) }}" method="post"
+                    enctype="multipart/form-data">
+                    @method('post')
+                    @csrf
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <div class="form-file">
+                                <input type="file" name="file" class="form-file-input form-control"
+                                    accept=".xlsx , .csv , .xls">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Simpan</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

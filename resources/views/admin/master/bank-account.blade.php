@@ -24,15 +24,15 @@
 
                                     <!-- Example single danger button -->
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="" aria-expanded="false">
+                                        <a href="{{ route('bank-account-export', ['id' => 1]) }}" class="btn btn-success"
+                                            aria-expanded="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-file-earmark-spreadsheet"
                                                 viewBox="0 0 16 16">
                                                 <path
                                                     d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
                                             </svg> Export
-                                        </button>
+                                        </a>
                                     </div>
 
                                     <button type="button" class="btn btn-warning" data-bs-target="#button-import"
@@ -71,37 +71,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="{{ route('edit-bank-account') }}"
-                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-bank-account"></i></a>
-                                            </div>
-                                        </td>
 
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="{{ route('edit-bank-account') }}"
-                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="#" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                        class="fa fa-trash" data-bs-toggle="modal"
-                                                        data-bs-target="#delete-bank-account"></i></a>
-                                            </div>
-                                        </td>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item['account_number'] }}</td>
+                                            <td>
+                                                <div class="d-flex ">
+                                                    <a href="{{ route('edit-bank-account', ['id' => $item['id']]) }}"
+                                                        class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+                                                    <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-bank-account"
+                                                        data-id="{{ $item['id'] }}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
 
-
-                                    </tr>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -123,30 +112,57 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Hapus</button>
+                    <form action="{{ route('bank-account-delete') }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <input type="text" name="id" id="id-bank-account" hidden>
+                        <button type="submit" class="btn btn-primary">Hapus</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <script>
+        $(document).ready(function() {
+            // Capture click event on the delete button
+            $('.btn-delete').on('click', function() {
+                // Retrieve the data-id attribute from the clicked button
+                var id = $(this).data('id');
+                $('#id-bank-account').val(id);
+            });
+        });
+    </script>
+
     <div class="modal fade" id="button-import">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Rekening</h5>
+                    <div class="row-12">
+                        <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Nomor Rekening</h5>
+                        <a href="{{ route('bank-account-template') }}">Download Template</a>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <div class="form-file">
-                            <input type="file" class="form-file-input form-control">
+                <form action="{{ route('bank-account-import', ['id' => 1]) }}" method="post"
+                    enctype="multipart/form-data">
+                    @method('post')
+                    @csrf
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <div class="form-file">
+                                <input type="file" name="file" class="form-file-input form-control"
+                                    accept=".xlsx , .csv , .xls">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Simpan</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

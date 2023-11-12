@@ -6,6 +6,7 @@ use App\Models\Places;
 use App\Services\PlacesService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 use function PHPUnit\Framework\assertNotEmpty;
@@ -23,7 +24,7 @@ class PlacesServiceTest extends TestCase
 
         $service->create(
             [
-                'name' => 'Banyuwangi'
+                'name' => Str::random(15)
             ]
         );
     }
@@ -42,12 +43,12 @@ class PlacesServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = Places::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->update(
             [
-                'name' => 'Banyuwangi jaya'
+                'name' => Str::random(5)
             ],
             $place->id
         );

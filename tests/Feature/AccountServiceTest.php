@@ -6,6 +6,7 @@ use App\Models\Account;
 use App\Services\AccountService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class AccountServiceTest extends TestCase
@@ -44,7 +45,7 @@ class AccountServiceTest extends TestCase
 
         $service->update(
             [
-                'name' => 'Banyuwangi jaya'
+                'name' => Str::random(5)
             ],
             $place->id
         );

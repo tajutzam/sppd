@@ -39,20 +39,23 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="">
+                            <form action="{{ route('user-post') }}" method="post"
+                                class="form-valide-with-icon needs-validation" novalidate="">
+                                @method('post')
+                                @csrf
 
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
                                         Pengguna</label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Pengguna">
+                                        placeholder="Masukkan Nama Pengguna" name="name">
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Email</label>
                                     <input type="email" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Email">
+                                        placeholder="Masukkan Email" name="email">
                                 </div>
 
                                 <div class="mb-3">
@@ -61,7 +64,7 @@
                                     <div class="input-group transparent-append">
 
                                         <input type="password" class="form-control custom-border" id="dlab-password"
-                                            placeholder="Masukkan Password " required="">
+                                            placeholder="Masukkan Password " required="" name="password">
                                         <span class="input-group-text show-pass"
                                             style=" border-top-right-radius: 10px; 
         border-bottom-right-radius: 10px; ">
@@ -71,8 +74,17 @@
                                         <div class="invalid-feedback">
                                             Masukkan Password
                                         </div>
+
                                     </div>
                                 </div>
+                                <label for="inlineFormCustomSelect" class="text-label form-label ps-2"
+                                    style="font-size: 19px; font-weight: 500">Hak Akses</label>
+                                <select class="me-sm-2 mb-3 default-select form-control wide custom-border"
+                                    id="inlineFormCustomSelect"  name="role">
+                                    {{-- <option selected="">Choose...</option> --}}
+                                    <option value="super-admin">Super Admin</option>
+                                    <option value="admin">Admin</option>
+                                </select>
                                 <button type="submit" class="btn me-2 btn-dark">Kembali</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>

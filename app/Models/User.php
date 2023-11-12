@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable , Uuids;
+    use HasApiTokens, HasFactory, Notifiable, Uuids;
 
     /**
      * The attributes that are mass assignable.
@@ -31,16 +31,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-    ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'password' => 'hashed',
-    ];
+
+
+
+
+    protected $table = 'users';
 }

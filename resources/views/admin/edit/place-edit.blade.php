@@ -39,16 +39,18 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="">
-
+                            <form action="{{ route('place-put', ['id' => $place->id]) }}"
+                                class="form-valide-with-icon needs-validation" novalidate="" method="POST">
+                                @method('put')
+                                @csrf
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
                                         Tempat</label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Tempat">
+                                        placeholder="Masukkan Nama Tempat" value="{{ $place['name'] }}" name="name">
                                 </div>
 
-                                <button type="submit" class="btn me-2 btn-dark">Kembali</button>
+                                <a href="{{ route('place') }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>

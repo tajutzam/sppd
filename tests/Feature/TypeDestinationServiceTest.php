@@ -6,6 +6,7 @@ use App\Models\TypeDestination;
 use App\Services\TypeDestinationService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 use function PHPUnit\Framework\assertNotEmpty;
@@ -22,7 +23,7 @@ class TypeDestinationServiceTest extends TestCase
 
         $service->create(
             [
-                'name' => 'Banyuwangi'
+                'name' => Str::random(12)
             ]
         );
     }
@@ -41,12 +42,12 @@ class TypeDestinationServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = TypeDestination::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->update(
             [
-                'name' => 'Banyuwangi jaya'
+                'name' => Str::random(5)
             ],
             $place->id
         );
@@ -59,7 +60,7 @@ class TypeDestinationServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = TypeDestination::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->delete(

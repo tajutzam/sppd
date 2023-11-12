@@ -17,4 +17,7 @@ class Transportation extends Model
     ];
 
     protected $table = 'transportation';
+
+
+
 }
