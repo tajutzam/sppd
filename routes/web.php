@@ -150,4 +150,7 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get("spt/edit", function () {
         return view('admin.edit.spt-edit');
     })->name('edit-spt');
+    Route::get("spt/detail", function () {
+        return view('admin.detail-spt');
+    })->name('detail-spt');
 });
