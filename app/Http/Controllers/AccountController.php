@@ -68,7 +68,7 @@ class AccountController extends Controller
         $rules = [
             'name' => 'required|string'
         ];
-       
+
 
         $data = $this->validate($request, $rules);
         $this->accountService->update($data, $id);

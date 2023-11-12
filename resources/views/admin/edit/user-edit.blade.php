@@ -39,22 +39,24 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="">
-
+                            <form method="POST" action="{{ route('user-put', ['id' => $user['id']]) }}"
+                                class="form-valide-with-icon needs-validation" novalidate="">
+                                @method('put')
+                                @csrf
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
                                         Pengguna</label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Pengguna">
+                                        placeholder="Masukkan Nama Pengguna" value="{{ $user['name'] }}" name="name">
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Email</label>
                                     <input type="email" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Email">
+                                        placeholder="Masukkan Email" value="{{ $user['email'] }}" name="email">
                                 </div>
-                                <button type="submit" class="btn me-2 btn-dark">Kembali</button>
+                                <a href="{{ route('user') }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>

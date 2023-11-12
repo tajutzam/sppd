@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->foreignUuid('transportation_id')->references('id')->on('transportation')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('destination_to_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('destination_form_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->integer('travel_time')->default(0);
+            $table->bigInteger('travel_time')->default(0);
             $table->foreignUuid('budget_account_id')->references('id')->on('account')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('bank_account_id')->references('id')->on('bank_account')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('present_in');

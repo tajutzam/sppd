@@ -43,7 +43,7 @@ class BankAccountServiceTest extends TestCase
 
         $service->update(
             [
-                'account_number' => Str::random(5)
+                'account_number' => random_int(1, 100)
             ],
             $place->id
         );
@@ -56,7 +56,7 @@ class BankAccountServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = BankAccount::create(
-            ['account_number' => 'Banyuwangi Kota']
+            ['account_number' => random_int(1, 100)]
         );
 
         $service->delete(

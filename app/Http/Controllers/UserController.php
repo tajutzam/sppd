@@ -57,7 +57,30 @@ class UserController extends Controller
         $data = $this->validate($request, $rules, $messages);
         $this->UserService->create($data);
         Alert::success("Sukes", "Berhasil Menambahkan Pengguna");
-    return redirect("admin/master/user");
+        return redirect("admin/master/user");
+    }
+
+
+    public function edit($id)
+    {
+        $user = $this->UserService->findById($id);
+        return view("admin.edit.user-edit", ['user' => $user]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'name' => 'required|string',
+            'email' => 'required'
+        ];
+
+        $messages = [
+            'required' => ":attribute Tidak Boleh Kosong"
+        ];
+        $data = $this->validate($request, $rules, $messages);
+        $this->UserService->update($id, $data);
+        Alert::success("Sukses", "Berhasil Memperbarui Pengguna");
+        return redirect("/admin/master/user");
     }
 
 }

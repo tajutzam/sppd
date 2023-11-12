@@ -99,9 +99,9 @@ class EmployeeServiceTest extends TestCase
                 'rank' => 'asdas',
                 'group' => 'asdas',
                 'position' => 'ob',
-                'daily_money' => 0,
-                'food_money' => 1000,
-                'transport_money' => 12000
+                'daily_money' => random_int(100000, 100000000000),
+                'food_money' => random_int(100000, 100000000000),
+                'transport_money' => random_int(100000, 100000000000)
             ]
         );
         $response = $service->findAll();

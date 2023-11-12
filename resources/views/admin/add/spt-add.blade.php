@@ -170,7 +170,8 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="" method="get">
+                            <form action="" method="post" class="form-valide-with-icon needs-validation"
+                                novalidate="" method="get">
 
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
@@ -195,7 +196,9 @@
                                         Perjalanan</label>
                                     <select class="js-example-basic custom-border" name="states[]">
                                         <option>Pilih Kategori Perjalanan</option>
-                                        <option value="a1">Item A1</option>
+                                        @foreach ($categories as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
 
                                 </div>
@@ -228,12 +231,9 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Pegawai Ditugaskan</label>
                                     <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                                        <option value="a1">Item A1</option>
-                                        <option value="a2">Item A2</option>
-                                        <option value="b1">Item B1</option>
-                                        <option value="c1">Item C1</option>
-                                        <option value="c2">Item C2</option>
-                                        <option value="c2">Item C3</option>
+                                        @foreach ($employees as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -242,7 +242,9 @@
                                         style="font-size: 19px; font-weight: 500">Transportasi</label>
                                     <select class="js-example-basic custom-border" name="states[]">
                                         <option>Pilih Transportasi</option>
-                                        <option value="a1">Item A1</option>
+                                        @foreach ($transportations as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-unit form-divided mb-3">
@@ -250,7 +252,9 @@
                                         Tempat Berangkat</label>
                                     <select class="js-example-basic custom-border" name="states[]">
                                         <option>Pilih Tempat Berangkat</option>
-                                        <option value="a1">Item A1</option>
+                                        @foreach ($places as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-unit form-divided mb-3">
@@ -258,7 +262,9 @@
                                         style="font-size: 19px; font-weight: 500">Tempat Tujuan</label>
                                     <select class="js-example-basic custom-border" name="states[]">
                                         <option>Pilih Tempat Tujuan</option>
-                                        <option value="a1">Item A1</option>
+                                        @foreach ($places as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-unit form-divided mb-3">
@@ -279,12 +285,13 @@
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
-                                    <label class="text-label form-label ps-2"
-                                        style="font-size: 19px; font-weight: 500">Akun
+                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Akun
                                         Anggaran</label>
                                     <select class="js-example-basic custom-border" name="states[]">
                                         <option>Pilih Akun Anggaran</option>
-                                        <option value="a1">Item A1</option>
+                                        @foreach ($accounts as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -317,7 +324,9 @@
                                         Nomor Rekening</label>
                                     <select class="js-example-basic custom-border" name="states[]">
                                         <option>Pilih Nomor Rekening</option>
-                                        <option value="a1">Item A1</option>
+                                        @foreach ($banks as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['account_number'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
