@@ -37,4 +37,27 @@ class UserController extends Controller
         return back();
     }
 
+
+
+    public function store(
+        Request
+        $request
+    ) {
+        $rules = [
+            'name' => 'required|unique:users,name',
+            'email' => 'required|unique:users,email',
+            'password' => 'required',
+            'role' => 'required'
+        ];
+        $messages = [
+            'requierd' => ':attribute Tidak Boleh Kosong',
+            'name.unique' => 'Nama Pengguna Sudah Digunakan',
+            'email.unique' => 'Email Pengguna Sudah Digunakan'
+        ];
+        $data = $this->validate($request, $rules, $messages);
+        $this->UserService->create($data);
+        Alert::success("Sukes", "Berhasil Menambahkan Pengguna");
+    return redirect("admin/master/user");
+    }
+
 }

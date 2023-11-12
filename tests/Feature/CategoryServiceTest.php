@@ -21,7 +21,7 @@ class CategoryServiceTest extends TestCase
 
         $service->create(
             [
-                'name' => 'Banyuwangi'
+                'name' => Str::Random(12)
             ]
         );
     }
@@ -40,7 +40,7 @@ class CategoryServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = Category::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->update(
@@ -58,7 +58,7 @@ class CategoryServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = Category::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->delete(

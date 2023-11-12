@@ -19,6 +19,8 @@ class BankAccountService implements Service
 
     public function create($request)
     {
+        $data = $this->findAll();
+        $this->validateAccountNumber($data , $request['account_number']);
         $created = $this->bankAccount->create($request);
         return $created;
     }

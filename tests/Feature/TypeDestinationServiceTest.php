@@ -23,7 +23,7 @@ class TypeDestinationServiceTest extends TestCase
 
         $service->create(
             [
-                'name' => 'Banyuwangi'
+                'name' => Str::random(12)
             ]
         );
     }
@@ -42,7 +42,7 @@ class TypeDestinationServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = TypeDestination::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->update(
@@ -60,7 +60,7 @@ class TypeDestinationServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = TypeDestination::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->delete(

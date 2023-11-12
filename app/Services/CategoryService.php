@@ -18,8 +18,18 @@ class CategoryService implements Service
 
     public function create($request)
     {
-        $created = $this->category->create($request);
-        return $created;
+        $data = $this->findAll();
+        $this->validateName($data, $request['name']);
+        try {
+            //code...
+            $created = $this->category->create($request);
+            return $created;
+
+        } catch (\Throwable $th) {
+            //throw $th;
+
+            throw new WebException($th->getMessage());
+        }
     }
 
     public function update($request, $id)
@@ -28,6 +38,8 @@ class CategoryService implements Service
         if (!isset($category)) {
             throw new WebException("Ops , Id Category Tidak Ditemukan");
         }
+        $data = $this->findWithoutId($id);
+        $this->validateName($data, $request['name']);
         $updated = $category->update(
             $request
         );

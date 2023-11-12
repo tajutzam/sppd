@@ -9,10 +9,9 @@
                         <div class="row">
                             <div class="col-sm-6">
                             </div>
-
                             <div class="col-sm-6 text-md-end pe-3">
                                 <a href="{{ route('add-employee') }}">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
+                                    <button type="button" class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                             <path
@@ -35,7 +34,8 @@
                                         </button>
                                     </div>
 
-                                    <button type="button" class="btn btn-warning" data-bs-target="" data-bs-toggle="modal">
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#import-employee">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
                                             <path
@@ -83,7 +83,7 @@
                                                 </span></td>
                                             <td>
                                                 <div class="d-flex ">
-                                                    <a href="#"
+                                                    <a href="{{ route('edit-employee', ['id' => $item['id']]) }}"
                                                         class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                             class="fas fa-pencil-alt"></i></a>
                                                     <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
@@ -150,4 +150,37 @@
             });
         });
     </script>
+
+
+
+    <div class="modal fade" id="import-employee">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="row12">
+                        <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Pegawai</h5>
+                        <a href="{{ route('employee-templates') }}" class="m-2">Download Template</a>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <form action="{{ route('employee-import', ['id' => 1]) }}" method="post" enctype="multipart/form-data">
+                    @method('post')
+                    @csrf
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <div class="form-file">
+                                <input type="file" name="file" class="form-file-input form-control"
+                                    accept=".xlsx , .csv , .xls">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

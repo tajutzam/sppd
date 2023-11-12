@@ -24,7 +24,7 @@ class PlacesServiceTest extends TestCase
 
         $service->create(
             [
-                'name' => 'Banyuwangi'
+                'name' => Str::random(15)
             ]
         );
     }
@@ -43,7 +43,7 @@ class PlacesServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = Places::create(
-            ['name' => 'Banyuwangi Kota']
+            ['name' => Str::random(12)]
         );
 
         $service->update(

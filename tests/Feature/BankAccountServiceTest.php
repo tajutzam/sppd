@@ -7,6 +7,7 @@ use App\Services\BankAccountService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Type\Integer;
 use Tests\TestCase;
 
 class BankAccountServiceTest extends TestCase
@@ -18,7 +19,7 @@ class BankAccountServiceTest extends TestCase
 
         $service->create(
             [
-                'account_number' => 'Banyuwangi'
+                'account_number' => random_int(1, 100)
             ]
         );
     }
@@ -37,7 +38,7 @@ class BankAccountServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $place = BankAccount::create(
-            ['account_number' => 'Banyuwangi Kota']
+            ['account_number' => random_int(1, 100)],
         );
 
         $service->update(

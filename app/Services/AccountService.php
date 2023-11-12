@@ -80,6 +80,7 @@ class AccountService implements Service
 
     public function findById($id)
     {
+        
         $account = $this->account->where('id', $id)->first();
 
         if (!isset($account)) {

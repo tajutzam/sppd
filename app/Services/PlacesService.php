@@ -35,6 +35,8 @@ class PlacesService implements Service
 
     public function create($request)
     {
+        $data = $this->findAll();
+        $this->validateName($data, $request['name']);
         try {
             //code...
             $this->places->create($request);

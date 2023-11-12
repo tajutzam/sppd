@@ -23,7 +23,7 @@ class EmployeeServiceTest extends TestCase
         $service = new EmployeeService();
 
         $create = $service->create([
-            'name' => 'kader-test',
+            'name' => Str::random(12),
             'nip' => '123123123123',
             'rank' => 'asdas',
             'group' => 'asdas',
@@ -35,7 +35,7 @@ class EmployeeServiceTest extends TestCase
         ]);
 
         $create = $service->create([
-            'name' => 'employe-test',
+            'name' => Str::random(12),
             'nip' => '123123123123',
             'rank' => 'asdas',
             'group' => 'asdas',

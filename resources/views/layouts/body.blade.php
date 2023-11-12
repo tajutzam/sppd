@@ -31,7 +31,7 @@
                     </defs>
                 </svg>
                 <div class="brand-title">
-                    <h2 class="">SPPD</h2>
+                    <h2 class="" style="color: var(--primary);">SPPD</h2>
                     <span class="brand-sub-title">Puskesmas Ketrowonojoyo</span>
                 </div>
             </a>

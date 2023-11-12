@@ -39,8 +39,9 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form action="{{ route('employee-post') }}" method="post" class="form-valide-with-icon needs-validation"
-                                novalidate="">
+                            <form action="{{ route('employee-post') }}" class="form-valide-with-icon needs-validation"
+                                novalidate="" method="post">
+
                                 @method('post')
                                 @csrf
                                 <div class="mb-3">
@@ -99,7 +100,7 @@
                                     <input type="number" class="form-control input-default custom-border"
                                         placeholder="Masukkan Uang Transport " name="transport_money">
                                 </div>
-                                <input type="text" name="role" hidden value="employee">
+                                <input type="text" name="role" value="employee" hidden>
                                 <a href="{{ route('employee') }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
@@ -109,6 +110,4 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-danger mb-2  me-2" id="toastr-danger-top-right">Error</button>
-    <script></script>
 @endsection

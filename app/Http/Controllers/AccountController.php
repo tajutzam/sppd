@@ -44,15 +44,15 @@ class AccountController extends Controller
 
     }
 
-    public function edit()
+    public function edit($id)
     {
-
+        $account = $this->accountService->findById($id);
+        return view("admin.edit.account-edit", ['account' => $account]);
     }
 
     public function store(Request $request)
     {
         $rules = [
-            'role' => 'required',
             'name' => 'required|string|unique:account,name'
         ];
 
@@ -60,18 +60,24 @@ class AccountController extends Controller
         $data = $this->validate($request, $rules);
         $this->accountService->create($data);
         Alert::success("Sukses", "Berhasil Menambahkan Akun");
+        return redirect('admin/master/account');
     }
 
     public function update(Request $request, $id)
     {
         $rules = [
-            'role' => 'required',
-            'name' => 'required|string|unique:account,name'
+            'name' => 'required|string'
         ];
+       
 
         $data = $this->validate($request, $rules);
-        $this->accountService->update($id, $data);
+        $this->accountService->update($data, $id);
         Alert::success("Sukses", "Berhasil Memperbarui Akun");
+        return redirect('admin/master/account');
     }
+
+
+
+
 
 }

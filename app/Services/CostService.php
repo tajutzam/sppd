@@ -68,6 +68,8 @@ class CostService implements Service
 
     public function create($request)
     {
+        $data = $this->findAll();
+        $this->validateName($data , $request['name']);
         $created = $this->cost->create($request);
         return $created;
     }

@@ -35,6 +35,8 @@ class TypeDestinationService implements Service
 
     public function create($request)
     {
+        $data = $this->findAll();
+        $this->validate($data, $request['name']);
         try {
             //code...
             $this->typeDestination->create($request);

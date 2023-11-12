@@ -20,9 +20,20 @@ class EmployeeService implements Service
 
     public function create($request)
     {
+        $data = $this->findAllEmployees();
+        $this->validateName($data, $request['name']);
         $created = $this->employee->create($request);
         return $created;
     }
+
+    public function createCadress($request)
+    {
+        $data = $this->findAllCadress();
+        $this->validateName($data, $request['name']);
+        $created = $this->employee->create($request);
+        return $created;
+    }
+
 
     public function update($request, $id)
     {
@@ -30,6 +41,8 @@ class EmployeeService implements Service
         if (!isset($employee)) {
             throw new WebException("Ops , Id Pegawai Tidak Ditemukan");
         }
+        $data = $this->findWithoutId($id);
+        $this->validateName($data, $request['name']);
         $updated = $employee->update(
             $request
         );
@@ -78,6 +91,21 @@ class EmployeeService implements Service
             throw new WebException('Pegawai Tidak Ditemukan');
         }
         return $employee;
+    }
+
+
+    public function findWithoutId($id)
+    {
+        return $this->employee->where("id", "<>", $id)->get()->toArray();
+    }
+
+    public function validateName($data, $name)
+    {
+        foreach ($data as $key => $value) {
+            if ($value['name'] == $name) {
+                throw new WebException("Ops , Nampaknya Ada Nama Yang Sama");
+            }
+        }
     }
 
 }

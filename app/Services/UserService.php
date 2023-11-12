@@ -31,6 +31,7 @@ class UserService implements Service
         }
 
         if (Hash::check($oldPassword, $user->password)) {
+
             $updated = $user->update([
                 'password' => Hash::make($newPassword)
             ]);
@@ -45,12 +46,39 @@ class UserService implements Service
 
     public function create(array $data)
     {
-
+        try {
+            //code...
+            $this->user->create([
+                'name' => $data['name'],
+                'password' => Hash::make($data['password']),
+                'email' => $data['email'],
+                'role' => $data['role']
+            ]);
+        } catch (\Throwable $th) {
+            //throw $th;
+            throw new WebException($th->getMessage());
+        }
     }
 
     public function update($id, $request)
     {
-
+        $user = $this->findById($id);
+        $data = $this->findAllWithoutId($id);
+        $this->validate($data, $request);
+        try {
+            $this->user->update(
+                [
+                    'name' => $request['name'],
+                    'password' => Hash::make($request['password']),
+                    'email' => $request['email'],
+                    'role' => $request['role']
+                ]
+            );
+            return;
+        } catch (\Throwable $th) {
+            //throw $th;
+            throw new WebException($th->getMessage());
+        }
     }
 
     public function delete($id)
@@ -72,13 +100,33 @@ class UserService implements Service
 
     public function findAllWithoutId($id)
     {
-        return $this->user->where('id', '<>', $id)->get();
+        return $this->user->where('id', '<>', $id)->get()->toArray();
 
     }
 
+
+    public function validate($data, $request)
+    {
+        foreach ($data as $key => $value) {
+            # code...
+            if ($value['email'] == $request['email']) {
+                throw new WebException("Ops, Email Sudah Digunakan Oleh Pengguna Yang Lain");
+            }
+            if ($value['name'] == $request['name']) {
+                throw new WebException("Ops, Nama Sudah Digunakan Oleh Pengguna Yang Lain");
+            }
+        }
+    }
+
+
+
     public function findById($id)
     {
-        return $this->user->find($id);
+        $user = $this->user->where('id', $id)->first();
+        if (!isset($user)) {
+            throw new WebException("Ops , Id Pengguna Tidak Ditemukan");
+        }
+        return $user;
     }
 
 }

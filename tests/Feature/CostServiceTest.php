@@ -20,7 +20,7 @@ class CostServiceTest extends TestCase
         $service = new CostService();
 
         $create = $service->create([
-            'name' => 'employe-test',
+            'name' => Str::random(12),
 
         ]);
         self::assertNotNull($create);
@@ -32,7 +32,7 @@ class CostServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
         $Cost = Cost::create(
             [
-                'name' => 'employe-test',
+                'name' => Str::random(12),
 
             ]
         );

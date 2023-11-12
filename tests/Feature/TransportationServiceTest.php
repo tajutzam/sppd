@@ -25,7 +25,7 @@ class TransportationServiceTest extends TestCase
         $this->expectNotToPerformAssertions();
         $service->create([
             'type_transportation' => "UDARA",
-            'name' => 'Bus ID'
+            'name' => Str::random(12)
         ]);
     }
 
@@ -43,7 +43,7 @@ class TransportationServiceTest extends TestCase
 
         $transportation = Transportation::create([
             'type_transportation' => "UDARA",
-            'name' => 'Bus ID'
+            'name' => Str::random(12)
         ]);
         $transportationObj = $service->findById($transportation->id);
         assertEquals($transportation->name, "$transportationObj->name");

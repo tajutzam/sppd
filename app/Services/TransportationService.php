@@ -24,6 +24,10 @@ class TransportationService implements Service
 
     public function create(array $request)
     {
+
+
+        $data = $this->findAll();
+        $this->validateName($data, $request['name']);
         try {
             //code...
             $this->transportation->create($request);
