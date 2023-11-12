@@ -62,29 +62,30 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Password</label>
                                     <div class="input-group transparent-append">
-
                                         <input type="password" class="form-control custom-border" id="dlab-password"
                                             placeholder="Masukkan Password " required="" name="password">
                                         <span class="input-group-text show-pass"
-                                            style=" border-top-right-radius: 10px; 
-        border-bottom-right-radius: 10px; ">
+                                            style=" border-top-right-radius: 10px; border-bottom-right-radius: 10px; ">
                                             <i class="fa fa-eye-slash"></i>
                                             <i class="fa fa-eye"></i>
                                         </span>
                                         <div class="invalid-feedback">
                                             Masukkan Password
                                         </div>
-
                                     </div>
                                 </div>
-                                <label for="inlineFormCustomSelect" class="text-label form-label ps-2"
-                                    style="font-size: 19px; font-weight: 500">Hak Akses</label>
-                                <select class="me-sm-2 mb-3 default-select form-control wide custom-border"
-                                    id="inlineFormCustomSelect"  name="role">
-                                    {{-- <option selected="">Choose...</option> --}}
-                                    <option value="super-admin">Super Admin</option>
-                                    <option value="admin">Admin</option>
-                                </select>
+
+                                <div class="mb-3">
+                                    <label for="inlineFormCustomSelect" class="text-label form-label ps-2"
+                                        style="font-size: 19px; font-weight: 500">Hak Akses</label>
+                                    <select class="me-sm-2 mb-3 default-select form-control wide custom-border"
+                                        id="inlineFormCustomSelect" name="role">
+                                        {{-- <option selected="">Choose...</option> --}}
+                                        <option value="super-admin">Super Admin</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+
                                 <button type="submit" class="btn me-2 btn-dark">Kembali</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>

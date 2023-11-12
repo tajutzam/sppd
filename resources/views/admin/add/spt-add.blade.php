@@ -261,9 +261,17 @@
                                         <option value="a1">Item A1</option>
                                     </select>
                                 </div>
-
+                                <div class="form-unit form-divided mb-3">
+                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Tipe
+                                        Tujuan</label>
+                                    <select class="js-example-basic custom-border" name="states[]">
+                                        <option>Pilih Tipe Tujuan</option>
+                                        <option value="a1">Item A1</option>
+                                    </select>
+                                </div>
                                 <div class="mb-3">
-                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Lama
+                                    <label class="text-label form-label ps-2"
+                                        style="font-size: 19px; font-weight: 500">Lama
                                         Perjalanan
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
