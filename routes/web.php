@@ -144,4 +144,10 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get("spt", function () {
         return view('admin.spt');
     })->name('spt');
+    Route::get("spt/create", function () {
+        return view('admin.add.spt-add');
+    })->name('add-spt');
+    Route::get("spt/edit", function () {
+        return view('admin.edit.spt-edit');
+    })->name('edit-spt');
 });
