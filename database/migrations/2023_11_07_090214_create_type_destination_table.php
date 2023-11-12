@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('type_destination', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name');
+            $table->text('name');
             $table->timestamps();
         });
     }

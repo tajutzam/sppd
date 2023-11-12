@@ -7,6 +7,7 @@ use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CostController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\InstructionsController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\TransportationController;
 use App\Http\Controllers\TypeDestinationController;
@@ -151,6 +152,7 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::put("categories/edit/{id}", [CategoryController::class, "update"])->name('categories-put');
         Route::get("categories/templates", [CategoryController::class, "downloadTemplate"])->name("categories-template");
         Route::post("categories/import", [CategoryController::class, "import"])->name("categories-import");
+        Route::get("categories/export", [CategoryController::class, "export"])->name('categories-export');
 
         // account routes
         Route::get("account", [AccountController::class, "index"])->name('account');
@@ -169,9 +171,8 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::get("user/create", function () {
             return view('admin.add.user-add');
         })->name('add-user');
-        Route::get("user/edit", function () {
-            return view('admin.edit.user-edit');
-        })->name('edit-user');
+        Route::get("user/edit/{id}", [UserController::class, "edit"])->name('edit-user');
+        Route::put("user/edit/{id}", [UserController::class, "update"])->name('user-put');
 
         // logout
         Route::post("logout", [AuthController::class, "logout"])->name('logout');
@@ -179,9 +180,7 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get("spt", function () {
         return view('admin.spt');
     })->name('spt');
-    Route::get("spt/create", function () {
-        return view('admin.add.spt-add');
-    })->name('add-spt');
+    Route::get("spt/create", [InstructionsController::class, "create"])->name('add-spt');
     Route::get("spt/edit", function () {
         return view('admin.edit.spt-edit');
     })->name('edit-spt');

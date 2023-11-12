@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CategoryExport;
 use App\Imports\CategoryImport;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
@@ -91,4 +92,11 @@ class CategoryController extends Controller
         $path = storage_path("/app/templates/category_templates.xlsx");
         return response()->download($path);
     }
+
+
+    public function export()
+    {
+        return Excel::download(new CategoryExport(), "categories.xlsx");
+    }
+
 }

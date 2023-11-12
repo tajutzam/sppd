@@ -61,7 +61,7 @@
                                             <td>{{ $item['role'] }}</td>
                                             <td>
                                                 <div class="d-flex ">
-                                                    <a href="#"
+                                                    <a href="{{ route('edit-user', ['id' => $item['id']]) }}"
                                                         class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                             class="fas fa-pencil-alt"></i></a>
                                                     <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"

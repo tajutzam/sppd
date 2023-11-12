@@ -69,9 +69,7 @@ class UserService implements Service
             $this->user->update(
                 [
                     'name' => $request['name'],
-                    'password' => Hash::make($request['password']),
                     'email' => $request['email'],
-                    'role' => $request['role']
                 ]
             );
             return;

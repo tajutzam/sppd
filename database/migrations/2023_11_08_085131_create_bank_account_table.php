@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('bank_account', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('account_number');
+            $table->integer('account_number');
             $table->timestamps();
         });
     }
