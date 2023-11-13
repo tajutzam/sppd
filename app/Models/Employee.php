@@ -25,4 +25,10 @@ class Employee extends Model
 
     protected $table = 'employee';
 
+
+    public function instructions()
+    {
+        return $this->hasMany(InstructionsEmployees::class , 'users');
+    }
+
 }

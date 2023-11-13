@@ -81,10 +81,21 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item['name'] }}</td>
                                             <td>{{ $item['position'] }}</td>
-                                            <td> <span class="badge light badge-danger">
-                                                    <i class="fa fa-circle text-danger me-1"></i>
-                                                    Tidak Tugas
-                                                </span></td>
+                                            <td>
+
+                                                @if ($item['isInstructions'])
+                                                    <span class="badge light badge-success">
+                                                        <i class="fa fa-circle text-success me-1"></i>
+                                                        Bertugas
+                                                    </span>
+                                                @else
+                                                    <span class="badge light badge-danger">
+                                                        <i class="fa fa-circle text-danger me-1"></i>
+                                                        Tidak Tugas
+                                                    </span>
+                                                @endif
+
+                                            </td>
                                             <td>
                                                 <div class="d-flex ">
                                                     <a href="{{ route('edit-cadress', ['id' => $item['id']]) }}"

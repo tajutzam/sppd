@@ -18,4 +18,18 @@ class Destination extends Model
     ];
 
     protected $table = 'destination';
+
+
+
+    public function place()
+    {
+        return $this->belongsTo(Places::class, "places_id");
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(TypeDestination::class, "type_destination_id");
+
+    }
+
 }

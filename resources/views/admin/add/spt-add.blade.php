@@ -195,7 +195,7 @@
                                         style="font-size: 19px; font-weight: 500">Kategori
                                         Perjalanan</label>
                                     <select class="js-example-basic custom-border" name="category_id">
-                                        <option>Pilih Kategori Perjalanan</option>
+                                        <option value="{{ null }}">Pilih Kategori Perjalanan</option>
                                         @foreach ($categories as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
@@ -243,7 +243,7 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Transportasi</label>
                                     <select class="js-example-basic custom-border" name="transportation_id">
-                                        <option>Pilih Transportasi</option>
+                                        <option value="{{ null }}">Pilih Transportasi</option>
                                         @foreach ($transportations as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
@@ -253,7 +253,7 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Tempat Berangkat</label>
                                     <select class="js-example-basic custom-border" name="place_from">
-                                        <option>Pilih Tempat Berangkat</option>
+                                        <option value="{{ null }}">Pilih Tempat Berangkat</option>
                                         @foreach ($places as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
@@ -263,18 +263,21 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Tempat Tujuan</label>
                                     <select class="js-example-basic custom-border" name="place_to">
-                                        <option>Pilih Tempat Tujuan</option>
+                                        <option value="{{ null }}"}>Pilih Tempat Tujuan</option>
                                         @foreach ($places as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-unit form-divided mb-3">
-                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Tipe
+                                    <label class="text-label form-label ps-2"
+                                        style="font-size: 19px; font-weight: 500">Tipe
                                         Tujuan</label>
-                                    <select class="js-example-basic custom-border" name="states[]">
-                                        <option>Pilih Tipe Tujuan</option>
-                                        <option value="a1">Item A1</option>
+                                    <select class="js-example-basic custom-border" name="type_destinations_id">
+                                        <option value="{{ null }}">Pilih Tipe Tujuan</option>
+                                        @foreach ($type_destinations as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -291,7 +294,7 @@
                                         style="font-size: 19px; font-weight: 500">Akun
                                         Anggaran</label>
                                     <select class="js-example-basic custom-border" name="account_id">
-                                        <option>Pilih Akun Anggaran</option>
+                                        <option value="{{ null }}">Pilih Akun Anggaran</option>
                                         @foreach ($accounts as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
@@ -326,7 +329,7 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Nomor Rekening</label>
                                     <select class="js-example-basic custom-border" name="bank_account_id">
-                                        <option>Pilih Nomor Rekening</option>
+                                        <option value="{{ null }}">Pilih Nomor Rekening</option>
                                         @foreach ($banks as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['account_number'] }}</option>
                                         @endforeach
@@ -345,7 +348,7 @@
                                         style="font-size: 19px; font-weight: 500">Arahan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Arahan" name="briefings">
+                                        placeholder="Masukkan Arahan" name="briefings" value="-">
 
                                 </div>
 
@@ -354,7 +357,7 @@
                                         style="font-size: 19px; font-weight: 500">Masalah
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Masalah" name="problem">
+                                        placeholder="Masukkan Masalah" name="problem" value="-">
                                 </div>
 
                                 <div class="mb-3">
@@ -362,14 +365,14 @@
                                         style="font-size: 19px; font-weight: 500">Saran
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Saran" name="advice">
+                                        placeholder="Masukkan Saran" name="advice" value="-">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Lain -Lain
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lain -Lain" name="other">
+                                        placeholder="Masukkan Lain -Lain" name="other" value="-">
                                 </div>
 
                                 <div class="mb-4">
@@ -377,7 +380,7 @@
                                         style="font-size: 19px; font-weight: 500">Keterangan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Keterangan" name="description">
+                                        placeholder="Masukkan Keterangan" name="description" value="-">
                                 </div>
                                 <button type="submit" class="btn me-2 btn-dark">Kembali</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>

@@ -110,4 +110,6 @@ class TransportationController extends Controller
         return Excel::download(new TransportationExport(), 'transportation.xlsx');
     }
 
+    
+
 }

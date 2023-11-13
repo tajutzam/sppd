@@ -62,27 +62,41 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="{{ route('detail-spt') }}"
-                                                    class="btn btn-success shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fa fa-eye"></i></a>
-                                                <a href="{{ route('edit-spt') }}"
-                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <a href="{{ route('detail-spt') }}"
-                                                    class="btn btn-danger shadow btn-xs sharp pt-2"><i class="fa fa-trash"
-                                                        data-bs-toggle="modal" data-bs-target="#delete-account"></i></a>
-                                            </div>
-                                        </td>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item['activity_name'] }}</td>
 
-                                    </tr>
+                                            @php
+                                                $employee = [];
+                                            @endphp
+                                            @foreach ($item['employees'] as $itemEmployee)
+                                                @php
+                                                    array_push($employee, $itemEmployee['employee']['name']);
+                                                    $implodedString = implode(', ', $employee);
+                                                @endphp
+                                            @endforeach
+                                            <td>{{ $implodedString }}</td>
+
+                                            <td>{{ Carbon\Carbon::parse($item['departure_date'])->format('Y-m-d') }}</td>
+                                            <td>{{ Carbon\Carbon::parse($item['return_date'])->format('Y-m-d') }}</td>
+                                            {{-- <td></td> --}}
+                                            <td>
+                                                <div class="d-flex ">
+                                                    <a href="{{ route('detail-spt', ['id' => $item['id']]) }}"
+                                                        class="btn btn-success shadow btn-xs sharp me-1 pt-2"><i
+                                                            class="fa fa-eye"></i></a>
+                                                    <a href="{{ route('edit-spt') }}"
+                                                        class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+                                                    <a href="" class="btn btn-danger shadow btn-xs sharp pt-2"><i
+                                                            class="fa fa-trash" data-bs-toggle="modal"
+                                                            data-bs-target="#delete-account"></i></a>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

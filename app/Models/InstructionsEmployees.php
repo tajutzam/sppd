@@ -12,7 +12,7 @@ class InstructionsEmployees extends Model
 
 
     protected $table = 'instructions_employees_cadres';
-    
+
     protected $fillable = [
         "users",
         "instructions"
@@ -21,7 +21,14 @@ class InstructionsEmployees extends Model
 
     public function instructions()
     {
-        return $this->belongsTo(Instructions::class);
+        return $this->belongsTo(Instructions::class, "instructions");
+    }
+
+
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, "users");
     }
 
 }

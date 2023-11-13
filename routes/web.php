@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CostController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\InstructionsController;
 use App\Http\Controllers\PlaceController;
@@ -43,12 +44,8 @@ Route::get('/forgotpassword', function () {
 })->name('forgotpassword');
 
 Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-    Route::get('index', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('dashboard', [DashboardController::class, "index"])->name('dashboard');
+    Route::get('index', [DashboardController::class, "index"]);
     Route::prefix("master")->group(function () {
         Route::get("destination", function () { });
 
@@ -177,18 +174,14 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         // logout
         Route::post("logout", [AuthController::class, "logout"])->name('logout');
     });
-    Route::get("spt", function () {
-        return view('admin.spt');
-    })->name('spt');
+    Route::get("spt", [InstructionsController::class, "index"])->name('spt');
     Route::get("spt/create", [InstructionsController::class, "create"])->name('add-spt');
     Route::post("spt/create", [InstructionsController::class, "store"])->name('spt-post');
 
     Route::get("spt/edit", function () {
         return view('admin.edit.spt-edit');
     })->name('edit-spt');
-    Route::get("spt/detail", function () {
-        return view('admin.detail-spt');
-    })->name('detail-spt');
+    Route::get("spt/detail/{id}", [InstructionsController::class, "detail"])->name('detail-spt');
 });
 
 
