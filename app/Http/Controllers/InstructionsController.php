@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\AccountService;
 use App\Services\BankAccountService;
 use App\Services\CategoryService;
+use App\Services\DestinationService;
 use App\Services\EmployeeService;
 use App\Services\PlacesService;
 use App\Services\TransportationService;
@@ -19,6 +20,10 @@ class InstructionsController extends Controller
     private PlacesService $placesService;
     private AccountService $accountService;
     private BankAccountService $bankService;
+
+    private DestinationService $destinationService;
+
+
 
     public function __construct()
     {

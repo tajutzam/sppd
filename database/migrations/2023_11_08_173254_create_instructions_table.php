@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -15,8 +16,8 @@ return new class extends Migration {
             $table->string('activity_name');
             $table->string('sub_activity_name');
             $table->foreignUuid('category_id')->references('id')->on('category')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamp('departure_date');
-            $table->timestamp('return_date');
+            $table->timestamp('departure_date')->default(DB::raw("CURRENT_TIMESTAMP"));
+            $table->timestamp('return_date')->default(DB::raw("CURRENT_TIMESTAMP"));
             $table->foreignUuid('transportation_id')->references('id')->on('transportation')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('destination_to_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('destination_form_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
