@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->string('activity_name');
             $table->string('sub_activity_name');
             $table->foreignUuid('category_id')->references('id')->on('category')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->timestamp('departure_date');
+            $table->timestamp('return_date');
             $table->foreignUuid('transportation_id')->references('id')->on('transportation')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('destination_to_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('destination_form_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
@@ -22,6 +24,9 @@ return new class extends Migration {
             $table->foreignUuid('budget_account_id')->references('id')->on('account')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('bank_account_id')->references('id')->on('bank_account')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('present_in');
+            $table->string('accept_from');
+            $table->string('sub_component');
+            $table->string('amount_money');
             $table->string('briefings');
             $table->string('problem');
             $table->string('advice');

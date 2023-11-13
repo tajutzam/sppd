@@ -13,16 +13,26 @@ class InstructionService
 
     private InstructionsEmployees $employees;
 
+    private EmployeeService $employeeService;
+
     public function __construct()
     {
         $this->instructions = new Instructions();
+        $this->employeeService = new EmployeeService();
+        $this->employees = new InstructionsEmployees();
     }
 
 
 
-    public function create()
+    public function create($request)
     {
-
+        // list of users instructions
+        $users = [];
+        foreach ($request['users'] as $key => $value) {
+            # code...
+            $user = $this->employeeService->findById($value['id']);
+            array_push($users, $user);
+        }
     }
 
 

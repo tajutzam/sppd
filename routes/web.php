@@ -181,6 +181,8 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         return view('admin.spt');
     })->name('spt');
     Route::get("spt/create", [InstructionsController::class, "create"])->name('add-spt');
+    Route::post("spt/create", [InstructionsController::class, "store"])->name('spt-post');
+
     Route::get("spt/edit", function () {
         return view('admin.edit.spt-edit');
     })->name('edit-spt');

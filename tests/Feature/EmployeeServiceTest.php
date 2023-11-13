@@ -101,7 +101,7 @@ class EmployeeServiceTest extends TestCase
                 'position' => 'ob',
                 'daily_money' => random_int(100000, 100000000000),
                 'food_money' => random_int(100000, 100000000000),
-                'transport_money' => random_int(100000, 100000000000)
+                'transport_money' => 2000000000000
             ]
         );
         $response = $service->findAll();
