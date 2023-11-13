@@ -13,8 +13,6 @@
 <!-- Dashboard 1 -->
 <script src="{{ asset('/') }}vendor/toastr/js/toastr.min.js"></script>
 <script src="{{ asset('/') }}js/dashboard/dashboard-1.js"></script>
-<script src="{{ asset('/') }}vendor/chartist/js/chartist.min.js"></script>
-<script src="{{ asset('/') }}vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
 <script src="{{ asset('/') }}vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 <script src="{{ asset('/') }}js/plugins-init/chartist-init.js"></script>
 <script src="{{ asset('/') }}vendor/owl-carousel/owl.carousel.js"></script>
@@ -76,7 +74,7 @@
         (function($) {
             "use strict";
             $(document).ready(function() {
-                toastr.error("{{ $errors->first()}}", "Error", {
+                toastr.error("{{ $errors->first() }}", "Error", {
                     positionClass: "toast-top-right",
                     timeOut: 5e3,
                     closeButton: true,

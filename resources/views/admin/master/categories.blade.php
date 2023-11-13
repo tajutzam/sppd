@@ -28,7 +28,8 @@
 
                                     <!-- Example single danger button -->
                                     <div class="btn-group">
-                                        <a href="" class="btn btn-success" aria-expanded="false">
+                                        <a href="{{ route('categories-export') }}" class="btn btn-success"
+                                            aria-expanded="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-file-earmark-spreadsheet"
                                                 viewBox="0 0 16 16">
