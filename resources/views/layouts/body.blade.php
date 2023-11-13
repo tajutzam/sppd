@@ -55,9 +55,11 @@
 
 
                             <li class="nav-item dropdown  header-profile">
+
                                 <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
                                     <img src="{{ asset('/') }}images/user.jpg" width="56" alt="">
                                 </a>
+
                                 <div class="dropdown-menu dropdown-menu-end">
                                     <a href="{{ route('forgotpassword') }}" class="dropdown-item ai-icon">
                                         <i class="fas fa-key" style="color: grey"></i>
@@ -142,5 +144,11 @@
         </div>
         <div class="content-body">
             @yield('content')
+        </div>
+    </div>
+    <div class="footer">
+        <div class="copyright">
+            <p>Copyright © Designed &amp; Developed by <a href="" target="_blank">Puskesmas
+                    Ketrowonojoyo</a> 2023</p>
         </div>
     </div>

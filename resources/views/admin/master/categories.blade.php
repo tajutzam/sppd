@@ -11,6 +11,10 @@
                             </div>
 
                             <div class="col-sm-6 text-md-end">
+
+                                <a href="{{ route('categories-template') }}"><button class="btn btn-secondary me-2">
+                                        Download Template
+                                    </button></a>
                                 <a href="{{ route('add-categories') }}">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -24,8 +28,8 @@
 
                                     <!-- Example single danger button -->
                                     <div class="btn-group">
-                                        <a href="{{ route('categories-export', ['id' => 1]) }}" class="btn btn-success"
-                                             aria-expanded="false">
+                                        <a href="{{ route('categories-export') }}" class="btn btn-success"
+                                            aria-expanded="false">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="currentColor" class="bi bi-file-earmark-spreadsheet"
                                                 viewBox="0 0 16 16">
@@ -144,7 +148,7 @@
                 <div class="modal-header">
                     <div class="row-12">
                         <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Kategori</h5>
-                        <a href="{{ route('categories-template') }}">Download Template</a>
+
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>

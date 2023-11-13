@@ -11,6 +11,9 @@
                             </div>
 
                             <div class="col-sm-6 text-md-end">
+                                <a href="{{ route('bank-account-template') }}"><button class="btn btn-secondary me-2">
+                                        Download Template
+                                    </button></a>
                                 <a href="{{ route('add-bank-account') }}">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -19,6 +22,7 @@
                                                 d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                                         </svg> Tambah
                                     </button></a>
+
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example"
                                     style="padding: 1%">
 
@@ -141,7 +145,7 @@
                 <div class="modal-header">
                     <div class="row-12">
                         <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Nomor Rekening</h5>
-                        <a href="{{ route('bank-account-template') }}">Download Template</a>
+
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>

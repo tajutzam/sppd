@@ -10,6 +10,9 @@
                             <div class="col-sm-6">
                             </div>
                             <div class="col-sm-6 text-md-end pe-3">
+                                <a href="{{ route('employee-templates') }}"><button class="btn btn-secondary me-2">
+                                        Download Template
+                                    </button></a>
                                 <a href="{{ route('add-employee') }}">
                                     <button type="button" class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -159,7 +162,7 @@
                 <div class="modal-header">
                     <div class="row12">
                         <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Pegawai</h5>
-                        <a href="{{ route('employee-templates') }}" class="m-2">Download Template</a>
+
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>

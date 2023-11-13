@@ -23,7 +23,7 @@
 
         th {
             width: 200px;
-            font-size: 16px;
+            font-size: 18px;
             /* Atur lebar elemen th */
             /* Atur properti CSS lainnya sesuai kebutuhan */
         }
@@ -70,8 +70,8 @@
                                     </tr>
                                     <tr>
                                         <th>Pegawai Ditugaskan</th>
-                                        <td> Yoi Bang <span class="badge badge-primary mb-1">Sale</span> <br>
-                                            Yoi Bang <span class="badge badge-primary">Sale</span>
+                                        <td> Yoi Bang <span class="badge badge-primary m-2">Sale</span> <br>
+                                            Yoi Bang <span class="badge badge-primary m-2">Sale</span>
                                         </td>
                                     </tr>
                                     <tr>
