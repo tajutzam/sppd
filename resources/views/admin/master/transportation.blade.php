@@ -11,6 +11,9 @@
                             </div>
 
                             <div class="col-sm-6 text-md-end">
+                                <a href="{{ route('transportation-template') }}"><button class="btn btn-secondary me-2">
+                                        Download Template
+                                    </button></a>
                                 <a href="{{ route('add-transportation') }}">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -144,7 +147,7 @@
                 <div class="modal-header">
                     <div class="row-12">
                         <h5 class="modal-title" style="font-weight: bold; font-size: 30px">Upload Data Transportasi</h5>
-                        <a href="{{ route('transportation-template') }}">Download Template</a>
+
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                     </button>
