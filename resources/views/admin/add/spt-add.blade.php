@@ -194,7 +194,7 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Kategori
                                         Perjalanan</label>
-                                    <select class="js-example-basic custom-border" name="category_id">
+                                    <select class="js-example-category custom-border" name="category_id">
                                         <option value="{{ null }}">Pilih Kategori Perjalanan</option>
                                         @foreach ($categories as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
@@ -242,7 +242,7 @@
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Transportasi</label>
-                                    <select class="js-example-basic custom-border" name="transportation_id">
+                                    <select class="js-example-transportation custom-border" name="transportation_id">
                                         <option value="{{ null }}">Pilih Transportasi</option>
                                         @foreach ($transportations as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
@@ -252,7 +252,7 @@
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Tempat Berangkat</label>
-                                    <select class="js-example-basic custom-border" name="place_from">
+                                    <select class="js-example-place custom-border" name="place_from">
                                         <option value="{{ null }}">Pilih Tempat Berangkat</option>
                                         @foreach ($places as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
@@ -262,7 +262,7 @@
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Tempat Tujuan</label>
-                                    <select class="js-example-basic custom-border" name="place_to">
+                                    <select class="js-example-destination custom-border" name="place_to">
                                         <option value="{{ null }}"}>Pilih Tempat Tujuan</option>
                                         @foreach ($places as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
@@ -273,7 +273,7 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Tipe
                                         Tujuan</label>
-                                    <select class="js-example-basic custom-border" name="type_destinations_id">
+                                    <select class="js-example-type custom-border" name="type_destinations_id">
                                         <option value="{{ null }}">Pilih Tipe Tujuan</option>
                                         @foreach ($type_destinations as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
@@ -293,7 +293,7 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Akun
                                         Anggaran</label>
-                                    <select class="js-example-basic custom-border" name="account_id">
+                                    <select class="js-example-money custom-border" name="account_id">
                                         <option value="{{ null }}">Pilih Akun Anggaran</option>
                                         @foreach ($accounts as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
@@ -328,7 +328,7 @@
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Nomor Rekening</label>
-                                    <select class="js-example-basic custom-border" name="bank_account_id">
+                                    <select class="js-example-bank-account custom-border" name="bank_account_id">
                                         <option value="{{ null }}">Pilih Nomor Rekening</option>
                                         @foreach ($banks as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['account_number'] }}</option>
@@ -425,6 +425,107 @@
                     $(this).next('.select2-container')
                         .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
                             'Pilih Pegawai');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-transportation").select2({
+                placeholder: "Pilih Transportasi"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Transportasi');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-category").select2({
+                placeholder: "Pilih Kategori Perjalanan"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Kategori Perjalanan');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-place").select2({
+                placeholder: "Pilih Tempat Berangkat"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Tempat Berangkat');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-destination").select2({
+                placeholder: "Pilih Tempat Tujuan"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Tempat Tujuan');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-type").select2({
+                placeholder: "Pilih Tipe Tujuan"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Tipe Tujuan');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-money").select2({
+                placeholder: "Pilih Akun Anggaran"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Akun Anggaran');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-bank-account").select2({
+                placeholder: "Pilih Nomor Rekening"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Nomor Rekening');
                 }
             });
         });
