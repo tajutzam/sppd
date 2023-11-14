@@ -181,10 +181,10 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::post("spt/create", [InstructionsController::class, "store"])->name('spt-post');
     Route::delete("spt", [InstructionsController::class, "delete"])->name('spt-delete');
 
-    Route::get("spt/edit", function () {
-        return view('admin.edit.spt-edit');
-    })->name('edit-spt');
+    Route::get("spt/edit/{id}", [InstructionsController::class, "edit"])->name('edit-spt');
     Route::get("spt/detail/{id}", [InstructionsController::class, "detail"])->name('detail-spt');
+    Route::get("bku/export", [InstructionsController::class, "export_bku"])->name('bku-export');
+    Route::get("spt/export/{id}", [InstructionsController::class, "export_spt"])->name('spt-export');
 });
 
 Route::get("error-404", function () {
@@ -193,3 +193,4 @@ Route::get("error-404", function () {
 // Route::get("coba", function () {
 //     return view("admin.coba");
 // });
+

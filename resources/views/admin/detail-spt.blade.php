@@ -35,10 +35,10 @@
                     <div class="card-header text-align-between">
                         <h2 class="card-title " style="font-weight: bold; font-size: 25px">Data SPT</h2>
                         <div>
-                            <a href="
-                        {{ route('spt') }}">
-                                <button type="submit" class="btn me-2 btn-dark">Kembali</button></a>
-                            <button type="submit" class="btn me-2 btn-success">Cetak SPT, Laporan & Kuitansi</button>
+
+                            <a class="btn me-2 btn-dark">Kembali</a></a>
+                            <a href="{{ route('spt-export', ['id' => $data['id']]) }}" class="btn me-2 btn-success">Cetak SPT, Laporan &
+                                Kuitansi</a>
                         </div>
                     </div>
                     <hr class="m-0" style="opacity: 30%;

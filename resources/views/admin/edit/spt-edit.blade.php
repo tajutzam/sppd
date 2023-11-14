@@ -178,7 +178,8 @@
                                         Kegiatan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Kegiatan" name="activity_name">
+                                        placeholder="Masukkan Nama Kegiatan" name="activity_name"
+                                        value="{{ $data['activity_name'] }}">
                                 </div>
 
                                 <div class="mb-3">
@@ -187,22 +188,27 @@
                                         Kegiatan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Sub Kegiatan" name="sub_activity_name">
+                                        placeholder="Masukkan Nama Sub Kegiatan" name="sub_activity_name"
+                                        value="{{ $data['sub_activity_name'] }}">
                                 </div>
+                                {{-- @dd($data) --}}
 
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Kategori
                                         Perjalanan</label>
                                     <select class="js-example-category custom-border" name="category_id">
-
                                         @foreach ($categories as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                            <option value="{{ $item['id'] }}"
+                                                {{ $item['id'] == $data['category_id'] ? 'selected' : '' }}>
+                                                {{ $item['name'] }}
+                                            </option>
                                         @endforeach
                                     </select>
 
                                 </div>
 
+                                {{-- @dd($data) --}}
                                 <div class="row mb-3">
                                     <div class="col mt-2 mt-sm-0">
                                         <label class="text-label form-label ps-2"
@@ -212,7 +218,8 @@
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             <input type="date" class="form-control input-default custom-border"
-                                                name="departure_date">
+                                                name="departure_date"
+                                                value="{{ date('Y-m-d', strtotime($data['departure_date'])) }}">
                                         </div>
 
                                     </div>
@@ -224,19 +231,21 @@
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             <input type="date" class="form-control input-default custom-border"
-                                                name="return_date">
+                                                name="return_date"
+                                                value="{{ date('Y-m-d', strtotime($data['return_date'])) }}">
                                         </div>
                                     </div>
                                 </div>
+
+                                {{-- @dd($data) --}}
 
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Pegawai Ditugaskan</label>
                                     <select class="js-example-basic-multiple" name="users[]" multiple="multiple">
-                                        @foreach ($employees as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
-                                        @endforeach
+
                                     </select>
+
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">

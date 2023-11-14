@@ -4,6 +4,7 @@
 namespace App\Services;
 
 use App\Exceptions\WebException;
+use App\Models\Employee;
 use App\Models\Instructions;
 use App\Models\InstructionsEmployees;
 use Carbon\Carbon;
@@ -18,6 +19,8 @@ class InstructionService
 
     private InstructionsEmployeesService $employeeService;
 
+    private Employee $employee;
+
 
 
 
@@ -28,6 +31,7 @@ class InstructionService
         $this->instructions = new Instructions();
         $this->destinationService = new DestinationService();
         $this->employeeService = new InstructionsEmployeesService();
+        $this->employee = new Employee();
 
     }
 
@@ -122,6 +126,28 @@ class InstructionService
     public function findAll()
     {
         return $this->instructions->with(['employees', 'employees.employee'])->get()->toArray();
+    }
+
+
+    public function bkuFindAll()
+    {
+
+        $data = $this->employee
+            ->whereHas('instructions')
+            ->with('instructions', 'instructions.instructions', 'instructions.instructions.categories', 'instructions.instructions.transportation', 'instructions.instructions.destination_to', 'instructions.instructions.destination_from', 'instructions.instructions.destination_from.place', 'instructions.instructions.destination_to.place', 'instructions.instructions.bank_account', 'instructions.instructions.account', 'instructions.instructions.destination_from.type_destination', 'instructions.instructions.destination_to.type_destination', 'instructions.instructions.transportation')
+            ->get()
+            ->toArray();
+
+        $newData = [];
+
+        foreach ($data as $user) {
+            foreach ($user['instructions'] as $instruction) {
+                $newUser = $user;
+                $newUser['instructions'] = [$instruction];
+                $newData[] = $newUser;
+            }
+        }
+        return $newData;
     }
 
 

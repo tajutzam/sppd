@@ -26,7 +26,7 @@ class Destination extends Model
         return $this->belongsTo(Places::class, "places_id");
     }
 
-    public function type()
+    public function type_destination()
     {
         return $this->belongsTo(TypeDestination::class, "type_destination_id");
 

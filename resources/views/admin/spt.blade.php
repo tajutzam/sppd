@@ -24,14 +24,14 @@
                                             </svg> Tambah
                                         </button>
                                     </a>
-                                    <button type="btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="">
+                                    <a href="{{ route('bku-export', ['id' => 1]) }}" class="btn btn-success" 
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-file-earmark-arrow-down-fill"
                                             viewBox="0 0 16 16">
                                             <path
                                                 d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm-1 4v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 11.293V7.5a.5.5 0 0 1 1 0z" />
                                         </svg> Export Lap. Perjadin
-                                    </button>
+                                    </a>
                                 </div>
 
                             </div>
@@ -86,7 +86,7 @@
                                                     <a href="{{ route('detail-spt', ['id' => $item['id']]) }}"
                                                         class="btn btn-success shadow btn-xs sharp me-1 pt-2"><i
                                                             class="fa fa-eye"></i></a>
-                                                    <a href="{{ route('edit-spt') }}"
+                                                    <a href="{{ route('edit-spt', ['id' => $item['id']]) }}"
                                                         class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                             class="fas fa-pencil-alt"></i></a>
                                                     <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
@@ -122,7 +122,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <form action="{{ route('spt-delete', ['id'=>1]) }}" method="post">
+                    <form action="{{ route('spt-delete', ['id' => 1]) }}" method="post">
                         @csrf
                         @method('delete')
                         <input type="text" name="id" hidden id="id-delete">

@@ -396,7 +396,7 @@
         document.getElementsByName('departure_date')[0].addEventListener('change', function() {
             // Ambil nilai dari input tanggal berangkat
             var departureDate = this.value;
-
+            
             // Set nilai input tanggal pulang dengan nilai tanggal berangkat
             document.getElementsByName('return_date')[0].value = departureDate;
         });

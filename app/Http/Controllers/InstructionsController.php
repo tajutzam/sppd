@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BkuExport;
 use App\Services\AccountService;
 use App\Services\BankAccountService;
 use App\Services\CategoryService;
@@ -11,7 +12,10 @@ use App\Services\InstructionService;
 use App\Services\PlacesService;
 use App\Services\TransportationService;
 use App\Services\TypeDestinationService;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class InstructionsController extends Controller
@@ -150,6 +154,48 @@ class InstructionsController extends Controller
     {
         $data = $this->instructionService->findAll();
         return view("admin.spt", ['data' => $data]);
+    }
+
+
+    public function edit($id)
+    {
+        $data = $this->instructionService->findById($id)->toArray();
+
+        $categories = $this->categoryService->findAll();
+        $employees = $this->employeeService->findAll();
+        $transportations = $this->transportationService->findAll();
+        $places = $this->placesService->findAll();
+        $accounts = $this->accountService->findAll();
+        $bankAccounts = $this->bankService->findAll();
+        $typeDestinations = $this->typeDestinationService->findAll();
+        // dd($data);
+        return view('admin.edit.spt-edit', [
+            'data' => $data,
+            'categories' => $categories,
+            'employees' => $employees,
+            'transportations' => $transportations,
+            'places' => $places,
+            'accounts' => $accounts,
+            'banks' => $bankAccounts,
+            'type_destinations' => $typeDestinations
+        ]);
+    }
+
+    public function export_bku()
+    {
+        return Excel::download(new BkuExport(), 'bku.xlsx');
+    }
+
+    public function export_spt($id)
+    {
+
+        $data = $this->instructionService->findById($id)->toArray();
+        // dd($data);
+        $pdf = PDF::loadView('exports.spt-export', ['data' => $data])->setPaper('a4', 'potrait');
+
+        // Save the pdf with a specific name
+        return $pdf->download("SPT & LAPORAN / " . Carbon::now()->format('Y-m-d') . '.docx');
+
     }
 
 }
