@@ -164,20 +164,21 @@
             <div class="col-lg-12">
                 <div class="card custom-card">
                     <div class="card-header">
-                        <h2 class="card-title " style="font-weight: bold; font-size: 25px">Edit SPT</h2>
+                        <h2 class="card-title " style="font-weight: bold; font-size: 25px">Tambah SPT</h2>
                     </div>
                     <hr class="m-0" style="opacity: 30%;
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="" method="get">
-
+                            <form method="post" action="{{ route('spt-post', ['id' => 1]) }}" method="post"
+                                class="form-valide-with-icon needs-validation" novalidate="" method="get">
+                                @csrf
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
                                         Kegiatan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Kegiatan">
+                                        placeholder="Masukkan Nama Kegiatan" name="activity_name">
                                 </div>
 
                                 <div class="mb-3">
@@ -186,16 +187,18 @@
                                         Kegiatan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Sub Kegiatan">
+                                        placeholder="Masukkan Nama Sub Kegiatan" name="sub_activity_name">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Kategori
                                         Perjalanan</label>
-                                    <select class="js-example-basic custom-border" name="states[]">
-                                        <option>Pilih Kategori Perjalanan</option>
-                                        <option value="a1">Item A1</option>
+                                    <select class="js-example-category custom-border" name="category_id">
+
+                                        @foreach ($categories as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
 
                                 </div>
@@ -208,7 +211,8 @@
                                         <div class="input-group " data-placement="left" data-align="top"
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input type="date" class="form-control input-default custom-border">
+                                            <input type="date" class="form-control input-default custom-border"
+                                                name="departure_date">
                                         </div>
 
                                     </div>
@@ -219,7 +223,8 @@
                                         <div class="input-group " data-placement="left" data-align="top"
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input type="date" class="form-control input-default custom-border">
+                                            <input type="date" class="form-control input-default custom-border"
+                                                name="return_date">
                                         </div>
                                     </div>
                                 </div>
@@ -227,56 +232,68 @@
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Pegawai Ditugaskan</label>
-                                    <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                                        <option value="a1">Item A1</option>
-                                        <option value="a2">Item A2</option>
-                                        <option value="b1">Item B1</option>
-                                        <option value="c1">Item C1</option>
-                                        <option value="c2">Item C2</option>
-                                        <option value="c2">Item C3</option>
+                                    <select class="js-example-basic-multiple" name="users[]" multiple="multiple">
+                                        @foreach ($employees as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Transportasi</label>
-                                    <select class="js-example-basic custom-border" name="states[]">
-                                        <option>Pilih Transportasi</option>
-                                        <option value="a1">Item A1</option>
+                                    <select class="js-example-transportation custom-border" name="transportation_id">
+
+                                        @foreach ($transportations as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Tempat Berangkat</label>
-                                    <select class="js-example-basic custom-border" name="states[]">
-                                        <option>Pilih Tempat Berangkat</option>
-                                        <option value="a1">Item A1</option>
+                                    <select class="js-example-place custom-border" name="place_from">
+
+                                        @foreach ($places as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Tempat Tujuan</label>
-                                    <select class="js-example-basic custom-border" name="states[]">
-                                        <option>Pilih Tempat Tujuan</option>
-                                        <option value="a1">Item A1</option>
+                                    <select class="js-example-destination custom-border" name="place_to">
+
+                                        @foreach ($places as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+                                <div class="form-unit form-divided mb-3">
+                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Tipe
+                                        Tujuan</label>
+                                    <select class="js-example-type custom-border" name="states[]">
 
+                                    </select>
+                                </div>
                                 <div class="mb-3">
-                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Lama
+                                    <label class="text-label form-label ps-2"
+                                        style="font-size: 19px; font-weight: 500">Lama
                                         Perjalanan
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lama (Hari) ">
+                                        placeholder="Masukkan Lama (Hari) " name="travel_time">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Akun
                                         Anggaran</label>
-                                    <select class="js-example-basic custom-border" name="states[]">
-                                        <option>Pilih Akun Anggaran</option>
-                                        <option value="a1">Item A1</option>
+                                    <select class="js-example-money custom-border" name="account_id">
+
+                                        @foreach ($accounts as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -285,7 +302,7 @@
                                         style="font-size: 19px; font-weight: 500">Sudah Diterima Dari
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Terima Dari">
+                                        placeholder="Masukkan Terima Dari" name="accept_from">
                                 </div>
 
                                 <div class="mb-3">
@@ -293,7 +310,7 @@
                                         style="font-size: 19px; font-weight: 500">Sub Komponen
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Sub Komponen">
+                                        placeholder="Masukkan Sub Komponen" name="sub_component">
                                 </div>
 
                                 <div class="mb-3">
@@ -301,15 +318,17 @@
                                         style="font-size: 19px; font-weight: 500">Jumlah Uang
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Jumlah Uang">
+                                        placeholder="Masukkan Jumlah Uang" name="ammount_money">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Nomor Rekening</label>
-                                    <select class="js-example-basic custom-border" name="states[]">
-                                        <option>Pilih Nomor Rekening</option>
-                                        <option value="a1">Item A1</option>
+                                    <select class="js-example-bank-account custom-border" name="bank_account_id">
+
+                                        @foreach ($banks as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['account_number'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -317,7 +336,7 @@
                                         style="font-size: 19px; font-weight: 500">Hadir Dalam
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Hadir Dalam">
+                                        placeholder="Masukkan Hadir Dalam" name="present_in">
                                 </div>
 
                                 <div class="mb-3">
@@ -325,7 +344,7 @@
                                         style="font-size: 19px; font-weight: 500">Arahan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Arahan">
+                                        placeholder="Masukkan Arahan" name="briefings">
 
                                 </div>
 
@@ -334,7 +353,7 @@
                                         style="font-size: 19px; font-weight: 500">Masalah
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Masalah">
+                                        placeholder="Masukkan Masalah" name="problem">
                                 </div>
 
                                 <div class="mb-3">
@@ -342,14 +361,14 @@
                                         style="font-size: 19px; font-weight: 500">Saran
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Saran">
+                                        placeholder="Masukkan Saran" name="advice">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Lain -Lain
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lain -Lain">
+                                        placeholder="Masukkan Lain -Lain" name="other">
                                 </div>
 
                                 <div class="mb-4">
@@ -357,7 +376,7 @@
                                         style="font-size: 19px; font-weight: 500">Keterangan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Keterangan">
+                                        placeholder="Masukkan Keterangan" name="description">
                                 </div>
                                 <button type="submit" class="btn me-2 btn-dark">Kembali</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -370,6 +389,14 @@
         </div>
     </div>
     <script>
+        document.getElementsByName('departure_date')[0].addEventListener('change', function() {
+            // Ambil nilai dari input tanggal berangkat
+            var departureDate = this.value;
+
+            // Set nilai input tanggal pulang dengan nilai tanggal berangkat
+            document.getElementsByName('return_date')[0].value = departureDate;
+        });
+
         $(document).ready(function() {
 
             $(".js-example-basic-multiple").select2({
@@ -394,6 +421,107 @@
                     $(this).next('.select2-container')
                         .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
                             'Pilih Pegawai');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-transportation").select2({
+                placeholder: "Pilih Transportasi"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Transportasi');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-category").select2({
+                placeholder: "Pilih Kategori Perjalanan"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Kategori Perjalanan');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-place").select2({
+                placeholder: "Pilih Tempat Berangkat"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Tempat Berangkat');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-destination").select2({
+                placeholder: "Pilih Tempat Tujuan"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Tempat Tujuan');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-type").select2({
+                placeholder: "Pilih Tipe Tujuan"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Tipe Tujuan');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-money").select2({
+                placeholder: "Pilih Akun Anggaran"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Akun Anggaran');
+                }
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-bank-account").select2({
+                placeholder: "Pilih Nomor Rekening"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Nomor Rekening');
                 }
             });
         });
