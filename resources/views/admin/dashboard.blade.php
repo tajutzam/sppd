@@ -74,18 +74,14 @@
                                                     </span>
                                                     <div class="media-body text-white text-end">
                                                         <p class="mb-1">Jumlah SPT</p>
-                                                        <h3 class="text-white">{{$spt}}</h3>
+                                                        <h3 class="text-white">{{ $spt }}</h3>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
-
-
                         </div>
                     </div>
                 </div>

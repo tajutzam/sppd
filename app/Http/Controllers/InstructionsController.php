@@ -138,6 +138,13 @@ class InstructionsController extends Controller
         return view('admin.detail-spt', ['data' => $data]);
     }
 
+    public function delete(Request $request)
+    {
+        $this->instructionService->delete($request->input('id'));
+        Alert::success("Sukses", "Berhasil Menghapus SPT");
+        return back();
+    }
+
 
     public function index()
     {

@@ -60,6 +60,7 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::post("employee/create", [EmployeeController::class, "storeEmployee"])->name("employee-post");
         Route::post("employee/import", [EmployeeController::class, "importEmployee"])->name("employee-import");
         Route::get("employee/templates", [EmployeeController::class, "downloadTemplate"])->name("employee-templates");
+        Route::get("employee/export", [EmployeeController::class, "export"])->name('employee-export');
 
         // cadress routes
         Route::get("cadress", [EmployeeController::class, "cadress"])->name('cadress');
@@ -177,6 +178,7 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get("spt", [InstructionsController::class, "index"])->name('spt');
     Route::get("spt/create", [InstructionsController::class, "create"])->name('add-spt');
     Route::post("spt/create", [InstructionsController::class, "store"])->name('spt-post');
+    Route::delete("spt", [InstructionsController::class, "delete"])->name('spt-delete');
 
     Route::get("spt/edit", function () {
         return view('admin.edit.spt-edit');

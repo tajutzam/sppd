@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EmployeeExport;
 use App\Imports\EmployeeImport;
 use App\Services\EmployeeService;
 use Illuminate\Http\Request;
@@ -232,6 +233,11 @@ class EmployeeController extends Controller
     {
         $path = storage_path("/app/templates/pegawai_template.xls");
         return response()->download($path);
+    }
+
+    public function export()
+    {
+        return Excel::download(new EmployeeExport(), "employees.xlsx");
     }
 
 }

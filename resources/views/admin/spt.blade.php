@@ -89,9 +89,11 @@
                                                     <a href="{{ route('edit-spt') }}"
                                                         class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                             class="fas fa-pencil-alt"></i></a>
-                                                    <a href="" class="btn btn-danger shadow btn-xs sharp pt-2"><i
-                                                            class="fa fa-trash" data-bs-toggle="modal"
-                                                            data-bs-target="#delete-account"></i></a>
+                                                    <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-spt"
+                                                        data-id="{{ $item['id'] }}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
                                                 </div>
                                             </td>
 
@@ -107,7 +109,7 @@
     </div>
 
 
-    <div class="modal fade" id="delete-account">
+    <div class="modal fade" id="delete-spt">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,9 +122,26 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Kembali</button>
-                    <button type="button" class="btn btn-primary">Hapus</button>
+                    <form action="{{ route('spt-delete', ['id'=>1]) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="text" name="id" hidden id="id-delete">
+                        <button type="submit" class="btn btn-primary">Hapus</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            // Capture click event on the delete button
+            $('.btn-delete').on('click', function() {
+                // Retrieve the data-id attribute from the clicked button
+                var id = $(this).data('id');
+                console.log(id);
+                $('#id-delete').val(id);
+            });
+        });
+    </script>
 @endsection

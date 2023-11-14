@@ -131,7 +131,20 @@ class InstructionService
     }
 
 
-    public function count(){
+    public function delete($id)
+    {
+        try {
+            //code...
+            $instructions = $this->findById($id);
+            $instructions->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+            throw new WebException($th->getMessage());
+        }
+    }
+
+    public function count()
+    {
         return $this->instructions->count();
     }
 
