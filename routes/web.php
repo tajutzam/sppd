@@ -26,9 +26,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 Route::get('/login', [AuthController::class, 'login'])->middleware('guest');
@@ -50,7 +50,8 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         return view('admin.dashboard');
     });
     Route::prefix("master")->group(function () {
-        Route::get("destination", function () { });
+        Route::get("destination", function () {
+        });
 
         // employee routes
         Route::get("employee", [EmployeeController::class, "employees"])->name('employee');
@@ -189,9 +190,15 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get("spt/detail", function () {
         return view('admin.detail-spt');
     })->name('detail-spt');
+
+    Route::get("404", function () {
+        return view('admin.auth.404');
+    })->name('404');
 });
 
-
+Route::get("error-404", function () {
+    return view('admin.404');
+})->name('error-404');
 // Route::get("coba", function () {
 //     return view("admin.coba");
 // });
