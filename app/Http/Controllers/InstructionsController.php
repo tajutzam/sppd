@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\WebException;
 use App\Exports\BkuExport;
 use App\Services\AccountService;
 use App\Services\BankAccountService;
 use App\Services\CategoryService;
 use App\Services\DestinationService;
 use App\Services\EmployeeService;
+use App\Services\HeadHealthService;
 use App\Services\InstructionService;
 use App\Services\PlacesService;
 use App\Services\TransportationService;
@@ -32,6 +34,7 @@ class InstructionsController extends Controller
     private TypeDestinationService $typeDestinationService;
 
     private InstructionService $instructionService;
+    private HeadHealthService $headHealthService;
 
 
 
@@ -46,12 +49,18 @@ class InstructionsController extends Controller
         $this->bankService = new BankAccountService();
         $this->typeDestinationService = new TypeDestinationService();
         $this->instructionService = new InstructionService();
+        $this->headHealthService = new HeadHealthService();
 
     }
 
 
     public function create()
     {
+
+        $headHealths = $this->headHealthService->findAll();
+        if (sizeof($headHealths) == 0) {
+            throw new WebException('Ops, Data Kepala Puskesmas Kosong Silahkan Tambahkan Terlebih Dahulu');
+        }
         $categories = $this->categoryService->findAll();
         $employees = $this->employeeService->findAll();
         $transportations = $this->transportationService->findAll();
@@ -60,7 +69,6 @@ class InstructionsController extends Controller
         $bankAccounts = $this->bankService->findAll();
         $typeDestinations = $this->typeDestinationService->findAll();
 
-
         return view('admin.add.spt-add', [
             'categories' => $categories,
             'employees' => $employees,
@@ -68,7 +76,8 @@ class InstructionsController extends Controller
             'places' => $places,
             'accounts' => $accounts,
             'banks' => $bankAccounts,
-            'type_destinations' => $typeDestinations
+            'type_destinations' => $typeDestinations,
+            'head' => $headHealths[0]
         ]);
     }
 
@@ -153,6 +162,7 @@ class InstructionsController extends Controller
     public function index()
     {
         $data = $this->instructionService->findAll();
+        // dd($data);
         return view("admin.spt", ['data' => $data]);
     }
 
@@ -190,8 +200,14 @@ class InstructionsController extends Controller
     {
 
         $data = $this->instructionService->findById($id)->toArray();
+        $head = $this->headHealthService->findAll();
+
+        if (sizeof($head) == 0) {
+            throw new WebException("Tidak Ada Kepala Perpustakaan, Harap Tambahkan Terlebih dahulu");
+        }
+
         // dd($data);
-        $pdf = PDF::loadView('exports.spt-export', ['data' => $data])->setPaper('a4', 'potrait');
+        $pdf = PDF::loadView('exports.spt-export', ['data' => $data, 'head' => $head[0]])->setPaper('a4', 'potrait');
 
         // Save the pdf with a specific name
         return $pdf->download("SPT & LAPORAN / " . Carbon::now()->format('Y-m-d') . '.docx');

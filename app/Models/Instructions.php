@@ -32,7 +32,8 @@ class Instructions extends Model
         "problem",
         "advice",
         "other",
-        "description"
+        "description",
+        'treasurer_id'
     ];
 
     protected $table = 'instructions';
@@ -73,6 +74,11 @@ class Instructions extends Model
     public function bank_account()
     {
         return $this->belongsTo(BankAccount::class, "bank_account_id");
+    }
+
+    public function treasurer()
+    {
+        return $this->belongsTo(Employee::class, "treasurer_id");
     }
 
 }

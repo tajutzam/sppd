@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HeadHealthController;
 use App\Http\Controllers\InstructionsController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\TransportationController;
@@ -175,6 +176,14 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
 
         // logout
         Route::post("logout", [AuthController::class, "logout"])->name('logout');
+
+        Route::get("head-health", [HeadHealthController::class, "index"])->name('head-health');
+        Route::get("head-health/create", [HeadHealthController::class, "create"])->name('add-head-health');
+        Route::post("head-health/create", [HeadHealthController::class, "store"])->name('head-health-post');
+        Route::get("head-health/edit/{id}", [HeadHealthController::class, "edit"])->name('edit-head-health');
+        Route::put("head-health/edit/{id}", [HeadHealthController::class, "update"])->name('head-health-put');
+
+
     });
     Route::get("spt", [InstructionsController::class, "index"])->name('spt');
     Route::get("spt/create", [InstructionsController::class, "create"])->name('add-spt');
@@ -185,6 +194,12 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get("spt/detail/{id}", [InstructionsController::class, "detail"])->name('detail-spt');
     Route::get("bku/export", [InstructionsController::class, "export_bku"])->name('bku-export');
     Route::get("spt/export/{id}", [InstructionsController::class, "export_spt"])->name('spt-export');
+
+
+    // head health
+
+
+
 });
 
 Route::get("error-404", function () {

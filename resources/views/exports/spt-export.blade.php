@@ -1,6 +1,7 @@
 <html>
 
 <style>
+    .surat-perintah,
     .laporan-perjalanan-dinas,
     {
     page-break-after: always
@@ -8,6 +9,9 @@
 </style>
 
 <body>
+
+
+
     <div class="surat-perintah">
 
         <p
@@ -281,13 +285,13 @@
         </p>
         <p style="margin:0pt 1.1pt 0pt 216pt; text-align:center">
             {{-- kepala --}}
-            <strong><u><span style="font-family:Cambria; ">dr. IKA MAYASARI</span></u></strong>
+            <strong><u><span style="font-family:Cambria; ">{{ $head['name'] }}</span></u></strong>
         </p>
         <p style="margin:0pt 1.1pt 0pt 216pt; text-align:center">
-            <span style="font-family:Cambria">Penata Tingkat I</span>
+            <span style="font-family:Cambria">{{ $head['rank'] }}</span>
         </p>
         <p style="margin:0pt 1.1pt 0pt 216pt; text-align:center">
-            <span style="font-family:Cambria">NIP. 19841208 201001 2 021 </span>
+            <span style="font-family:Cambria">NIP. {{ $head['nip'] }} </span>
         </p>
         <p style="margin-top:0pt; margin-right:1.1pt; margin-bottom:0pt">
             <span style="font-family:Arial">&#xa0;</span>
@@ -296,6 +300,7 @@
             <br style="page-break-before:always; clear:both">
         </p>
     </div>
+    <page></page>
     <div class="laporan-perjalanan-dinas">
         <p style="margin-top:0pt; margin-bottom:10pt; text-align:center; line-height:115%; font-size:13pt">
             <strong><span style="font-family:Cambria; ">LAPORAN PERJALANAN DINAS</span></strong>
@@ -701,7 +706,8 @@
                 </td>
                 <td style="width:339.55pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
                     <p style="margin-top:0pt; margin-bottom:0pt; font-size:11pt">
-                        <span style="font-family:Arial">: {{ $data['amount_money'] }}</span>
+                        <span style="font-family:Arial">: Rp {{ number_format($data['amount_money'], 0, ',', '.') }}
+                        </span>
                     </p>
                     <p style="margin-top:0pt; margin-bottom:0pt; font-size:11pt">
                         <span style="font-family:Arial">&#xa0;</span>
@@ -777,13 +783,14 @@
                                     'travel_time' => $travelTime,
                                     'transport' => $transportation,
                                     'amount' => $travelTime * $transportation,
-                                    'name' => $value['employee']['name']
+                                    'name' => $value['employee']['name'],
                                 ];
                                 $amountMoney += $temp['amount'];
                                 array_push($detailMoney, $temp);
                             }
                         @endphp
-                            {{ $money }}
+                            Rp {{ number_format($money, 0, ',', '.') }}
+
                         </span>
                     </p>
                     <p style="margin-top:0pt; margin-bottom:0pt; font-size:11pt">
@@ -836,19 +843,22 @@
                     <td
                         style="border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:top">
                         <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt">
-                            Uang Transport <br>{{ $item['travel_time'] }} X Rp. {{ $item['transport'] }}
+                            Uang Transport <br>{{ $item['travel_time'] }} X Rp
+                            {{ number_format($item['transport'], 0, ',', '.') }}
+
                         </p>
                     </td>
                     <td
                         style="border-style:solid; border-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
                         <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt">
-                            <br>Rp. {{ $item['amount'] }}
+                            <br>Rp {{ number_format($item['amount'], 0, ',', '.') }}
+
                         </p>
                     </td>
                     <td
                         style="border-top-style:solid; border-top-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:bottom">
                         <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt">
-                            {{$item['name']}}
+                            {{ $item['name'] }}
                         </p>
                     </td>
                 </tr>
@@ -869,7 +879,8 @@
                 <td
                     style="width:189.2pt; border-top-style:solid; border-top-width:0.75pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; padding-right:5.03pt; padding-left:5.03pt; vertical-align:middle">
                     <p style="margin-top:0pt; margin-bottom:0pt; text-align:justify; font-size:11pt">
-                        Rp. {{$amountMoney}}
+                        Rp {{ number_format($amountMoney, 0, ',', '.') }}
+
                     </p>
                 </td>
                 <td
@@ -902,12 +913,13 @@
                     <p style="margin-top:0pt; margin-bottom:0pt; font-size:11pt">
                         <span style="font-family:Arial">Lunas dibayar pada tanggal</span><span
                             style="font-family:Arial">&#xa0;&#xa0;&#xa0; </span><span
-                            style="font-family:Arial">{{ \Carbon\Carbon::now()->format('Y-m-d') }}</span><span style="font-family:Arial">&#xa0;&#xa0;&#xa0;&#xa0;
+                            style="font-family:Arial">{{ \Carbon\Carbon::now()->format('Y-m-d') }}</span><span
+                            style="font-family:Arial">&#xa0;&#xa0;&#xa0;&#xa0;
                         </span><span style="font-family:Arial"></span><span style="font-family:Arial">&#xa0;&#xa0;
                         </span>
                     </p>
                     <p style="margin-top:0pt; margin-bottom:0pt; font-size:11pt">
-                        <span style="font-family:Arial">{{$data['accept_from']}}</span>
+                        <span style="font-family:Arial">{{ $data['accept_from'] }}</span>
                     </p>
                 </td>
             </tr>
@@ -931,10 +943,10 @@
             <tr>
                 <td style="width:164.7pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
                     <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt">
-                        <strong><u><span style="font-family:Arial; ">dr. IKA MAYASARI</span></u></strong>
+                        <strong><u><span style="font-family:Arial; ">{{ $head['name'] }}</span></u></strong>
                     </p>
                     <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt">
-                        <span style="font-family:Arial">NIP. 19841208 201001 2 021</span>
+                        <span style="font-family:Arial">NIP. {{ $head['nip'] }}</span>
                     </p>
                 </td>
                 <td style="width:67.2pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
@@ -944,10 +956,11 @@
                 </td>
                 <td style="width:197.8pt; padding-right:5.4pt; padding-left:5.4pt; vertical-align:top">
                     <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt">
-                        <strong><u><span style="font-family:Arial; ">YUYUN INJAWATI,A.md.Keb</span></u></strong>
+                        <strong><u><span
+                                    style="font-family:Arial; ">{{ $data['treasurer']['name'] }}</span></u></strong>
                     </p>
                     <p style="margin-top:0pt; margin-bottom:0pt; text-align:center; font-size:11pt">
-                        <span style="font-family:Arial">NIP. 19840318 201704 2 007</span>
+                        <span style="font-family:Arial">NIP. {{ $data['treasurer']['nip'] }}</span>
                     </p>
                 </td>
             </tr>

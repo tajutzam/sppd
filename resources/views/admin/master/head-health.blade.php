@@ -10,10 +10,7 @@
                             <div class="col-sm-6">
                             </div>
                             <div class="col-sm-6 text-md-end pe-3">
-                                <a href="{{ route('employee-templates') }}"><button class="btn btn-secondary me-2">
-                                        Download Template
-                                    </button></a>
-                                <a href="{{ route('add-employee') }}">
+                                <a href="{{ route('add-head-health') }}">
                                     <button type="button" class="btn btn-primary">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
@@ -21,33 +18,6 @@
                                                 d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
                                         </svg> Tambah
                                     </button></a>
-
-                                <div class="btn-group" role="group" aria-label="Basic mixed styles example"
-                                    style="padding: 1%">
-                                    <!-- Example single danger button -->
-                                    <div class="btn-group">
-                                        <a class="btn btn-success" href="{{ route('employee-export') }}"
-                                            aria-expanded="false">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-file-earmark-spreadsheet"
-                                                viewBox="0 0 16 16">
-                                                <path
-                                                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V9H3V2a1 1 0 0 1 1-1h5.5v2zM3 12v-2h2v2H3zm0 1h2v2H4a1 1 0 0 1-1-1v-1zm3 2v-2h3v2H6zm4 0v-2h3v1a1 1 0 0 1-1 1h-2zm3-3h-3v-2h3v2zm-7 0v-2h3v2H6z" />
-                                            </svg> Export
-                                        </a>
-                                    </div>
-
-                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                        data-bs-target="#import-employee">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z" />
-                                            <path
-                                                d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z" />
-                                        </svg> Import
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +30,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h2 class="card-title " style="font-weight: bold; font-size: 25px">Data Pegawai</h2>
+                        <h2 class="card-title " style="font-weight: bold; font-size: 25px">Data Kepala Puskesmas </h2>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -68,9 +38,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Pegawai</th>
-                                        <th>Jabatan</th>
-                                        <th>Status</th>
+                                        <th>Nama Kepala Puskesmas</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -79,31 +47,13 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item['name'] }}</td>
-                                            <td>{{ $item['position'] }}</td>
-                                            @if ($item['isInstructions'])
-                                                <span class="badge light badge-success">
-                                                    <i class="fa fa-circle text-success me-1"></i>
-                                                    Bertugas
-                                                </span>
-                                            @else
-                                                <span class="badge light badge-danger">
-                                                    <i class="fa fa-circle text-danger me-1"></i>
-                                                    Tidak Tugas
-                                                </span>
-                                            @endif
                                             <td>
                                                 <div class="d-flex ">
-                                                    <a href="{{ route('edit-employee', ['id' => $item['id']]) }}"
+                                                    <a href="{{ route('edit-head-health', ['id'=>$item['id']]) }}"
                                                         class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                             class="fas fa-pencil-alt"></i></a>
-                                                    <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
-                                                        data-bs-toggle="modal" data-bs-target="#delete-employee"
-                                                        data-id="{{ $item['id'] }}" data-name="{{ $item['name'] }}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
                                                 </div>
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>

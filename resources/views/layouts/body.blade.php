@@ -113,6 +113,7 @@
                                     <ul aria-expanded="false">
                                         <li><a href="{{ route('employee') }}">Pegawai</a></li>
                                         <li><a href="{{ route('cadress') }}">Kader</a></li>
+                                        <li><a href="{{ route('head-health') }}">Kepala Puskesmas </a></li> 
                                     </ul>
                                 </li>
                                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Tujuan</a>
