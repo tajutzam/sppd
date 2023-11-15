@@ -210,7 +210,7 @@ class InstructionsController extends Controller
         $pdf = PDF::loadView('exports.spt-export', ['data' => $data, 'head' => $head[0]])->setPaper('a4', 'potrait');
 
         // Save the pdf with a specific name
-        return $pdf->download("SPT & LAPORAN / " . Carbon::now()->format('Y-m-d') . '.docx');
+        return $pdf->download("SPT & LAPORAN / " . Carbon::now()->format('Y-m-d') . '.pdf');
 
     }
 

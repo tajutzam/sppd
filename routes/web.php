@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HeadHealthController;
 use App\Http\Controllers\InstructionsController;
+use App\Http\Controllers\LawController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\TransportationController;
 use App\Http\Controllers\TypeDestinationController;
@@ -176,12 +177,15 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
 
         // logout
         Route::post("logout", [AuthController::class, "logout"])->name('logout');
-
+        // kapus
         Route::get("head-health", [HeadHealthController::class, "index"])->name('head-health');
         Route::get("head-health/create", [HeadHealthController::class, "create"])->name('add-head-health');
         Route::post("head-health/create", [HeadHealthController::class, "store"])->name('head-health-post');
         Route::get("head-health/edit/{id}", [HeadHealthController::class, "edit"])->name('edit-head-health');
         Route::put("head-health/edit/{id}", [HeadHealthController::class, "update"])->name('head-health-put');
+
+        // law
+        Route::get("law" , [LawController::class , "index"])->name('law');
 
 
     });
