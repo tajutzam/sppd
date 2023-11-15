@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Exceptions\WebException;
 use App\Models\Employee;
+use Carbon\Carbon;
 
 use function PHPUnit\Framework\isNull;
 
@@ -73,12 +74,61 @@ class EmployeeService implements Service
 
     public function findAllEmployees()
     {
-        return $this->employee->where('role', 'employee')->get()->toArray();
+        $data = $this->employee
+            ->where('role', 'employee')
+            ->with([
+                'instructions' => function ($query) {
+                    $query->latest()->first();
+                },
+                'instructions.instructions' => function ($query) {
+                    $query->latest()->first();
+                }
+            ])
+            ->get()
+            ->toArray();
+
+        foreach ($data as $key => $value) {
+            # code...
+            $isInstructions = false;
+            foreach ($value['instructions'] as $keyInstructions => $valueInstructions) {
+                # code...
+                if (Carbon::now()->isBefore(Carbon::parse($valueInstructions['instructions']['return_date']))) {
+                    $isInstructions = true;
+                }
+            }
+            $data[$key]['isInstructions'] = $isInstructions;
+        }
+        return $data;
     }
 
     public function findAllCadress()
     {
-        return $this->employee->where('role', 'cadres')->get()->toArray();
+        $data = $this->employee
+            ->where('role', 'cadres')
+            ->with([
+                'instructions' => function ($query) {
+                    $query->latest()->first();
+                },
+                'instructions.instructions' => function ($query) {
+                    $query->latest()->first();
+                }
+            ])
+            ->get()
+            ->toArray();
+
+        foreach ($data as $key => $value) {
+            # code...
+            $isInstructions = false;
+            foreach ($value['instructions'] as $keyInstructions => $valueInstructions) {
+                # code...
+                if (Carbon::now()->isBefore(Carbon::parse($valueInstructions['instructions']['return_date']))) {
+                    $isInstructions = true;
+                }
+            }
+            $data[$key]['isInstructions'] = $isInstructions;
+        }
+        // dd($data);
+        return $data;
     }
 
 

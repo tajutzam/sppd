@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('instructions_employees_cadres', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('users')->nullable()->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('users')->nullable()->references('id')->on('employee')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('instructions')->references('id')->on('instructions')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

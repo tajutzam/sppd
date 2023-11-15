@@ -35,10 +35,10 @@
                     <div class="card-header text-align-between">
                         <h2 class="card-title " style="font-weight: bold; font-size: 25px">Data SPT</h2>
                         <div>
-                            <a href="
-                        {{ route('spt') }}">
-                                <button type="submit" class="btn me-2 btn-dark">Kembali</button></a>
-                            <button type="submit" class="btn me-2 btn-success">Cetak SPT, Laporan & Kuitansi</button>
+
+                            <a class="btn me-2 btn-dark">Kembali</a></a>
+                            <a href="{{ route('spt-export', ['id' => $data['id']]) }}" class="btn me-2 btn-success">Cetak SPT, Laporan &
+                                Kuitansi</a>
                         </div>
                     </div>
                     <hr class="m-0" style="opacity: 30%;
@@ -55,103 +55,107 @@
                                 <tbody>
                                     <tr>
                                         <th>Kegiatan</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['activity_name'] }}
                                         </td>
                                     </tr>
+                                    {{-- @dd($data) --}}
                                     <tr>
                                         <th>Sub Kegiatan</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['sub_activity_name'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Kategori Perjalanan</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['categories']['name'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Pegawai Ditugaskan</th>
-                                        <td> Yoi Bang <span class="badge badge-primary m-2">Sale</span> <br>
-                                            Yoi Bang <span class="badge badge-primary m-2">Sale</span>
+                                        <td>
+                                            @foreach ($data['employees'] as $item)
+                                                {{ $item['employee']['name'] }} <span
+                                                    class="badge badge-primary m-2">SPPD</span> <br>
+                                            @endforeach
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Alat Angkut</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['transportation']['name'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Tempat Berangkat</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['destination_from']['place']['name'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Lama Perjalanan</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['travel_time'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Tanggal Berangkat</th>
-                                        <td> Yoi Bang
+                                        <td> {{ \Carbon\Carbon::parse($data['departure_date'])->format('Y-m-d') }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Tanggal Pulang</th>
-                                        <td> Yoi Bang
+                                        <td> {{ \Carbon\Carbon::parse($data['return_date'])->format('Y-m-d') }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Akun Anggaran</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['account']['name'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Sudah Diterima Dari</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['accept_from'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Sub Komponen</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['sub_component'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th> Jumlah Uang</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['amount_money'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Nomor Rekening</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['bank_account']['account_number'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Hadir Dalam</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['present_in'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Arahan/Petunjuk</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['briefings'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Temuan Masalah</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['problem'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Saran</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['advice'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Lain Lain</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['other'] }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Keterangan</th>
-                                        <td> Yoi Bang
+                                        <td> {{ $data['description'] }}
                                         </td>
                                     </tr>
                                 </tbody>

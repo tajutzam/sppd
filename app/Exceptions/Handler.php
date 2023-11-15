@@ -26,15 +26,13 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
-          
+
 
         });
 
-
         $this->renderable(function (Throwable $e) {
+            // dd($e);
             if ($e instanceof WebException) {
-            
-
                 // mengirim error sesuai message web exceptions
                 DB::rollBack();
                 return back()->withErrors($e->getMessage());

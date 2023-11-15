@@ -10,9 +10,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('bank_account', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->bigInteger('account_number');
+        Schema::create('law', function (Blueprint $table) {
+            $table->uuid('primary')->primary();
+            $table->text('law_value');
             $table->timestamps();
         });
     }
@@ -22,6 +22,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('bank_account');
+        Schema::dropIfExists('law');
     }
 };

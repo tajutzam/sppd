@@ -6,8 +6,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BankAccountController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CostController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HeadHealthController;
 use App\Http\Controllers\InstructionsController;
+use App\Http\Controllers\LawController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\TransportationController;
 use App\Http\Controllers\TypeDestinationController;
@@ -43,12 +46,8 @@ Route::get('/forgotpassword', function () {
 })->name('forgotpassword');
 
 Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
-    Route::get('index', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('dashboard', [DashboardController::class, "index"])->name('dashboard');
+    Route::get('index', [DashboardController::class, "index"]);
     Route::prefix("master")->group(function () {
         Route::get("destination", function () {
         });
@@ -64,6 +63,7 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::post("employee/create", [EmployeeController::class, "storeEmployee"])->name("employee-post");
         Route::post("employee/import", [EmployeeController::class, "importEmployee"])->name("employee-import");
         Route::get("employee/templates", [EmployeeController::class, "downloadTemplate"])->name("employee-templates");
+        Route::get("employee/export", [EmployeeController::class, "export"])->name('employee-export');
 
         // cadress routes
         Route::get("cadress", [EmployeeController::class, "cadress"])->name('cadress');
@@ -177,23 +177,33 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
 
         // logout
         Route::post("logout", [AuthController::class, "logout"])->name('logout');
+        // kapus
+        Route::get("head-health", [HeadHealthController::class, "index"])->name('head-health');
+        Route::get("head-health/create", [HeadHealthController::class, "create"])->name('add-head-health');
+        Route::post("head-health/create", [HeadHealthController::class, "store"])->name('head-health-post');
+        Route::get("head-health/edit/{id}", [HeadHealthController::class, "edit"])->name('edit-head-health');
+        Route::put("head-health/edit/{id}", [HeadHealthController::class, "update"])->name('head-health-put');
+
+        // law
+        Route::get("law" , [LawController::class , "index"])->name('law');
+
+
     });
-    Route::get("spt", function () {
-        return view('admin.spt');
-    })->name('spt');
+    Route::get("spt", [InstructionsController::class, "index"])->name('spt');
     Route::get("spt/create", [InstructionsController::class, "create"])->name('add-spt');
     Route::post("spt/create", [InstructionsController::class, "store"])->name('spt-post');
+    Route::delete("spt", [InstructionsController::class, "delete"])->name('spt-delete');
 
-    Route::get("spt/edit", function () {
-        return view('admin.edit.spt-edit');
-    })->name('edit-spt');
-    Route::get("spt/detail", function () {
-        return view('admin.detail-spt');
-    })->name('detail-spt');
+    Route::get("spt/edit/{id}", [InstructionsController::class, "edit"])->name('edit-spt');
+    Route::get("spt/detail/{id}", [InstructionsController::class, "detail"])->name('detail-spt');
+    Route::get("bku/export", [InstructionsController::class, "export_bku"])->name('bku-export');
+    Route::get("spt/export/{id}", [InstructionsController::class, "export_spt"])->name('spt-export');
 
-    Route::get("404", function () {
-        return view('admin.auth.404');
-    })->name('404');
+
+    // head health
+
+
+
 });
 
 Route::get("error-404", function () {
@@ -202,3 +212,4 @@ Route::get("error-404", function () {
 // Route::get("coba", function () {
 //     return view("admin.coba");
 // });
+

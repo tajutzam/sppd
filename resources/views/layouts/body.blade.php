@@ -113,6 +113,7 @@
                                     <ul aria-expanded="false">
                                         <li><a href="{{ route('employee') }}">Pegawai</a></li>
                                         <li><a href="{{ route('cadress') }}">Kader</a></li>
+                                        <li><a href="{{ route('head-health') }}">Kepala Puskesmas </a></li>
                                     </ul>
                                 </li>
                                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Tujuan</a>
@@ -127,6 +128,8 @@
                                 <li><a href="{{ route('categories') }}">Kategori</a></li>
                                 <li><a href="{{ route('account') }}">Akun</a></li>
                                 <li><a href="{{ route('user') }}">Pengguna</a></li>
+                            <li><a href="{{ route('law') }}">Dasar Perundang Undangan</a></li>
+
                             </ul>
                         </li>
                     @endif

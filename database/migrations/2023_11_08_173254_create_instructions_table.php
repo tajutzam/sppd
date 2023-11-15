@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -21,7 +20,7 @@ return new class extends Migration
             $table->timestamp('return_date')->default(DB::raw("CURRENT_TIMESTAMP"));
             $table->foreignUuid('transportation_id')->references('id')->on('transportation')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('destination_to_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignUuid('destination_form_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignUuid('destination_from_id')->references('id')->on('destination')->cascadeOnDelete()->cascadeOnUpdate();
             $table->bigInteger('travel_time')->default(0);
             $table->foreignUuid('budget_account_id')->references('id')->on('account')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignUuid('bank_account_id')->references('id')->on('bank_account')->cascadeOnDelete()->cascadeOnUpdate();
@@ -34,6 +33,7 @@ return new class extends Migration
             $table->string('advice');
             $table->string('other');
             $table->string('description');
+            $table->foreignUuid('treasurer_id')->references('id')->on('employee')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

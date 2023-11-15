@@ -20,8 +20,15 @@ class DestinationService
 
     public function create($request)
     {
-        $created = $this->destination->create($request);
-        return $created;
+        try {
+            //code...
+            $created = $this->destination->create($request);
+            return $created;
+        } catch (\Throwable $th) {
+            //throw $th;
+            throw new WebException($th->getMessage());
+        }
+        // return $created;
     }
 
     public function update($request, $id)
@@ -69,6 +76,6 @@ class DestinationService
         return $destination;
     }
 
-    
+
 
 }

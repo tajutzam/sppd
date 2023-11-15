@@ -195,7 +195,7 @@
                                         style="font-size: 19px; font-weight: 500">Kategori
                                         Perjalanan</label>
                                     <select class="js-example-category custom-border" name="category_id">
-
+                                        <option value="{{ null }}">Pilih Kategori Perjalanan</option>
                                         @foreach ($categories as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
@@ -243,7 +243,7 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Transportasi</label>
                                     <select class="js-example-transportation custom-border" name="transportation_id">
-
+                                        <option value="{{ null }}">Pilih Transportasi</option>
                                         @foreach ($transportations as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
@@ -253,7 +253,7 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Tempat Berangkat</label>
                                     <select class="js-example-place custom-border" name="place_from">
-
+                                        <option value="{{ null }}">Pilih Tempat Berangkat</option>
                                         @foreach ($places as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
@@ -263,17 +263,21 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Tempat Tujuan</label>
                                     <select class="js-example-destination custom-border" name="place_to">
-
+                                        <option value="{{ null }}"}>Pilih Tempat Tujuan</option>
                                         @foreach ($places as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-unit form-divided mb-3">
-                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Tipe
+                                    <label class="text-label form-label ps-2"
+                                        style="font-size: 19px; font-weight: 500">Tipe
                                         Tujuan</label>
-                                    <select class="js-example-type custom-border" name="states[]">
-
+                                    <select class="js-example-type custom-border" name="type_destinations_id">
+                                        <option value="{{ null }}">Pilih Tipe Tujuan</option>
+                                        @foreach ($type_destinations as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -290,7 +294,7 @@
                                         style="font-size: 19px; font-weight: 500">Akun
                                         Anggaran</label>
                                     <select class="js-example-money custom-border" name="account_id">
-
+                                        <option value="{{ null }}">Pilih Akun Anggaran</option>
                                         @foreach ($accounts as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
@@ -325,7 +329,7 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Nomor Rekening</label>
                                     <select class="js-example-bank-account custom-border" name="bank_account_id">
-
+                                        <option value="{{ null }}">Pilih Nomor Rekening</option>
                                         @foreach ($banks as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['account_number'] }}</option>
                                         @endforeach
@@ -344,7 +348,7 @@
                                         style="font-size: 19px; font-weight: 500">Arahan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Arahan" name="briefings">
+                                        placeholder="Masukkan Arahan" name="briefings" value="-">
 
                                 </div>
 
@@ -353,7 +357,7 @@
                                         style="font-size: 19px; font-weight: 500">Masalah
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Masalah" name="problem">
+                                        placeholder="Masukkan Masalah" name="problem" value="-">
                                 </div>
 
                                 <div class="mb-3">
@@ -361,14 +365,14 @@
                                         style="font-size: 19px; font-weight: 500">Saran
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Saran" name="advice">
+                                        placeholder="Masukkan Saran" name="advice" value="-">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Lain -Lain
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lain -Lain" name="other">
+                                        placeholder="Masukkan Lain -Lain" name="other" value="-">
                                 </div>
 
                                 <div class="mb-4">
@@ -376,7 +380,7 @@
                                         style="font-size: 19px; font-weight: 500">Keterangan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Keterangan" name="description">
+                                        placeholder="Masukkan Keterangan" name="description" value="-">
                                 </div>
                                 <button type="submit" class="btn me-2 btn-dark">Kembali</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -392,7 +396,7 @@
         document.getElementsByName('departure_date')[0].addEventListener('change', function() {
             // Ambil nilai dari input tanggal berangkat
             var departureDate = this.value;
-
+            
             // Set nilai input tanggal pulang dengan nilai tanggal berangkat
             document.getElementsByName('return_date')[0].value = departureDate;
         });

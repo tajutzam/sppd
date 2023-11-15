@@ -15,8 +15,8 @@
                                             <h1 style="color:white; font-weight: bold">Selamat Datang</h1>
                                             <h3 style="color: primary">Di SPPD Puskesmas Ketrowonojoyo</h3>
                                             <span></span>
-                                            <a href="javascript:void(0);" class="btn btn-rounded-3  fs-18 font-w500">Admin
-                                                1</a>
+                                            <a href="javascript:void(0);"
+                                                class="btn btn-rounded-3  fs-18 font-w500">{{ Auth::guard('users')->user()->name }}</a>
                                         </div>
 
                                         <div class="col-xl-5 col-sm-6">
@@ -42,7 +42,7 @@
                                                     </span>
                                                     <div class="media-body text-white text-end">
                                                         <p class="mb-1">JUMLAH PEGAWAI</p>
-                                                        <h3 class="text-white">76</h3>
+                                                        <h3 class="text-white">{{ $totalEmployee }}</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -58,7 +58,7 @@
                                                     </span>
                                                     <div class="media-body text-white text-end">
                                                         <p class="mb-1">JUMLAH KADER</p>
-                                                        <h3 class="text-white">76</h3>
+                                                        <h3 class="text-white">{{ $totalCadress }}</h3>
                                                     </div>
                                                 </div>
                                             </div>
@@ -74,18 +74,14 @@
                                                     </span>
                                                     <div class="media-body text-white text-end">
                                                         <p class="mb-1">Jumlah SPT</p>
-                                                        <h3 class="text-white">76</h3>
+                                                        <h3 class="text-white">{{ $spt }}</h3>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
-
-
                         </div>
                     </div>
                 </div>
