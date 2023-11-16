@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="icon" href="{{ asset('/') }}images/sppd-logo.png" type="image/png" style="size: 200%" />
+
 
     <!-- PAGE TITLE HERE -->
 
