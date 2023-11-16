@@ -72,11 +72,17 @@
                                             placeholder="Masukkan Golongan " name="group">
                                     </div>
                                 </div>
-
                                 <div class="mb-3">
-                                    <label class="text-label form-label ps-2"
+                                    <label class="text-label form-label ps-2 pe-4"
                                         style="font-size: 19px; font-weight: 500">Jabatan
                                     </label>
+
+                                    <input class="form-check-input " type="checkbox" value="" id="validationCustom12"
+                                        required="">
+                                    <label class="form-check-label" for="validationCustom12">
+                                        Apakah ini Bendahara ?
+                                    </label>
+
                                     <input type="text" class="form-control input-default custom-border"
                                         placeholder="Masukkan Jabatan " name="position">
                                 </div>

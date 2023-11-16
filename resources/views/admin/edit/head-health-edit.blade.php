@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Tambah Pegawai - SPPD Puskesmas Ketrowonojoyo</title>
+<title>Edit Kepala Puskesmas - SPPD Puskesmas Ketrowonojoyo</title>
 @section('content')
     <style>
         .custom-border {

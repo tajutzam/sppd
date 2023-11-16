@@ -28,16 +28,16 @@
         </p>
         <p
             style="margin-top:3pt; margin-left:85.05pt; margin-bottom:0pt; text-align:center; line-height:80%; font-size:16pt">
-            <strong><span style="font-family:Cambria; ">PUSKESMAS GONDOSARI</span></strong>
+            <strong><span style="font-family:Cambria; ">PUSKESMAS KETROWONOJOYO</span></strong>
         </p>
         <p
             style="margin-top:3pt; margin-left:85.05pt; margin-bottom:0pt; text-align:center; line-height:80%; font-size:12pt">
-            <span style="font-family:Cambria">Jln. Gondosari - Ploso Gondosari Kecamatan Punung, e-mail :
-                gondosaripuskesmas@gmail.com Telp. 081216825500</span>
+            <span style="font-family:Cambria">Jln. Pacitan &ndash; Lorok Km 16, Kode Pos 63561, e-mail
+                :puskesmasketrowonojoyo@gmail.com Telp. 085233190910</span>
         </p>
         <p
             style="margin-top:3pt; margin-left:85.05pt; margin-bottom:0pt; text-align:center; line-height:80%; font-size:14pt">
-            <strong><span style="font-family:Cambria; ">Gondosari</span></strong>
+            <strong><span style="font-family:Cambria; ">PACITAN</span></strong>
         </p>
         <p style="margin:4.8pt 127.65pt 0pt 85.1pt; font-size:12pt">
             <span

@@ -1,4 +1,5 @@
 @extends('layouts.auth')
+<link rel="icon" href="{{ asset('/') }}images/sppd-logo.png" type="image/png" style="size: 200%" />
 <title>Login - SPPD Ketrowonojoyo</title>
 @section('content')
     <div class="authincation h-100">

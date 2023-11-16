@@ -11,6 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ asset('/') }}vendor/peity/jquery.peity.min.js"></script>
 <!-- Dashboard 1 -->
+<script src="{{ asset('/vendor/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ asset('/') }}vendor/toastr/js/toastr.min.js"></script>
 <script src="{{ asset('/') }}js/dashboard/dashboard-1.js"></script>
 <script src="{{ asset('/') }}vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>

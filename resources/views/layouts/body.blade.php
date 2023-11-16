@@ -128,7 +128,7 @@
                                 <li><a href="{{ route('categories') }}">Kategori</a></li>
                                 <li><a href="{{ route('account') }}">Akun</a></li>
                                 <li><a href="{{ route('user') }}">Pengguna</a></li>
-                            <li><a href="{{ route('law') }}">Dasar Perundang Undangan</a></li>
+                                <li><a href="{{ route('law') }}">Dasar </a></li>
 
                             </ul>
                         </li>

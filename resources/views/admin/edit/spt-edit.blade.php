@@ -321,7 +321,14 @@
                                     <input type="text" class="form-control input-default custom-border"
                                         placeholder="Masukkan Sub Komponen" name="sub_component">
                                 </div>
+                                <div class="form-unit form-divided mb-3">
+                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
+                                        Bendahara</label>
+                                    <select class="js-example-bendahara custom-border" name="bendahara">
+                                        <option></option>
 
+                                    </select>
+                                </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Jumlah Uang
@@ -531,6 +538,20 @@
                     $(this).next('.select2-container')
                         .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
                             'Pilih Nomor Rekening');
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $(".js-example-bendahara").select2({
+                placeholder: "Pilih Bendahara"
+            }).on('change', function(e) {
+                if ($(this).val() && $(this).val().length) {
+                    $(this).next('.select2-container')
+                        .find('li.select2-search--inline input.select2-search__field').attr('placeholder',
+                            'Pilih Bendahara');
                 }
             });
         });

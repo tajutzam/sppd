@@ -185,9 +185,13 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::put("head-health/edit/{id}", [HeadHealthController::class, "update"])->name('head-health-put');
 
         // law
-        Route::get("law" , [LawController::class , "index"])->name('law');
-
-
+        Route::get("law", [LawController::class, "index"])->name('law');
+        Route::get("law-add", function () {
+            return view('admin.add.law-add');
+        })->name('law-add');
+        Route::get("law-edit", function () {
+            return view('admin.edit.law-edit');
+        })->name('law-edit');
     });
     Route::get("spt", [InstructionsController::class, "index"])->name('spt');
     Route::get("spt/create", [InstructionsController::class, "create"])->name('add-spt');
@@ -212,4 +216,3 @@ Route::get("error-404", function () {
 // Route::get("coba", function () {
 //     return view("admin.coba");
 // });
-
