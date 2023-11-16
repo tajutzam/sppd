@@ -1,4 +1,4 @@
-\@extends('layouts.app')
+@extends('layouts.app')
 <title>Tambah Peraturan - SPPD Puskesmas Ketrowonojoyo</title>
 @section('content')
     <style>
@@ -38,17 +38,16 @@
                     <hr class="m-0" style="opacity: 30%; height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form action="" method="post" class="form-valide-with-icon needs-validation"
-                                novalidate="">
+                            <form action="{{ route('law-post', ['id' => 1]) }}" method="post"
+                                class="form-valide-with-icon needs-validation" novalidate="">
                                 @method('post')
                                 @csrf
                                 <div class="mb-3">
-
-                                    <div class="card-body custom-ekeditor">
-                                        <input id="ckeditor"></input>
-                                    </div>
+                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
+                                        Hukum Dasar</label>
+                                    <input type="text" class="form-control input-default custom-border"
+                                        placeholder="Masukkan Nama Hukum" name="law_value">
                                 </div>
-
                                 <a href="{{ route('bank-account') }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>

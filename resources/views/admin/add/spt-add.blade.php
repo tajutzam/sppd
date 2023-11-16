@@ -211,8 +211,8 @@
                                         <div class="input-group " data-placement="left" data-align="top"
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input type="date" class="form-control input-default custom-border"
-                                                name="departure_date">
+                                            <input type="date" id="berangkat" min="<?php echo date('Y-m-d'); ?>"
+                                                class="form-control input-default custom-border" name="departure_date">
                                         </div>
 
                                     </div>
@@ -223,8 +223,8 @@
                                         <div class="input-group " data-placement="left" data-align="top"
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input type="date" class="form-control input-default custom-border"
-                                                name="return_date">
+                                            <input type="date" min="<?php echo date('Y-m-d'); ?>"
+                                                class="form-control input-default custom-border" name="return_date">
                                         </div>
                                     </div>
                                 </div>
@@ -318,9 +318,8 @@
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Petugas Bendahara</label>
-                                    <select class="js-example-bendahara custom-border" name="place_from">
-
-                                        @foreach ($places as $item)
+                                    <select class="js-example-bendahara custom-border" name="tresurer_id">
+                                        @foreach ($tresurers as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach
                                     </select>

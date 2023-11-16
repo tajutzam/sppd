@@ -49,6 +49,7 @@ class EmployeeController extends Controller
 
     public function storeEmployee(Request $request)
     {
+        // dd($request->all());
         $rules = [
             'name' => 'required|unique:employee,name',
             'nip' => 'required',

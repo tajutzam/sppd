@@ -83,4 +83,26 @@ class UserController extends Controller
         return redirect("/admin/master/user");
     }
 
+
+    public function updatePassword(Request $request)
+    {
+        $rules = [
+            'old_password',
+            'new_password',
+            'confirm_password'
+        ];
+
+        $messages = [
+            'required' => ":attribute Tidak Boleh Kosong"
+        ];
+        $this->validate($request, $rules, $messages);
+        // dd($request->all());
+        $userId = Auth::guard('users')->user()->id;
+        $this->UserService->updatePassword($request['old_password'], $request['new_password'], $request['confirm_password'], $userId);
+        Auth::guard('users')->logout();
+        Alert::success("Sukses", "Berhasil Mengganti Password Silahkan Login Kembali");
+        return back();
+    }
+
+
 }

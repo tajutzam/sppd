@@ -37,7 +37,8 @@
                         <div>
 
                             <a class="btn me-2 btn-dark">Kembali</a></a>
-                            <a href="{{ route('spt-export', ['id' => $data['id']]) }}" class="btn me-2 btn-success">Cetak SPT, Laporan &
+                            <a href="{{ route('spt-export', ['id' => $data['id']]) }}" class="btn me-2 btn-success">Cetak SPT,
+                                Laporan &
                                 Kuitansi</a>
                         </div>
                     </div>
@@ -73,8 +74,9 @@
                                         <th>Pegawai Ditugaskan</th>
                                         <td>
                                             @foreach ($data['employees'] as $item)
-                                                {{ $item['employee']['name'] }} <span
-                                                    class="badge badge-primary m-2">SPPD</span> <br>
+                                                {{ $item['employee']['name'] }} <a
+                                                    href="{{ route('sppd-export', ['id' => $instructionsId , 'userId' => $item['employee']['id']]) }}"><span
+                                                        class="badge badge-primary m-2">CETAK SPPD</span></a> <br>
                                             @endforeach
                                         </td>
                                     </tr>

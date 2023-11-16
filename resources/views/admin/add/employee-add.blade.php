@@ -83,8 +83,9 @@
                                         Apakah ini Bendahara ?
                                     </label>
 
-                                    <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Jabatan " name="position">
+                                    <input type="text" id="inputPosition"
+                                        class="form-control input-default custom-border" placeholder="Masukkan Jabatan"
+                                        name="position">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Uang
@@ -116,4 +117,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            // Saat checkbox berubah
+            $(document).ready(function() {
+                // Saat halaman dimuat, cek apakah checkbox sudah dicentang
+                if ($('#validationCustom12').is(':checked')) {
+                    // Jika checkbox sudah dicentang, aktifkan input teks dan beri nilai "Bendahara"
+                    $('#positionInput').prop('disabled', false).val('Bendahara');
+                }
+
+                // Saat checkbox berubah
+                $('#validationCustom12').change(function() {
+                    // Jika checkbox dicentang
+                    if (this.checked) {
+                        // Aktifkan input teks dan beri nilai "Bendahara"
+                        $('#inputPosition').prop('disabled', false).val('Bendahara').attr('name',
+                            'position');
+
+                    } else {
+                        // Jika checkbox tidak dicentang, nonaktifkan input teks dan hapus nilai
+                        $('#inputPosition').prop('disabled', false).val('').attr('name',
+                            'position');
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

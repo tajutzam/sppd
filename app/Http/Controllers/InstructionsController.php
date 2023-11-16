@@ -11,6 +11,7 @@ use App\Services\DestinationService;
 use App\Services\EmployeeService;
 use App\Services\HeadHealthService;
 use App\Services\InstructionService;
+use App\Services\LawService;
 use App\Services\PlacesService;
 use App\Services\TransportationService;
 use App\Services\TypeDestinationService;
@@ -35,6 +36,7 @@ class InstructionsController extends Controller
 
     private InstructionService $instructionService;
     private HeadHealthService $headHealthService;
+    private LawService $lawService;
 
 
 
@@ -50,7 +52,7 @@ class InstructionsController extends Controller
         $this->typeDestinationService = new TypeDestinationService();
         $this->instructionService = new InstructionService();
         $this->headHealthService = new HeadHealthService();
-
+        $this->lawService = new LawService();
     }
 
 
@@ -62,12 +64,13 @@ class InstructionsController extends Controller
             throw new WebException('Ops, Data Kepala Puskesmas Kosong Silahkan Tambahkan Terlebih Dahulu');
         }
         $categories = $this->categoryService->findAll();
-        $employees = $this->employeeService->findAll();
+        $employees = $this->employeeService->findAllEmployeesWithoutTresurer();
         $transportations = $this->transportationService->findAll();
         $places = $this->placesService->findAll();
         $accounts = $this->accountService->findAll();
         $bankAccounts = $this->bankService->findAll();
         $typeDestinations = $this->typeDestinationService->findAll();
+        $tresurers = $this->employeeService->findAllTresurer();
 
         return view('admin.add.spt-add', [
             'categories' => $categories,
@@ -77,7 +80,8 @@ class InstructionsController extends Controller
             'accounts' => $accounts,
             'banks' => $bankAccounts,
             'type_destinations' => $typeDestinations,
-            'head' => $headHealths[0]
+            'head' => $headHealths[0],
+            'tresurers' => $tresurers
         ]);
     }
 
@@ -107,7 +111,8 @@ class InstructionsController extends Controller
             'problem' => 'required',
             'advice' => 'required',
             'description' => 'required',
-            'other' => 'required'
+            'other' => 'required',
+            'tresurer_id' => 'required'
         ];
         $messages = [
             'activity_name.required' => 'Nama Aktivitas Harus Di Isi',
@@ -134,12 +139,13 @@ class InstructionsController extends Controller
             'users.required' => 'Pegawai Harus Di isi',
             'other' => 'Lain Lain Harus Diisi',
             'departure_date.after' => 'Tanggal Berangkat Tidak Valid',
-            'return_date.after' => 'Tanggal Kembali Tidak Valid'
+            'return_date.after' => 'Tanggal Kembali Tidak Valid',
+            'tresurer_id.required' => 'Petugas Bendahara Tidak Boleh Kosong'
         ];
         $data = $this->validate($request, $rules, $messages);
         $this->instructionService->create($data);
         Alert::success("Sukses", "Berhasil Menambahkan SPT");
-        return redirect('/admin/master/spt');
+        return redirect('/admin/spt');
     }
 
 
@@ -148,7 +154,7 @@ class InstructionsController extends Controller
     {
         $data = $this->instructionService->findById($id)->toArray();
         // dd($data);
-        return view('admin.detail-spt', ['data' => $data]);
+        return view('admin.detail-spt', ['data' => $data, 'instructionsId' => $id]);
     }
 
     public function delete(Request $request)
@@ -193,25 +199,56 @@ class InstructionsController extends Controller
 
     public function export_bku()
     {
-        return Excel::download(new BkuExport(), 'bku.xlsx');
+        return Excel::download(new BkuExport(), 'BKU.xlsx');
     }
 
     public function export_spt($id)
     {
 
-        // $data = $this->instructionService->findById($id)->toArray();
-        // $head = $this->headHealthService->findAll();
+        $data = $this->instructionService->findById($id)->toArray();
+        $head = $this->headHealthService->findAll();
+        $laws = $this->lawService->findAll();
 
-        // if (sizeof($head) == 0) {
-        //     throw new WebException("Tidak Ada Kepala Perpustakaan, Harap Tambahkan Terlebih dahulu");
-        // }
+        if (sizeof($head) == 0) {
+            throw new WebException("Tidak Ada Kepala Perpustakaan, Harap Tambahkan Terlebih dahulu");
+        }
+
 
         // dd($data);
-        $pdf = PDF::loadView('exports.spt-export', ['data' => [], 'head' => []])->setPaper('a4', 'potrait');
+        $pdf = PDF::loadView('exports.spt-export', ['data' => $data, 'head' => $head[0], 'laws' => $laws])->setPaper('a4', 'potrait');
 
         // Save the pdf with a specific name
-        return $pdf->download("SPT & LAPORAN / " . Carbon::now()->format('Y-m-d') . '.pdf');
+        return $pdf->download("SPT & LAPORAN / " . Carbon::now()->format('Y-m-d') . '.docx');
 
     }
+
+
+
+    public function export_sppd($id, $userId)
+    {
+        $data = $this->instructionService->findByIdAndEmployeeId($id, $userId);
+        $head = $this->headHealthService->findAll();
+
+        $data = $data->toArray();
+        $data['user'] = [];
+        $isMatchUser = false;
+
+        foreach ($data['employees'] as $key => $value) {
+            # code...
+            if ($value['employee']['id'] == $userId) {
+                $isMatchUser = true;
+                $employee = $value['employee'];
+                $data['user'] = $employee;
+            }
+        }
+       
+        if (!$isMatchUser) {
+            throw new WebException("SPD Tidak Ditemukan ");
+        }
+        $pdf = PDF::loadView('exports.sppd-export', ['data' => $data, 'head' => $head[0]])->setPaper('a4', 'potrait');
+        return $pdf->download("SPPD  / " . Carbon::now()->format('Y-m-d') . '.docx');
+    }
+
+
 
 }

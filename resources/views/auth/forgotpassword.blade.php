@@ -11,13 +11,16 @@
                     </div>
                     <div class="card-body">
                         <div class="basic-form">
-                            <form class="form-valide-with-icon needs-validation" novalidate="">
+                            <form action="{{ route('update-password') }}" method="post"
+                                class="form-valide-with-icon needs-validation" novalidate="">
+                                @method('put')
+                                @csrf
                                 <div class="mb-3">
                                     <label class="text-label form-label" for="dlab-password">Password Lama</label>
                                     <div class="input-group transparent-append">
                                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                         <input type="password" class="form-control" id="dlab-password"
-                                            placeholder="Masukkan Password Lama" required="">
+                                            placeholder="Masukkan Password Lama" required="" name="old_password">
                                         <span class="input-group-text show-pass">
                                             <i class="fa fa-eye-slash"></i>
                                             <i class="fa fa-eye"></i>
@@ -32,7 +35,7 @@
                                     <div class="input-group transparent-append">
                                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                         <input type="password" class="form-control" id="dlab-password"
-                                            placeholder="Masukkan Password Baru" required="">
+                                            placeholder="Masukkan Password Baru" required="" name="new_password">
                                         <span class="input-group-text show-pass">
                                             <i class="fa fa-eye-slash"></i>
                                             <i class="fa fa-eye"></i>
@@ -47,7 +50,7 @@
                                     <div class="input-group transparent-append">
                                         <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                         <input type="password" class="form-control" id="dlab-password"
-                                            placeholder="Ulangi Password" required="">
+                                            placeholder="Ulangi Password" required="" name="confirm_password">
                                         <span class="input-group-text show-pass">
                                             <i class="fa fa-eye-slash"></i>
                                             <i class="fa fa-eye"></i>
@@ -57,7 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn me-2 btn-dark">Kembali</button>
+                                <a href="{{ route('dashboard', ['id' => 1]) }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
                         </div>

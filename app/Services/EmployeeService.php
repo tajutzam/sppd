@@ -92,6 +92,36 @@ class EmployeeService implements Service
             $isInstructions = false;
             foreach ($value['instructions'] as $keyInstructions => $valueInstructions) {
                 # code...
+                if (Carbon::now()->isBefore(Carbon::parse($valueInstructions['instructions']['return_date'])->addDay())) {
+                    $isInstructions = true;
+                }
+            }
+            $data[$key]['isInstructions'] = $isInstructions;
+        }
+        return $data;
+    }
+
+    public function findAllEmployeesWithoutTresurer()
+    {
+        $data = $this->employee
+            // ->where('role', 'employee')
+            ->where('position', '<>', 'Bendahara')
+            ->with([
+                'instructions' => function ($query) {
+                    $query->latest()->first();
+                },
+                'instructions.instructions' => function ($query) {
+                    $query->latest()->first();
+                }
+            ])
+            ->get()
+            ->toArray();
+
+        foreach ($data as $key => $value) {
+            # code...
+            $isInstructions = false;
+            foreach ($value['instructions'] as $keyInstructions => $valueInstructions) {
+                # code...
                 if (Carbon::now()->isBefore(Carbon::parse($valueInstructions['instructions']['return_date']))) {
                     $isInstructions = true;
                 }
@@ -157,4 +187,16 @@ class EmployeeService implements Service
             }
         }
     }
+
+
+    public function findAllTresurer()
+    {
+        return $this->employee
+            ->where('role', 'employee')
+            ->where('position', 'Bendahara')
+            ->get()
+            ->toArray();
+
+    }
+
 }

@@ -41,11 +41,17 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('login');
 //     // return view('admin.dashboard');
 // });
 
-Route::get('/forgotpassword', function () {
-    return view('auth.forgotpassword');
-})->name('forgotpassword');
+
 
 Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () {
+
+
+    Route::get('/forgotpassword', function () {
+        return view('auth.forgotpassword');
+    })->name('forgotpassword');
+
+    Route::put('/forgotpassword', [UserController::class, "updatePassword"])->name('update-password');
+
     Route::get('dashboard', [DashboardController::class, "index"])->name('dashboard');
     Route::get('index', [DashboardController::class, "index"]);
     Route::prefix("master")->group(function () {
@@ -189,9 +195,10 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::get("law-add", function () {
             return view('admin.add.law-add');
         })->name('law-add');
-        Route::get("law-edit", function () {
-            return view('admin.edit.law-edit');
-        })->name('law-edit');
+        Route::get("law-edit/{id}", [LawController::class, "edit"])->name('law-edit');
+        Route::put("law-edit/{id}", [LawController::class, "update"])->name('law-put');
+
+        Route::post("law/create", [LawController::class, "store"])->name('law-post');
     });
     Route::get("spt", [InstructionsController::class, "index"])->name('spt');
     Route::get("spt/create", [InstructionsController::class, "create"])->name('add-spt');
@@ -203,10 +210,9 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get("bku/export", [InstructionsController::class, "export_bku"])->name('bku-export');
     Route::get("spt/export/{id}", [InstructionsController::class, "export_spt"])->name('spt-export');
 
+    Route::get("spt/detail/{id}/sppd/export/{userId}", [InstructionsController::class, "export_sppd"])->name('sppd-export');
 
     // head health
-
-
 
 });
 

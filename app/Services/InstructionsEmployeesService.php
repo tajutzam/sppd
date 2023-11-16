@@ -44,9 +44,9 @@ class InstructionsEmployeesService
 
         foreach ($users as $key => $value) {
             # code...
-            $returnDate = Carbon::parse($value['instructions']['return_date']);
+            $returnDate = Carbon::parse($value['instructions']['return_date'])->addDay();
             if (Carbon::now()->isBefore($returnDate)) {
-                throw new WebException("Maaf Pegawai Sudah Ditugaskan.");
+                throw new WebException("Maaf Pegawai Masih Dalam Status Bertugas.");
             }
         }
     }

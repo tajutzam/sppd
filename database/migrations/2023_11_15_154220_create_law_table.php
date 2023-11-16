@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('law', function (Blueprint $table) {
-            $table->uuid('primary')->primary();
+            $table->uuid('id')->primary();
             $table->text('law_value');
             $table->timestamps();
         });

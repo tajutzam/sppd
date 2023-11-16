@@ -72,7 +72,7 @@ class InstructionService
                 'advice' => $request['advice'],
                 'other' => $request['other'],
                 'description' => $request['description'],
-                'treasurer_id' => $request['treasurer_id']
+                'treasurer_id' => $request['tresurer_id']
             ]);
             // dd($created->id);
             if ($created) {
@@ -154,7 +154,12 @@ class InstructionService
 
     public function findById($id)
     {
-        return $this->instructions->with(['employees', 'treasurer','employees.employee', 'categories', 'transportation', 'destination_to.place', 'destination_from.place', 'bank_account', 'account'])->where('id', $id)->first();
+        return $this->instructions->with(['employees', 'treasurer', 'employees.employee', 'categories', 'transportation', 'destination_to.place', 'destination_from.place', 'bank_account', 'account'])->where('id', $id)->first();
+    }
+
+    public function findByIdAndEmployeeId($id, $employeeId)
+    {
+        return $this->instructions->with(['employees', 'treasurer', 'employees.employee', 'categories', 'transportation', 'destination_to.place', 'destination_from.place', 'bank_account', 'account'])->where('id', $id)->first();
     }
 
 

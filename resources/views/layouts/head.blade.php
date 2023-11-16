@@ -2,6 +2,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
 
     <!-- PAGE TITLE HERE -->

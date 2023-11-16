@@ -45,28 +45,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Hayooo</td>
-                                        <td>
-                                            <div class="d-flex ">
-                                                <a href="{{ route('law-edit') }}"
-                                                    class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
-                                                        class="fas fa-pencil-alt"></i></a>
-                                                <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
-                                                    data-bs-toggle="modal" data-bs-target="">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
                                     @foreach ($data as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item['law_value'] }}</td>
                                             <td>
                                                 <div class="d-flex ">
-                                                    <a href="{{ route('edit-law', ['id' => $item['id']]) }}"
+                                                    <a href="{{ route('law-edit', ['id' => $item['id']]) }}"
                                                         class="btn btn-primary shadow btn-xs sharp me-1 pt-2"><i
                                                             class="fas fa-pencil-alt"></i></a>
                                                     <button class="btn-delete btn btn-danger shadow btn-xs sharp pt-2"
