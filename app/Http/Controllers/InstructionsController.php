@@ -199,15 +199,15 @@ class InstructionsController extends Controller
     public function export_spt($id)
     {
 
-        $data = $this->instructionService->findById($id)->toArray();
-        $head = $this->headHealthService->findAll();
+        // $data = $this->instructionService->findById($id)->toArray();
+        // $head = $this->headHealthService->findAll();
 
-        if (sizeof($head) == 0) {
-            throw new WebException("Tidak Ada Kepala Perpustakaan, Harap Tambahkan Terlebih dahulu");
-        }
+        // if (sizeof($head) == 0) {
+        //     throw new WebException("Tidak Ada Kepala Perpustakaan, Harap Tambahkan Terlebih dahulu");
+        // }
 
         // dd($data);
-        $pdf = PDF::loadView('exports.spt-export', ['data' => $data, 'head' => $head[0]])->setPaper('a4', 'potrait');
+        $pdf = PDF::loadView('exports.spt-export', ['data' => [], 'head' => []])->setPaper('a4', 'potrait');
 
         // Save the pdf with a specific name
         return $pdf->download("SPT & LAPORAN / " . Carbon::now()->format('Y-m-d') . '.pdf');

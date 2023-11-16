@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -37,6 +38,11 @@ class Handler extends ExceptionHandler
                 DB::rollBack();
                 return back()->withErrors($e->getMessage());
             }
+
+            if ($e instanceof NotFoundHttpException) {
+                return redirect('error-404');
+            }
+
         });
     }
 }
