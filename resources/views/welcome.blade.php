@@ -65,7 +65,7 @@
                     <div data-aos="zoom-out">
                         <h1>Mas <span>Joyo</span></h1>
                         <h2>Puskesmas Ketrowonojoyo</h2>
-                        <div class="text-center text-lg-start">
+                        <div class="text-start text-lg-start">
                             <a href="#about" class="btn-get-started scrollto">Mulai</a>
                         </div>
                     </div>
