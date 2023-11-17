@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Mas Joyo - Puskesmas Ketrowonojoyo</title>
@@ -161,7 +163,7 @@
                             <img src="{{ asset('/') }}landing/assets/img/sppd-logo.png" alt=" "
                                 style="width: 70px;">
 
-                            <h3><a href="">SPPD Online</a></h3>
+                            <h3><a href="{{ route('dashboard') }}">SPPD Online</a></h3>
                         </div>
                     </div>
                 </div>
