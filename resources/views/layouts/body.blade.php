@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @include('layouts.header')
+
+
+
+    <link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
 <body>
 
     <!--*******************
@@ -11,6 +24,8 @@
     </div>
 
     <div id="main-wrapper">
+
+
         <div class="nav-header">
             <a href="{{ route('dashboard') }}" class="brand-logo">
                 <svg class="logo-abbr" width="5143" height="4315" viewBox="0 0 5143 4315" fill="none"
@@ -87,13 +102,7 @@
                 </nav>
             </div>
         </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
 
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
@@ -145,13 +154,34 @@
 
             </div>
         </div>
+
         <div class="content-body">
-            @yield('content')
+            <!-- row -->
+            <div class="container-fluid">
+                @yield('content')
+
+            </div>
         </div>
-    </div>
-    <div class="footer">
-        <div class="copyright">
-            <p>Copyright © Designed &amp; Developed by <a href="" target="_blank">Puskesmas
-                    Ketrowonojoyo</a> 2023</p>
+
+        <div class="footer">
+            <div class="copyright">
+                <p>Copyright © Designed &amp; Developed by <a href="" target="_blank">SleepZZ Software</a> 2021
+                </p>
+            </div>
         </div>
+
+
+
+
     </div>
+
+    <!-- Required vendors -->
+    {{-- <script src="vendor/global/global.min.js"></script>
+    <script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/dlabnav-init.js"></script>
+    <script src="js/demo.js"></script>
+    <script src="js/styleSwitcher.js"></script> --}}
+</body>
+
+</html>
