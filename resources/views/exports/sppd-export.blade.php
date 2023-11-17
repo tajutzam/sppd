@@ -56,7 +56,9 @@
         <tbody>
             <tr style="border-bottom: 1px solid black;">
                 <td style="font-size: 11px; border: 1px solid black; padding: 8px;">1.</td>
-                <td style="font-size: 11px; border: 1px solid black; padding: 8px;">Kuasa Pengguna Anggaran</td>
+                <td style="font-size: 11px; border: 1px solid black; padding: 8px;">Kuasa Pengguna Anggaran
+
+                </td>
                 <td colspan="2" style="font-size: 11px; border: 1px solid black; padding: 8px;">{{ $head['name'] }}
                 </td>
 
