@@ -92,12 +92,10 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    {{-- <script src="vendor/global/global.min.js"></script>
+    <script src="vendor/global/global.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/dlabnav-init.js"></script>
-    <script src="js/styleSwitcher.js"></script> --}}
-
-    {{-- <script src="{{ asset('/') }}vendor/toastr/js/toastr.min.js"></script> --}}
+    <script src="js/styleSwitcher.js"></script>
     @if ($errors->any())
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>
