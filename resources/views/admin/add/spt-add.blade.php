@@ -329,7 +329,7 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Jumlah Uang
                                     </label>
-                                    <input type="text" class="form-control input-default custom-border"
+                                    <input type="number" class="form-control input-default custom-border"
                                         placeholder="Masukkan Jumlah Uang" name="ammount_money">
                                 </div>
 

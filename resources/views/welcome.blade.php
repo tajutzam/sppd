@@ -158,14 +158,14 @@
 
                 <div class="row" data-aos="fade-left">
 
-                    <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
+                    <a href="{{ route('dashboard') }}" class="col-lg-3 col-md-4 mt-4 mt-lg-0">
                         <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
                             <img src="{{ asset('/') }}landing/assets/img/sppd-logo.png" alt=" "
                                 style="width: 70px;">
 
-                            <h3><a href="{{ route('dashboard') }}">SPPD Online</a></h3>
+                            <h3>SPPD Online</h3>
                         </div>
-                    </div>
+                    </a>
                 </div>
 
             </div>

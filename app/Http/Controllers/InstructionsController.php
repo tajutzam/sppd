@@ -19,7 +19,13 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use NumberFormatter;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Shared\Html;
+use PhpOffice\PhpWord\TemplateProcessor;
 use RealRashid\SweetAlert\Facades\Alert;
+use Riskihajar\Terbilang\Facades\Terbilang;
 
 class InstructionsController extends Controller
 {
@@ -208,17 +214,102 @@ class InstructionsController extends Controller
         $data = $this->instructionService->findById($id)->toArray();
         $head = $this->headHealthService->findAll();
         $laws = $this->lawService->findAll();
+        // dd($data);
 
         if (sizeof($head) == 0) {
             throw new WebException("Tidak Ada Kepala Perpustakaan, Harap Tambahkan Terlebih dahulu");
         }
 
+        $templateProcessor = new TemplateProcessor(storage_path("/app/templates/spt-template.docx"));
 
-        // dd($data);
-        $pdf = PDF::loadView('exports.spt-export', ['data' => $data, 'head' => $head[0], 'laws' => $laws])->setPaper('a4', 'potrait');
+        $templateProcessor->cloneRow('row', sizeof($laws));
 
-        // Save the pdf with a specific name
-        return $pdf->download("SPT & LAPORAN / " . Carbon::now()->format('Y-m-d') . '.docx');
+        foreach ($laws as $key => $value) {
+            # code...
+            $index = $key + 1;
+            $templateProcessor->setValue('row#' . $index, $index);
+            $templateProcessor->setValue('lawValue#' . $index, $value['law_value']);
+
+        }
+
+        $templateProcessor->cloneRow('rowEmployee', sizeof($data['employees']));
+        $templateProcessor->cloneRow('rankRow', sizeof($data['employees']));
+        $templateProcessor->cloneRow('nipRow', sizeof($data['employees']));
+        $templateProcessor->cloneRow('positionRow', sizeof($data['employees']));
+        $templateProcessor->cloneRow('employeeRow', sizeof($data['employees']));
+        $templateProcessor->cloneRow('rowCost', sizeof($data['employees']));
+
+
+        $terbilang = 0;
+        $transportation = 0;
+        $departure = Carbon::parse($data['departure_date']);
+        $return = Carbon::parse($data['return_date']);
+        $daysDifference = $return->diffInDays($departure);
+
+        // If the dates are the same, set the value to 1
+        if ($daysDifference == 0) {
+            $daysDifference = 1;
+        }
+        $categoryName = $data['categories']['name'];
+        if ($categoryName == 'Perjalanan Kurang Dari 8 Jam') {
+            $transportation = 60000;
+        }
+
+        $formatter = new NumberFormatter('id_ID', NumberFormatter::CURRENCY);
+        $total = 0;
+        foreach ($data['employees'] as $key => $value) {
+            $tempTotal = $daysDifference * $transportation;
+            $total += $tempTotal;
+            # code...
+            $index = $key + 1;
+            $templateProcessor->setValue('rowEmployee#' . $index, $index);
+            $templateProcessor->setValue('name#' . $index, $value['employee']['name']);
+            $templateProcessor->setValue('rank#' . $index, $value['employee']['rank']);
+            $templateProcessor->setValue('group#' . $index, $value['employee']['group']);
+            $templateProcessor->setValue('employeeNip#' . $index, $value['employee']['nip']);
+            $templateProcessor->setValue('position#' . $index, $value['employee']['position']);
+
+            $templateProcessor->setValue('rankRow#' . $index, '');
+            $templateProcessor->setValue('rowCost#' . $index, $index);
+            $templateProcessor->setValue('nipRow#' . $index, '');
+            $templateProcessor->setValue('positionRow#' . $index, '');
+            $templateProcessor->setValue('employeeRow#' . $index, '-' . $value['employee']['name']);
+            $templateProcessor->setValue('tempTotal#' . $index, $formatter->formatCurrency($tempTotal, 'Rp.'));
+            $templateProcessor->setValue('time#' . $index, $daysDifference);
+            $templateProcessor->setValue('transport#' . $index, $formatter->formatCurrency($transportation, 'Rp.'));
+            $templateProcessor->setValue('costName#' . $index, $value['employee']['name']);
+        }
+
+
+
+        $templateProcessor->setValue('total', $formatter->formatCurrency($total, 'Rp.'));
+        $templateProcessor->setValue('activityName', $data['activity_name']);
+        $templateProcessor->setValue('departure', Carbon::parse($data['departure_date'])->format('Y-m-d'));
+        $templateProcessor->setValue('headName', $head[0]['name']);
+        $templateProcessor->setValue('headNip', $head[0]['nip']);
+        $templateProcessor->setValue('headGroup', $head[0]['group']);
+        $templateProcessor->setValue('now', Carbon::now()->format('Y-m-d'));
+        $templateProcessor->setValue('to', $data['destination_to']['place']['name']);
+        $templateProcessor->setValue('employeeFirst', $data['employees'][0]['employee']['name']);
+        $templateProcessor->setValue('employeeNipFirst', $data['employees'][0]['employee']['nip']);
+        $templateProcessor->setValue('present_in', $data['present_in']);
+        $templateProcessor->setValue('briefings', $data['briefings']);
+        $templateProcessor->setValue('problem', $data['problem']);
+        $templateProcessor->setValue('advice', $data['advice']);
+        $templateProcessor->setValue('other', $data['other']);
+        $templateProcessor->setValue('account_number', $data['bank_account']['account_number']);
+        $templateProcessor->setValue('accept_from', $data['accept_from']);
+        $templateProcessor->setValue('sub_activity_name', $data['sub_activity_name']);
+        $templateProcessor->setValue('amount_money', $data['amount_money']);
+        $templateProcessor->setValue('terbilang', Terbilang::make($data['amount_money'], " Rupiah"));
+        $templateProcessor->setValue('tresurer', $data['treasurer']['name']);
+        $templateProcessor->setValue('tresurerNip', $data['treasurer']['nip']);
+
+        $temporaryPath = tempnam(sys_get_temp_dir(), 'word_temp');
+        $templateProcessor->saveAs($temporaryPath);
+        // Download the Word file
+        $fileName = "SPT" . '-' . Carbon::now()->format('Y-m-d') . '.docx';
+        return response()->download($temporaryPath, $fileName)->deleteFileAfterSend(true);
 
     }
 
@@ -241,12 +332,39 @@ class InstructionsController extends Controller
                 $data['user'] = $employee;
             }
         }
-       
-        if (!$isMatchUser) {
-            throw new WebException("SPD Tidak Ditemukan ");
-        }
-        $pdf = PDF::loadView('exports.sppd-export', ['data' => $data, 'head' => $head[0]])->setPaper('a4', 'potrait');
-        return $pdf->download("SPPD  / " . Carbon::now()->format('Y-m-d') . '.docx');
+        // dd($data);
+        $view = view('exports.sppd-export', ['data' => $data, 'head' => $head[0]])->render();
+
+        $templateProcessor = new TemplateProcessor(storage_path("/app/templates/template_sppd.docx"));
+        $templateProcessor->setValue('headName', $head[0]['name']);
+        $templateProcessor->setValue('headNip', $head[0]['nip']);
+        $templateProcessor->setValue('employeeName', $data['user']['name']);
+        $templateProcessor->setValue('employeeNip', $data['user']['nip']);
+        $templateProcessor->setValue('employeeRank', $data['user']['rank']);
+        $templateProcessor->setValue('employeeGroup', $data['user']['group']);
+        $templateProcessor->setValue('position', $data['user']['position']);
+        $templateProcessor->setValue('activityName', $data['activity_name']);
+        $templateProcessor->setValue('transportation', $data['transportation']['name']);
+        $templateProcessor->setValue('placeFrom', $data['destination_from']['place']['name']);
+        $templateProcessor->setValue('placeTo', $data['destination_to']['place']['name']);
+        $templateProcessor->setValue('travel_time', $data['travel_time']);
+        $templateProcessor->setValue('placeFrom', $data['destination_from']['place']['name']);
+
+
+        $templateProcessor->setValue('departureDate', Carbon::parse($data['departure_date'])->format('Y-m-d'));
+        $templateProcessor->setValue('returnDate', Carbon::parse($data['return_date'])->format('Y-m-d'));
+        $templateProcessor->setValue('account', $data['account']['name']);
+        $templateProcessor->setValue('description', $data['description']);
+        $templateProcessor->setValue('other', $data['other']);
+
+        $templateProcessor->setValue('now', Carbon::now()->format('Y-m-d'));
+
+        $temporaryPath = tempnam(sys_get_temp_dir(), 'word_temp');
+        $templateProcessor->saveAs($temporaryPath);
+
+        // Download the Word file
+        $fileName = "SPD" . $data['user']['name'] . '-' . Carbon::now()->format('Y-m-d') . '.docx';
+        return response()->download($temporaryPath, $fileName)->deleteFileAfterSend(true);
     }
 
 

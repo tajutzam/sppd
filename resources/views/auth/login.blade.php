@@ -8,9 +8,9 @@
     <meta name="author" content="">
     <meta name="robots" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-    <meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-    <meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
+
+    <link rel="stylesheet" href="{{ asset('/') }}vendor/toastr/css/toastr.min.css">
+
     <meta property="og:image" content="https://fillow.dexignlab.com/xhtml/social-image.png">
     <meta name="format-detection" content="telephone=no">
 
@@ -94,10 +94,12 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
-    <script src="vendor/global/global.min.js"></script>
+    {{-- <script src="vendor/global/global.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/dlabnav-init.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="js/styleSwitcher.js"></script> --}}
+
+    {{-- <script src="{{ asset('/') }}vendor/toastr/js/toastr.min.js"></script> --}}
     @if ($errors->any())
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script>

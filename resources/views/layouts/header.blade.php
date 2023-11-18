@@ -21,7 +21,7 @@
 <!-- Custom Stylesheet -->
 <link href="{{ asset('/') }}vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
 <link href="{{ asset('/') }}css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="vendor/toastr/css/toastr.min.css">
+{{-- <link rel="stylesheet" href="vendor/toastr/css/toastr.min.css"> --}}
 
 <link rel="stylesheet" href="{{ asset('/') }}vendor/toastr/css/toastr.min.css">
 <!-- Style css -->
