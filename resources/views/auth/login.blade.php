@@ -8,19 +8,17 @@
     <meta name="author" content="">
     <meta name="robots" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="{{ asset('/') }}vendor/toastr/css/toastr.min.css">
-
-    <meta property="og:image" content="https://fillow.dexignlab.com/xhtml/social-image.png">
     <meta name="format-detection" content="telephone=no">
 
     <!-- PAGE TITLE HERE -->
-    <title>Admin Dashboard</title>
+    <title>Login SPPD - Puskemas Ketrowonojoyo</title>
+    <link rel="icon" href="{{ asset('/') }}images/sppd-logo.png" type="image/png" style="size: 200%" />
 
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
     <link href="css/style.css" rel="stylesheet">
-
+    <script src="{{ asset('/') }}vendor/toastr/js/toastr.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('/') }}vendor/toastr/css/toastr.min.css">
 </head>
 
 <body class="vh-100">
@@ -52,9 +50,9 @@
                                                 <input type="password" class="form-control border-end-0" name="password"
                                                     id="inputChoosePassword" value="12345678"
                                                     placeholder="Password Anda">
-                                                <a href="javascript:;" class="input-group-text bg-transparent"
+                                                <a href="javascript:;" class="input-group-text bg-primary"
                                                     id="show-hide-password">
-                                                    <i class="fa fa-eye"></i>
+                                                    <i class="fa fa-eye" style="color: white"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -82,10 +80,10 @@
         showHidePasswordButton.addEventListener('click', () => {
             if (isPasswordVisible) {
                 passwordInput.type = 'password';
-                showHidePasswordButton.innerHTML = '<i class="fa fa-eye"></i>';
+                showHidePasswordButton.innerHTML = '<i class="fa fa-eye" style="color: white"></i>';
             } else {
                 passwordInput.type = 'text';
-                showHidePasswordButton.innerHTML = '<i class="fa fa-eye-slash"></i>';
+                showHidePasswordButton.innerHTML = '<i class="fa fa-eye-slash" style="color: white"></i>';
             }
             isPasswordVisible = !isPasswordVisible;
         });

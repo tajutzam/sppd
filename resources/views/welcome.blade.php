@@ -158,14 +158,17 @@
 
                 <div class="row" data-aos="fade-left">
 
-                    <a href="{{ route('dashboard') }}" class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-                        <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
-                            <img src="{{ asset('/') }}landing/assets/img/sppd-logo.png" alt=" "
-                                style="width: 70px;">
+                    <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
 
-                            <h3>SPPD Online</h3>
-                        </div>
-                    </a>
+                        <a href="{{ route('dashboard') }}">
+                            <div class="icon-box" data-aos="zoom-in" data-aos-delay="200">
+                                <img src="{{ asset('/') }}landing/assets/img/sppd-logo.png" alt=" "
+                                    style="width: 70px;">
+
+                                <h3 style="color: rgb(89, 97, 184);">SPPD Online</h3>
+                            </div>
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -184,7 +187,7 @@
             </div>
             <div class="credits">
 
-                Designed by <a href="" style="color: rgb(89, 97, 184);">Puskesmas Ketrowonojoyo</a>
+                Designed by <a href="" style="color: rgb(89, 97, 184);">SleepZZ Software</a>
             </div>
         </div>
     </footer><!-- End Footer -->

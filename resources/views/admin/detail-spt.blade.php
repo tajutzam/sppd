@@ -36,10 +36,15 @@
                         <h2 class="card-title " style="font-weight: bold; font-size: 25px">Data SPT</h2>
                         <div>
 
-                            <a class="btn me-2 btn-dark">Kembali</a></a>
-                            <a href="{{ route('spt-export', ['id' => $data['id']]) }}" class="btn me-2 btn-success">Cetak SPT,
+                            <a class="btn me-2 btn-dark" {{ route('spt') }}>Kembali</a>
+
+
+                            <a href="{{ route('spt-export', ['id' => $data['id']]) }}" class="btn me-2 btn-success">Cetak
+                                SPT,
                                 Laporan &
                                 Kuitansi</a>
+
+
                         </div>
                     </div>
                     <hr class="m-0" style="opacity: 30%;
@@ -75,7 +80,7 @@
                                         <td>
                                             @foreach ($data['employees'] as $item)
                                                 {{ $item['employee']['name'] }} <a
-                                                    href="{{ route('sppd-export', ['id' => $instructionsId , 'userId' => $item['employee']['id']]) }}"><span
+                                                    href="{{ route('sppd-export', ['id' => $instructionsId, 'userId' => $item['employee']['id']]) }}"><span
                                                         class="badge badge-primary m-2">CETAK SPPD</span></a> <br>
                                             @endforeach
                                         </td>
