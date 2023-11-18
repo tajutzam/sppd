@@ -363,7 +363,7 @@ class InstructionsController extends Controller
         $templateProcessor->saveAs($temporaryPath);
 
         // Download the Word file
-        $fileName = "SPD" . $data['user']['name'] . '-' . Carbon::now()->format('Y-m-d') . '.docx';
+        $fileName = "SPD-" . $data['user']['name'] . '-' . Carbon::now()->format('Y-m-d') . '.docx';
         return response()->download($temporaryPath, $fileName)->deleteFileAfterSend(true);
     }
 
