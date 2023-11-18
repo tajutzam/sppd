@@ -54,7 +54,7 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">NIP
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan NIP " name="nip">
+                                        placeholder="Masukkan NIP " name="nip" value="-">
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col mt-2 mt-sm-0">
@@ -62,14 +62,14 @@
                                             style="font-size: 19px; font-weight: 500">Pangkat
                                         </label>
                                         <input type="text" class="form-control input-default custom-border"
-                                            placeholder="Masukkan Pangkat " name="rank">
+                                            placeholder="Masukkan Pangkat " name="rank" value="-">
                                     </div>
                                     <div class="col mt-2 mt-sm-0 ">
                                         <label class="text-label form-label ps-2"
                                             style="font-size: 19px; font-weight: 500">Golongan
                                         </label>
                                         <input type="text" class="form-control input-default custom-border"
-                                            placeholder="Masukkan Golongan " name="group">
+                                            placeholder="Masukkan Golongan " name="group" value="-">
                                     </div>
                                 </div>
 
@@ -77,21 +77,21 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Uang
                                         Harian</label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Uang Harian" name="daily_money">
+                                        placeholder="Masukkan Uang Harian" name="daily_money" value="0">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Uang
                                         Makan
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Uang Makan " name="food_money">
+                                        placeholder="Masukkan Uang Makan " name="food_money" value="0">
                                 </div>
                                 <div class="mb-5">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Uang
                                         Transport
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Uang Transport " name="transport_money">
+                                        placeholder="Masukkan Uang Transport " name="transport_money" value="0">
                                 </div>
                                 <input type="text" name="role" value="employee" hidden>
                                 <a href="{{ route('employee') }}" class="btn me-2 btn-dark">Kembali</a>
