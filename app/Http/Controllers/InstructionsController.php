@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Str;
 
 use App\Exceptions\WebException;
 use App\Exports\BkuExport;
@@ -280,7 +281,7 @@ class InstructionsController extends Controller
             $templateProcessor->setValue('costName#' . $index, $value['employee']['name']);
         }
 
-
+        $terbilangAmount = Terbilang::make($data['amount_money'], " Rupiah");
 
         $templateProcessor->setValue('total', $formatter->formatCurrency($total, 'Rp.'));
         $templateProcessor->setValue('activityName', $data['activity_name']);
@@ -301,7 +302,7 @@ class InstructionsController extends Controller
         $templateProcessor->setValue('accept_from', $data['accept_from']);
         $templateProcessor->setValue('sub_activity_name', $data['sub_activity_name']);
         $templateProcessor->setValue('amount_money', $data['amount_money']);
-        $templateProcessor->setValue('terbilang', Terbilang::make($data['amount_money'], " Rupiah"));
+        $templateProcessor->setValue('terbilang', Str::upper($terbilangAmount));
         $templateProcessor->setValue('tresurer', $data['treasurer']['name']);
         $templateProcessor->setValue('tresurerNip', $data['treasurer']['nip']);
 
