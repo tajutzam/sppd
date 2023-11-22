@@ -98,20 +98,18 @@
         </div>
     </div>
 
-    <!-- Your HTML code -->
+
 
 
 
     <script>
         $(document).ready(function() {
-            // Capture click event on the delete button
+
             $('.btn-delete').on('click', function() {
-                // Retrieve the data-id attribute from the clicked button
+
                 var id = $(this).data('id');
                 var name = $(this).data('name');
 
-
-                // Update the modal content with the retrieved text
                 $('#title-modal').text('Apakah anda yakin ingin menghapus ' + name + ' ?');
                 $('#id-employee').val(id);
 
