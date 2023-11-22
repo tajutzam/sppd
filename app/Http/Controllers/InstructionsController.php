@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Str;
 
 use App\Exceptions\WebException;
@@ -234,9 +235,9 @@ class InstructionsController extends Controller
         }
 
         $templateProcessor->cloneRow('rowEmployee', sizeof($data['employees']));
-        $templateProcessor->cloneRow('rankRow', sizeof($data['employees']));
-        $templateProcessor->cloneRow('nipRow', sizeof($data['employees']));
-        $templateProcessor->cloneRow('positionRow', sizeof($data['employees']));
+        $templateProcessor->cloneRow('rankRow', 1);
+        $templateProcessor->cloneRow('nipRow', 1);
+        $templateProcessor->cloneRow('positionRow', 1);
         $templateProcessor->cloneRow('employeeRow', sizeof($data['employees']));
         $templateProcessor->cloneRow('rowCost', sizeof($data['employees']));
 
