@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Str;
 
 use App\Exceptions\WebException;
@@ -230,7 +231,6 @@ class InstructionsController extends Controller
             $index = $key + 1;
             $templateProcessor->setValue('row#' . $index, $index);
             $templateProcessor->setValue('lawValue#' . $index, $value['law_value']);
-
         }
 
         $templateProcessor->cloneRow('rowEmployee', sizeof($data['employees']));
@@ -311,7 +311,6 @@ class InstructionsController extends Controller
         // Download the Word file
         $fileName = "SPT" . '-' . Carbon::now()->format('Y-m-d') . '.docx';
         return response()->download($temporaryPath, $fileName)->deleteFileAfterSend(true);
-
     }
 
 
@@ -367,7 +366,4 @@ class InstructionsController extends Controller
         $fileName = "SPD-" . $data['user']['name'] . '-' . Carbon::now()->format('Y-m-d') . '.docx';
         return response()->download($temporaryPath, $fileName)->deleteFileAfterSend(true);
     }
-
-
-
 }
