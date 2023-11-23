@@ -32,16 +32,16 @@ class Handler extends ExceptionHandler
         });
 
         $this->renderable(function (Throwable $e) {
-            // dd($e);
+           
             if ($e instanceof WebException) {
                 // mengirim error sesuai message web exceptions
                 DB::rollBack();
                 return back()->withErrors($e->getMessage());
             }
 
-            if ($e instanceof NotFoundHttpException) {
-                return redirect('error-404');
-            }
+            // if ($e instanceof NotFoundHttpException) {
+            //     return redirect('error-404');
+            // }
 
         });
     }
