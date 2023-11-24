@@ -21,7 +21,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use NumberFormatter;
+
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Shared\Html;
@@ -257,7 +257,6 @@ class InstructionsController extends Controller
             $transportation = 60000;
         }
 
-        $formatter = new NumberFormatter('id_ID', NumberFormatter::CURRENCY);
         $total = 0;
         foreach ($data['employees'] as $key => $value) {
             $tempTotal = $daysDifference * $transportation;
@@ -276,21 +275,21 @@ class InstructionsController extends Controller
             $templateProcessor->setValue('nipRow#' . $index, '');
             $templateProcessor->setValue('positionRow#' . $index, '');
             $templateProcessor->setValue('employeeRow#' . $index, '-' . $value['employee']['name']);
-            $templateProcessor->setValue('tempTotal#' . $index, $formatter->formatCurrency($tempTotal, 'Rp.'));
+            $templateProcessor->setValue('tempTotal#' . $index, $this->formatCurrency($tempTotal, ));
             $templateProcessor->setValue('time#' . $index, $daysDifference);
-            $templateProcessor->setValue('transport#' . $index, $formatter->formatCurrency($transportation, 'Rp.'));
+            $templateProcessor->setValue('transport#' . $index, $this->formatCurrency($transportation, ));
             $templateProcessor->setValue('costName#' . $index, $value['employee']['name']);
         }
 
         $terbilangAmount = Terbilang::make($data['amount_money'], " Rupiah");
 
-        $templateProcessor->setValue('total', $formatter->formatCurrency($total, 'Rp.'));
+        $templateProcessor->setValue('total', $this->formatCurrency($total, ));
         $templateProcessor->setValue('activityName', $data['activity_name']);
-        $templateProcessor->setValue('departure', Carbon::parse($data['departure_date'])->format('Y-m-d'));
+        $templateProcessor->setValue('departure', Carbon::parse($data['departure_date'])->format('d-m-Y'));
         $templateProcessor->setValue('headName', $head[0]['name']);
         $templateProcessor->setValue('headNip', $head[0]['nip']);
         $templateProcessor->setValue('headGroup', $head[0]['group']);
-        $templateProcessor->setValue('now', Carbon::now()->format('Y-m-d'));
+        $templateProcessor->setValue('now', Carbon::now()->format('d-m-Y'));
         $templateProcessor->setValue('to', $data['destination_to']['place']['name']);
         $templateProcessor->setValue('employeeFirst', $data['employees'][0]['employee']['name']);
         $templateProcessor->setValue('employeeNipFirst', $data['employees'][0]['employee']['nip']);
@@ -302,7 +301,7 @@ class InstructionsController extends Controller
         $templateProcessor->setValue('account_number', $data['bank_account']['account_number']);
         $templateProcessor->setValue('accept_from', $data['accept_from']);
         $templateProcessor->setValue('sub_activity_name', $data['sub_activity_name']);
-        $templateProcessor->setValue('amount_money', $data['amount_money']);
+        $templateProcessor->setValue('amount_money', $this->formatCurrency($data['amount_money']));
         $templateProcessor->setValue('terbilang', Str::upper($terbilangAmount));
         $templateProcessor->setValue('tresurer', $data['treasurer']['name']);
         $templateProcessor->setValue('tresurerNip', $data['treasurer']['nip']);
@@ -310,7 +309,7 @@ class InstructionsController extends Controller
         $temporaryPath = tempnam(sys_get_temp_dir(), 'word_temp');
         $templateProcessor->saveAs($temporaryPath);
         // Download the Word file
-        $fileName = "SPT" . '-' . Carbon::now()->format('Y-m-d') . '.docx';
+        $fileName = "SPT" . '-' . Carbon::now()->format('d-m-Y') . '.docx';
         return response()->download($temporaryPath, $fileName)->deleteFileAfterSend(true);
 
     }
@@ -353,21 +352,34 @@ class InstructionsController extends Controller
         $templateProcessor->setValue('placeFrom', $data['destination_from']['place']['name']);
 
 
-        $templateProcessor->setValue('departureDate', Carbon::parse($data['departure_date'])->format('Y-m-d'));
-        $templateProcessor->setValue('returnDate', Carbon::parse($data['return_date'])->format('Y-m-d'));
+        $templateProcessor->setValue('departureDate', Carbon::parse($data['departure_date'])->format('d-m-Y'));
+        $templateProcessor->setValue('returnDate', Carbon::parse($data['return_date'])->format('d-m-Y'));
         $templateProcessor->setValue('account', $data['account']['name']);
         $templateProcessor->setValue('description', $data['description']);
         $templateProcessor->setValue('other', $data['other']);
 
-        $templateProcessor->setValue('now', Carbon::now()->format('Y-m-d'));
+        $templateProcessor->setValue('now', Carbon::now()->format('d-m-Y'));
 
         $temporaryPath = tempnam(sys_get_temp_dir(), 'word_temp');
         $templateProcessor->saveAs($temporaryPath);
 
         // Download the Word file
-        $fileName = "SPD-" . $data['user']['name'] . '-' . Carbon::now()->format('Y-m-d') . '.docx';
+        $fileName = "SPD-" . $data['user']['name'] . '-' . Carbon::now()->format('d-m-Y') . '.docx';
         return response()->download($temporaryPath, $fileName)->deleteFileAfterSend(true);
     }
+
+
+    private function formatCurrency($amount)
+    {
+        // Format the amount without decimal separator and without thousands separator
+        $formattedAmount = number_format($amount, 0, '.', '');
+
+        // Add the currency symbol and thousands separator
+        $formattedAmount = 'Rp ' . number_format($formattedAmount, 0, ',', '.');
+
+        return $formattedAmount;
+    }
+
 
 
 
