@@ -48,8 +48,7 @@
                                             <label for="inputChoosePassword" class="form-label">Password</label>
                                             <div class="input-group" id="">
                                                 <input type="password" class="form-control border-end-0" name="password"
-                                                    id="inputChoosePassword" value="12345678"
-                                                    placeholder="Password Anda">
+                                                    id="inputChoosePassword" placeholder="Password Anda">
                                                 <a href="javascript:;" class="input-group-text bg-primary"
                                                     id="show-hide-password">
                                                     <i class="fa fa-eye" style="color: white"></i>
