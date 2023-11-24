@@ -179,7 +179,7 @@
                                         Kegiatan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Kegiatan" name="activity_name">
+                                        placeholder="Masukkan Nama Kegiatan" name="activity_name" value="{{old('activity_name')}}">
                                 </div>
 
                                 <div class="mb-3">
@@ -188,7 +188,7 @@
                                         Kegiatan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Nama Sub Kegiatan" name="sub_activity_name">
+                                        placeholder="Masukkan Nama Sub Kegiatan" name="sub_activity_name" value="{{old('sub_activity_name')}}">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
@@ -213,7 +213,7 @@
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             <input type="date" id="berangkat" min="<?php echo date('Y-m-d'); ?>"
-                                                class="form-control input-default custom-border" name="departure_date">
+                                                class="form-control input-default custom-border" name="departure_date" value="{{old('departure_date')}}">
                                         </div>
 
                                     </div>
@@ -225,7 +225,7 @@
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                             <input type="date" min="<?php echo date('Y-m-d'); ?>"
-                                                class="form-control input-default custom-border" name="return_date">
+                                                class="form-control input-default custom-border" name="return_date" value="{{old('return_date')}}">
                                         </div>
                                     </div>
                                 </div>
@@ -286,7 +286,7 @@
                                         Perjalanan
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lama (Hari) " name="travel_time">
+                                        placeholder="Masukkan Lama (Hari) " name="travel_time" value="{{old('travel_time')}}">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
@@ -306,7 +306,7 @@
                                         style="font-size: 19px; font-weight: 500">Sudah Diterima Dari
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Terima Dari" name="accept_from">
+                                        placeholder="Masukkan Terima Dari" name="accept_from" value="{{old('accept_from')}}">
                                 </div>
 
                                 <div class="mb-3">
@@ -314,7 +314,7 @@
                                         style="font-size: 19px; font-weight: 500">Sub Komponen
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Sub Komponen" name="sub_component">
+                                        placeholder="Masukkan Sub Komponen" name="sub_component" value="{{old('sub_component')}}">
                                 </div>
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
@@ -330,7 +330,7 @@
                                         style="font-size: 19px; font-weight: 500">Jumlah Uang
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Jumlah Uang" name="ammount_money">
+                                        placeholder="Masukkan Jumlah Uang" name="ammount_money" value="{{old('ammount_money')}}">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
@@ -348,7 +348,7 @@
                                         style="font-size: 19px; font-weight: 500">Hadir Dalam
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Hadir Dalam" name="present_in">
+                                        placeholder="Masukkan Hadir Dalam" name="present_in" value="{{old('present_in')}}">
                                 </div>
 
                                 <div class="mb-3">

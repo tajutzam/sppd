@@ -37955,7 +37955,7 @@ table.dataTable.display tbody td {
 }
 
 .sd-shape {
-    animation: movedelement 10s linear infinite;
+    /* animation: movedelement 10s linear infinite; */
     width: 100%;
     transform: scale(1.1);
     position: relative;
