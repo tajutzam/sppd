@@ -219,7 +219,7 @@ class InstructionsController extends Controller
         // dd($data);
 
         if (sizeof($head) == 0) {
-            throw new WebException("Tidak Ada Kepala Perpustakaan, Harap Tambahkan Terlebih dahulu");
+            throw new WebException("Tidak Ada Kepala Puskesmas, Harap Tambahkan Terlebih dahulu");
         }
 
         $templateProcessor = new TemplateProcessor(storage_path("/app/templates/spt-template.docx"));
@@ -287,7 +287,7 @@ class InstructionsController extends Controller
         $templateProcessor->setValue('departure', Carbon::parse($data['departure_date'])->format('d-m-Y'));
         $templateProcessor->setValue('headName', $head[0]['name']);
         $templateProcessor->setValue('headNip', $head[0]['nip']);
-        $templateProcessor->setValue('headGroup', $head[0]['group']);
+        $templateProcessor->setValue('headRank', $head[0]['rank']);
         $templateProcessor->setValue('now', Carbon::now()->format('d-m-Y'));
         $templateProcessor->setValue('to', $data['destination_to']['place']['name']);
         $templateProcessor->setValue('employeeFirst', $data['employees'][0]['employee']['name']);
