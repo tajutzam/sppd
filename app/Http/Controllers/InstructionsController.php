@@ -186,12 +186,13 @@ class InstructionsController extends Controller
         $data = $this->instructionService->findById($id)->toArray();
 
         $categories = $this->categoryService->findAll();
-        $employees = $this->employeeService->findAll();
+        $employees = $this->employeeService->findAllEmployeesWithoutTresurer();
         $transportations = $this->transportationService->findAll();
         $places = $this->placesService->findAll();
         $accounts = $this->accountService->findAll();
         $bankAccounts = $this->bankService->findAll();
         $typeDestinations = $this->typeDestinationService->findAll();
+        $tresurest = $this->employeeService->findAllTresurer();
         // dd($data);
         return view('admin.edit.spt-edit', [
             'data' => $data,
@@ -201,8 +202,71 @@ class InstructionsController extends Controller
             'places' => $places,
             'accounts' => $accounts,
             'banks' => $bankAccounts,
-            'type_destinations' => $typeDestinations
+            'type_destinations' => $typeDestinations,
+            'tresurers' => $tresurest
         ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'activity_name' => 'required',
+            'sub_activity_name' => 'required',
+            'category_id' => 'required',
+            'departure_date' => 'required|date|after:yesterday',
+            'return_date' => 'required|date|after:yesterday',
+            'users' => 'required|array|min:1',
+            'transportation_id' => 'required',
+            'place_from' => 'required',
+            'place_to' => 'required',
+            'type_destinations_id' => 'required',
+            'travel_time' => 'required',
+            'account_id' => 'required',
+            'accept_from' => 'required',
+            'sub_component' => 'required',
+            'ammount_money' => 'required',
+            'bank_account_id' => 'required',
+            'present_in' => 'required',
+            'briefings' => 'required',
+            'problem' => 'required',
+            'advice' => 'required',
+            'description' => 'required',
+            'other' => 'required',
+            'tresurer_id' => 'required'
+        ];
+        $messages = [
+            'activity_name.required' => 'Nama Aktivitas Harus Di Isi',
+            'sub_activity_name.required' => 'Nama SUb Aktivitas Harus Di isi',
+            'category_id.required' => 'Kategory Perjalanan Tidak Boleh Kosong',
+            'derparture_id.required' => 'Tanggal Berangkat Harus Di Isi',
+            'return_date.required' => 'Tanggal Pulang Harus Diisi',
+            'users.min' => 'Pegawai Tidak Boleh Kosong',
+            'transportation_id.required' => 'Alat Transportasi Tidak Boleh Kosong',
+            'place_form.required' => 'Tempat Berangkat Tidak Boleh Kosong',
+            'place_to.required' => 'Tempat Tujuan Tidak Boleh Kosong',
+            'type_destinations_id.required' => 'Tipe Tujuan Tidak Boleh Kosong',
+            'travel_time.required' => 'Waktu Perjalanan Tidak Boleh Kosong',
+            'account_id.required' => 'Akun Tidak Boleh Kosong',
+            'accept_from.required' => "Diterima Dari Tidak Boleh Kosong",
+            'sub_component.required' => 'Sub Komponen Tidak Boleh Kosong',
+            "ammount_money.required" => 'Total Biaya tidak boleh kosong',
+            "bank_account_id.required" => "Nomor Rekening Tidak Boleh Kosong",
+            "present_in.required" => "Hadir Dalam Tidak Boleh Kosong",
+            "briefings.required" => 'Pengarahan Tidak Boleh Kosong',
+            "problem.required" => 'Masalah Tidak Boleh Kosong',
+            "advice.required" => 'Saran Tidak Boleh Kosong',
+            "description.required" => "Deskripsi Tidak boleh kosong",
+            'users.required' => 'Pegawai Harus Di isi',
+            'other' => 'Lain Lain Harus Diisi',
+            'departure_date.after' => 'Tanggal Berangkat Tidak Valid',
+            'return_date.after' => 'Tanggal Kembali Tidak Valid',
+            'tresurer_id.required' => 'Petugas Bendahara Tidak Boleh Kosong'
+        ];
+        $data = $this->validate($request, $rules, $messages);
+        $this->instructionService->update($data , $id);
+        Alert::success("Sukses" , "Berhasil Memperbarui SPT");
+        return redirect("admin/spt");
+
     }
 
     public function export_bku()
@@ -274,15 +338,15 @@ class InstructionsController extends Controller
             $templateProcessor->setValue('nipRow#' . $index, '');
             $templateProcessor->setValue('positionRow#' . $index, '');
             $templateProcessor->setValue('employeeRow#' . $index, '-' . $value['employee']['name']);
-            $templateProcessor->setValue('tempTotal#' . $index, $this->formatCurrency($tempTotal,));
+            $templateProcessor->setValue('tempTotal#' . $index, $this->formatCurrency($tempTotal, ));
             $templateProcessor->setValue('time#' . $index, $daysDifference);
-            $templateProcessor->setValue('transport#' . $index, $this->formatCurrency($transportation,));
+            $templateProcessor->setValue('transport#' . $index, $this->formatCurrency($transportation, ));
             $templateProcessor->setValue('costName#' . $index, $value['employee']['name']);
         }
 
         $terbilangAmount = Terbilang::make($data['amount_money'], " Rupiah");
 
-        $templateProcessor->setValue('total', $this->formatCurrency($total,));
+        $templateProcessor->setValue('total', $this->formatCurrency($total, ));
         $templateProcessor->setValue('activityName', $data['activity_name']);
         $templateProcessor->setValue('departure', Carbon::parse($data['departure_date'])->format('d-m-Y'));
         $templateProcessor->setValue('headName', $head[0]['name']);

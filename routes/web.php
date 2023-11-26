@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 
@@ -209,6 +209,8 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
     Route::get("spt/detail/{id}", [InstructionsController::class, "detail"])->name('detail-spt');
     Route::get("bku/export", [InstructionsController::class, "export_bku"])->name('bku-export');
     Route::get("spt/export/{id}", [InstructionsController::class, "export_spt"])->name('spt-export');
+
+    Route::put("spt/edit/{id}" , [InstructionsController::class , "update"])->name('spt-put');
 
     Route::get("spt/detail/{id}/sppd/export/{userId}", [InstructionsController::class, "export_sppd"])->name('sppd-export');
 

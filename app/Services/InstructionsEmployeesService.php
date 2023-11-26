@@ -29,6 +29,11 @@ class InstructionsEmployeesService
         }
     }
 
+    public function deleteEmployeesInstructions($idInstructions)
+    {
+        $this->employees->where('instructions', $idInstructions)->delete();
+    }
+
 
     public function validateEmployees($userId)
     {

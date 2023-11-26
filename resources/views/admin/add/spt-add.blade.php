@@ -205,7 +205,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <div class="col mt-2 mt-sm-0">
+                                    <div class="col mt-2 mt-sm-0" id="tanggalmulai">
                                         <label class="text-label form-label ps-2"
                                             style="font-size: 19px; font-weight: 500">Tanggal Berangkat
                                         </label>
@@ -217,7 +217,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col mt-2 mt-sm-0 ">
+                                    <div class="col mt-2 mt-sm-0 " id="tanggalakhir">
                                         <label class="text-label form-label ps-2"
                                             style="font-size: 19px; font-weight: 500">Tanggal Pulang
                                         </label>
@@ -280,13 +280,13 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3" id="jumlahhari">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Lama
                                         Perjalanan
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lama (Hari) " name="travel_time" value="{{old('travel_time')}}">
+                                        placeholder="Masukkan Lama (Hari) "  name="travel_time" value="{{old('travel_time')}}">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
@@ -550,6 +550,36 @@
                             'Pilih Nomor Rekening');
                 }
             });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the date input elements
+            var startDateInput = document.getElementById("tanggalmulai").querySelector("input[type=date]");
+            var endDateInput = document.getElementById("tanggalakhir").querySelector("input[type=date]");
+            var daysTreatedInput = document.getElementById("jumlahhari").querySelector("input[type=number]");
+
+            // Add event listeners to the date inputs
+            startDateInput.addEventListener("input", updateDaysTreated);
+            endDateInput.addEventListener("input", updateDaysTreated);
+
+            function updateDaysTreated() {
+                var startDate = new Date(startDateInput.value);
+                var endDate = new Date(endDateInput.value);
+
+                // Check if both dates are valid
+                if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+                    // Calculate the difference in days
+                    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    // Update the "Jumlah Hari Rawat" input field
+                    daysTreatedInput.value = diffDays;
+                } else {
+                    // If either date is invalid, clear the "Jumlah Hari Rawat" input field
+                    daysTreatedInput.value = "";
+                }
+            }
         });
     </script>
 @endsection
