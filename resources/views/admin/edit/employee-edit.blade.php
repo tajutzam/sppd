@@ -82,8 +82,9 @@
                                     <label class="form-check-label" for="validationCustom12">
                                         Apakah ini Bendahara ?
                                     </label>
-                                    <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Jabatan " value="{{ $employee->position }}" name="position">
+                                    <input id="positionInput" type="text"
+                                        class="form-control input-default custom-border" placeholder="Masukkan Jabatan "
+                                        value="{{ $employee->position }}" name="position">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Uang
@@ -117,4 +118,34 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            console.log("yas");
+
+
+            if ($('#positionInput').val() == 'Bendahara') {
+                console.log("checked");
+                $("#validationCustom12").prop("checked", true);
+            }
+            if ($('#validationCustom12').is(':checked')) {
+                // Jika checkbox sudah dicentang, aktifkan input teks dan beri nilai "Bendahara"
+                $('#positionInput').prop('disabled', false).val('Bendahara');
+            }
+            $('#validationCustom12').change(function() {
+
+                // Jika checkbox dicentang
+                if (this.checked) {
+                    // Aktifkan input teks dan beri nilai "Bendahara"
+                    $('#positionInput').prop('disabled', false).val('Bendahara').attr('name',
+                        'position');
+
+                } else {
+                    // Jika checkbox tidak dicentang, nonaktifkan input teks dan hapus nilai
+                    $('#inputPosition').prop('disabled', false).val('').attr('name',
+                        'position');
+                }
+            });
+        });
+    </script>
 @endsection

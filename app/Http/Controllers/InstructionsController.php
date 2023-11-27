@@ -263,8 +263,8 @@ class InstructionsController extends Controller
             'tresurer_id.required' => 'Petugas Bendahara Tidak Boleh Kosong'
         ];
         $data = $this->validate($request, $rules, $messages);
-        $this->instructionService->update($data , $id);
-        Alert::success("Sukses" , "Berhasil Memperbarui SPT");
+        $this->instructionService->update($data, $id);
+        Alert::success("Sukses", "Berhasil Memperbarui SPT");
         return redirect("admin/spt");
 
     }
@@ -350,6 +350,8 @@ class InstructionsController extends Controller
         $templateProcessor->setValue('activityName', $data['activity_name']);
         $templateProcessor->setValue('departure', Carbon::parse($data['departure_date'])->format('d-m-Y'));
         $templateProcessor->setValue('headName', $head[0]['name']);
+        $templateProcessor->setValue('category', $data['categories']['name']);
+        $templateProcessor->setValue('year', date('Y'));
         $templateProcessor->setValue('headNip', $head[0]['nip']);
         $templateProcessor->setValue('headRank', $head[0]['rank']);
         $templateProcessor->setValue('now', Carbon::now()->format('d-m-Y'));
