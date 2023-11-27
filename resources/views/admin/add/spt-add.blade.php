@@ -37,6 +37,15 @@
             /* width: 366px !important; */
         }
 
+        .select2-container--default .select2-search--inline .select2-search__field {
+            color: black;
+            background: transparent;
+            border: none;
+            outline: 0;
+            box-shadow: none;
+            -webkit-appearance: textfield;
+        }
+
         .select2-selection__choice {
             height: 40px;
             line-height: 40px;
@@ -207,7 +216,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <div class="col mt-2 mt-sm-0" id="tanggalmulai">
+                                    <div class="col mt-2 mt-sm-0" id="tanggalmulai" id="tanggalmulai">
                                         <label class="text-label form-label ps-2"
                                             style="font-size: 19px; font-weight: 500">Tanggal Berangkat
                                         </label>
@@ -357,8 +366,7 @@
                                         style="font-size: 19px; font-weight: 500">Hadir Dalam
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Hadir Dalam" name="present_in"
-                                        value="{{ old('present_in') }}">
+                                        placeholder="Masukkan Hadir Dalam" name="present_in" value=" -">
                                 </div>
 
                                 <div class="mb-3">
@@ -366,7 +374,7 @@
                                         style="font-size: 19px; font-weight: 500">Arahan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Arahan" name="briefings" value="-">
+                                        placeholder="Masukkan Arahan" name="briefings" value=" -">
 
                                 </div>
 
@@ -375,7 +383,7 @@
                                         style="font-size: 19px; font-weight: 500">Masalah
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Masalah" name="problem" value="-">
+                                        placeholder="Masukkan Masalah" name="problem" value=" -">
                                 </div>
 
                                 <div class="mb-3">
@@ -383,14 +391,14 @@
                                         style="font-size: 19px; font-weight: 500">Saran
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Saran" name="advice" value="-">
+                                        placeholder="Masukkan Saran" name="advice" value=" -">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Lain -Lain
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lain -Lain" name="other" value="-">
+                                        placeholder="Masukkan Lain -Lain" name="other" value=" -">
                                 </div>
 
                                 <div class="mb-4">
@@ -398,7 +406,7 @@
                                         style="font-size: 19px; font-weight: 500">Keterangan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Keterangan" name="description" value="-">
+                                        placeholder="Masukkan Keterangan" name="description" value=" -">
                                 </div>
                                 <button type="submit" class="btn me-2 btn-dark">Kembali</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -560,6 +568,36 @@
                             'Pilih Nomor Rekening');
                 }
             });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the date input elements
+            var startDateInput = document.getElementById("tanggalmulai").querySelector("input[type=date]");
+            var endDateInput = document.getElementById("tanggalakhir").querySelector("input[type=date]");
+            var daysTreatedInput = document.getElementById("jumlahhari").querySelector("input[type=number]");
+
+            // Add event listeners to the date inputs
+            startDateInput.addEventListener("input", updateDaysTreated);
+            endDateInput.addEventListener("input", updateDaysTreated);
+
+            function updateDaysTreated() {
+                var startDate = new Date(startDateInput.value);
+                var endDate = new Date(endDateInput.value);
+
+                // Check if both dates are valid
+                if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+                    // Calculate the difference in days
+                    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    // Update the "Jumlah Hari Rawat" input field
+                    daysTreatedInput.value = diffDays;
+                } else {
+                    // If either date is invalid, clear the "Jumlah Hari Rawat" input field
+                    daysTreatedInput.value = "";
+                }
+            }
         });
     </script>
     <script>

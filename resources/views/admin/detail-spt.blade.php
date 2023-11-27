@@ -96,6 +96,11 @@
                                         </td>
                                     </tr>
                                     <tr>
+                                        <th>Tempat Tujuan</th>
+                                        <td> {{ $data['destination_to']['place']['name'] }}
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <th>Lama Perjalanan</th>
                                         <td> {{ $data['travel_time'] }}
                                         </td>

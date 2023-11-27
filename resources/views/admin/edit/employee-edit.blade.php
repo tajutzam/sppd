@@ -77,6 +77,11 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Jabatan
                                     </label>
+                                    <input class="form-check-input " type="checkbox" value="" id="validationCustom12"
+                                        required="">
+                                    <label class="form-check-label" for="validationCustom12">
+                                        Apakah ini Bendahara ?
+                                    </label>
                                     <input type="text" class="form-control input-default custom-border"
                                         placeholder="Masukkan Jabatan " value="{{ $employee->position }}" name="position">
                                 </div>
@@ -84,21 +89,24 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Uang
                                         Harian</label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Uang Harian" value="{{ $employee->daily_money }}" name="daily_money">
+                                        placeholder="Masukkan Uang Harian" value="{{ $employee->daily_money }}"
+                                        name="daily_money">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Uang
                                         Makan
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Uang Makan " value="{{ $employee->food_money }}" name="food_money">
+                                        placeholder="Masukkan Uang Makan " value="{{ $employee->food_money }}"
+                                        name="food_money">
                                 </div>
                                 <div class="mb-5">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Uang
                                         Transport
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Uang Transport " value="{{ $employee->transport_money }}" name="transport_money">
+                                        placeholder="Masukkan Uang Transport " value="{{ $employee->transport_money }}"
+                                        name="transport_money">
                                 </div>
                                 <a href="{{ route('employee') }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>

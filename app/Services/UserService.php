@@ -66,12 +66,13 @@ class UserService implements Service
         $data = $this->findAllWithoutId($id);
         $this->validate($data, $request);
         try {
-            $this->user->update(
+            $user->update(
                 [
                     'name' => $request['name'],
                     'email' => $request['email'],
                 ]
             );
+         
             return;
         } catch (\Throwable $th) {
             //throw $th;

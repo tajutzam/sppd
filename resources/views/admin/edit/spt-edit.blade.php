@@ -171,9 +171,10 @@
         height: 0.7px; ">
                     <div class="card-body">
                         <div class="basic-form">
-                            <form method="post" action="{{ route('spt-post', ['id' => 1]) }}" method="post"
-                                class="form-valide-with-icon needs-validation" novalidate="" method="get">
+                            <form method="post" action="{{ route('spt-put', ['id' => $data['id']]) }}" method="post"
+                                class="form-valide-with-icon needs-validation" novalidate="">
                                 @csrf
+                                @method('put')
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Nama
                                         Kegiatan
@@ -211,7 +212,7 @@
 
                                 {{-- @dd($data) --}}
                                 <div class="row mb-3">
-                                    <div class="col mt-2 mt-sm-0">
+                                    <div class="col mt-2 mt-sm-0" id="tanggalmulai">
                                         <label class="text-label form-label ps-2"
                                             style="font-size: 19px; font-weight: 500">Tanggal Berangkat
                                         </label>
@@ -224,7 +225,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col mt-2 mt-sm-0 ">
+                                    <div class="col mt-2 mt-sm-0 " id="tanggalakhir">
                                         <label class="text-label form-label ps-2"
                                             style="font-size: 19px; font-weight: 500">Tanggal Pulang
                                         </label>
@@ -244,7 +245,9 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Pegawai Ditugaskan</label>
                                     <select class="js-example-basic-multiple" name="users[]" multiple="multiple">
-
+                                        @foreach ($employees as $item)
+                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @endforeach
                                     </select>
 
                                 </div>
@@ -255,44 +258,63 @@
                                     <select class="js-example-transportation custom-border" name="transportation_id">
 
                                         @foreach ($transportations as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                            <option value="{{ $item['id'] }}"
+                                                {{ $data['transportation_id'] == $item['id'] ? 'selected' : '' }}>
+                                                {{ $item['name'] }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Tempat Berangkat</label>
                                     <select class="js-example-place custom-border" name="place_from">
-
                                         @foreach ($places as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                            <option value="{{ $item['id'] }}"
+                                                {{ $data['destination_from']['place']['id'] == $item['id'] ? 'selected' : '' }}>
+                                                {{ $item['name'] }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
+
+
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Tempat Tujuan</label>
                                     <select class="js-example-destination custom-border" name="place_to">
-
                                         @foreach ($places as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                            <option value="{{ $item['id'] }}"
+                                                {{ $data['destination_to']['place']['id'] == $item['id'] ? 'selected' : '' }}>
+                                                {{ $item['name'] }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-unit form-divided mb-3">
-                                    <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">Tipe
-                                        Tujuan</label>
-                                    <select class="js-example-type custom-border" name="states[]">
 
+                                <div class="form-unit form-divided mb-3">
+                                    <label class="text-label form-label ps-2"
+                                        style="font-size: 19px; font-weight: 500">Tipe
+                                        Tujuan</label>
+                                    <select class="js-example-type custom-border" name="type_destinations_id">
+                                        @foreach ($type_destinations as $item)
+                                            <option value="{{ $item['id'] }}"
+                                                {{ $data['destination_to']['type_destination_id'] == $item['id'] ? 'selected' : '' }}>
+                                                {{ $item['name'] }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3" id="jumlahhari">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Lama
                                         Perjalanan
                                     </label>
+
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lama (Hari) " name="travel_time">
+                                        placeholder="Masukkan Lama (Hari) " name="travel_time"
+                                        value="{{ $data['travel_time'] }}">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
@@ -300,9 +322,11 @@
                                         style="font-size: 19px; font-weight: 500">Akun
                                         Anggaran</label>
                                     <select class="js-example-money custom-border" name="account_id">
-
                                         @foreach ($accounts as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                            <option value="{{ $item['id'] }}"
+                                                {{ $data['account']['id'] == $item['id'] ? 'selected' : '' }}>
+                                                {{ $item['name'] }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -312,7 +336,8 @@
                                         style="font-size: 19px; font-weight: 500">Sudah Diterima Dari
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Terima Dari" name="accept_from">
+                                        placeholder="Masukkan Terima Dari" name="accept_from"
+                                        value="{{ $data['accept_from'] }}">
                                 </div>
 
                                 <div class="mb-3">
@@ -320,14 +345,19 @@
                                         style="font-size: 19px; font-weight: 500">Sub Komponen
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Sub Komponen" name="sub_component">
+                                        placeholder="Masukkan Sub Komponen" name="sub_component"
+                                        value="{{ $data['sub_component'] }}">
                                 </div>
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Bendahara</label>
-                                    <select class="js-example-bendahara custom-border" name="bendahara">
-                                        <option></option>
-
+                                    <select class="js-example-bendahara custom-border" name="tresurer_id">
+                                        @foreach ($tresurers as $item)
+                                            <option value="{{ $item['id'] }}"
+                                                {{ $data['bank_account']['id'] == $item['id'] ? 'selected' : '' }}>
+                                                {{ $item['name'] }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -335,16 +365,19 @@
                                         style="font-size: 19px; font-weight: 500">Jumlah Uang
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Jumlah Uang" name="ammount_money">
+                                        placeholder="Masukkan Jumlah Uang" name="ammount_money"
+                                        value="{{ $data['amount_money'] }}">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Nomor Rekening</label>
                                     <select class="js-example-bank-account custom-border" name="bank_account_id">
-
                                         @foreach ($banks as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['account_number'] }}</option>
+                                            <option value="{{ $item['id'] }}"
+                                                {{ $data['bank_account']['id'] == $item['id'] ? 'selected' : '' }}>
+                                                {{ $item['account_number'] }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -353,7 +386,8 @@
                                         style="font-size: 19px; font-weight: 500">Hadir Dalam
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Hadir Dalam" name="present_in">
+                                        placeholder="Masukkan Hadir Dalam" name="present_in"
+                                        value="{{ $data['present_in'] }}">
                                 </div>
 
                                 <div class="mb-3">
@@ -361,7 +395,7 @@
                                         style="font-size: 19px; font-weight: 500">Arahan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Arahan" name="briefings">
+                                        placeholder="Masukkan Arahan" name="briefings" value="{{ $data['briefings'] }}">
 
                                 </div>
 
@@ -370,7 +404,7 @@
                                         style="font-size: 19px; font-weight: 500">Masalah
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Masalah" name="problem">
+                                        placeholder="Masukkan Masalah" name="problem" value="{{ $data['problem'] }}">
                                 </div>
 
                                 <div class="mb-3">
@@ -378,14 +412,14 @@
                                         style="font-size: 19px; font-weight: 500">Saran
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Saran" name="advice">
+                                        placeholder="Masukkan Saran" name="advice" value="{{ $data['advice'] }}">
                                 </div>
                                 <div class="mb-3">
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Lain -Lain
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Lain -Lain" name="other">
+                                        placeholder="Masukkan Lain -Lain" name="other" value="{{ $data['other'] }}">
                                 </div>
 
                                 <div class="mb-4">
@@ -393,7 +427,8 @@
                                         style="font-size: 19px; font-weight: 500">Keterangan
                                     </label>
                                     <input type="text" class="form-control input-default custom-border"
-                                        placeholder="Masukkan Keterangan" name="description">
+                                        placeholder="Masukkan Keterangan" name="description"
+                                        value="{{ $data['other'] }}">
                                 </div>
                                 <button type="submit" class="btn me-2 btn-dark">Kembali</button>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -555,6 +590,36 @@
                             'Pilih Bendahara');
                 }
             });
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get the date input elements
+            var startDateInput = document.getElementById("tanggalmulai").querySelector("input[type=date]");
+            var endDateInput = document.getElementById("tanggalakhir").querySelector("input[type=date]");
+            var daysTreatedInput = document.getElementById("jumlahhari").querySelector("input[type=number]");
+
+            // Add event listeners to the date inputs
+            startDateInput.addEventListener("input", updateDaysTreated);
+            endDateInput.addEventListener("input", updateDaysTreated);
+
+            function updateDaysTreated() {
+                var startDate = new Date(startDateInput.value);
+                var endDate = new Date(endDateInput.value);
+
+                // Check if both dates are valid
+                if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+                    // Calculate the difference in days
+                    var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    // Update the "Jumlah Hari Rawat" input field
+                    daysTreatedInput.value = diffDays;
+                } else {
+                    // If either date is invalid, clear the "Jumlah Hari Rawat" input field
+                    daysTreatedInput.value = "";
+                }
+            }
         });
     </script>
 @endsection

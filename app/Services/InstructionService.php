@@ -88,6 +88,57 @@ class InstructionService
     }
 
 
+
+    public function update($request, $id)
+    {
+        $instructions = $this->instructions->where('id', $id)->first();
+        if (!isset($instructions)) {dd($id);
+            throw new WebException("Spt tidak ditemukan");
+        }
+
+        
+        $this->employeeService->deleteEmployeesInstructions($id);
+
+
+        $destinationFrom = $this->createDestinationFrom($request['place_from'], $request['type_destinations_id']);
+        $destinationTo = $this->createDestinationTo($request['place_to'], $request['type_destinations_id']);
+
+
+
+        try {
+            //code...
+            $created = $instructions->update([
+                'activity_name' => $request['activity_name'],
+                'sub_activity_name' => $request['sub_activity_name'],
+                'category_id' => $request['category_id'],
+                'departure_date' => Carbon::parse($request['departure_date']),
+                'return_date' => Carbon::parse($request['return_date']),
+                'transportation_id' => $request['transportation_id'],
+                'destination_to_id' => $destinationTo->id,
+                'destination_from_id' => $destinationFrom->id,
+                'travel_time' => $request['travel_time'],
+                'budget_account_id' => $request['account_id'],
+                'bank_account_id' => $request['bank_account_id'],
+                'present_in' => $request['present_in'],
+                'accept_from' => $request['accept_from'],
+                'sub_component' => $request['sub_component'],
+                'amount_money' => $request['ammount_money'],
+                'briefings' => $request['briefings'],
+                'problem' => $request['problem'],
+                'advice' => $request['advice'],
+                'other' => $request['other'],
+                'description' => $request['description'],
+                'treasurer_id' => $request['tresurer_id']
+            ]);
+            $this->createEmployeesInstruction($request['users'], $id);
+            return;
+        } catch (\Throwable $th) {
+            //throw $th;
+            throw new WebException($th->getMessage());
+        }
+    }
+
+
     private function createDestinationTo($placeId, $typeId)
     {
         $request = [
