@@ -77,6 +77,8 @@ Route::middleware([AdminMiddleware::class])->prefix('admin')->group(function () 
         Route::put("cadress/edit/{id}", [EmployeeController::class, "updateCadress"])->name('cadress-put');
         Route::post("cadress/import", [EmployeeController::class, "importCadress"])->name("cadress-import");
         Route::post("cadress", [EmployeeController::class, "storeCadress"])->name('cadress-post');
+        Route::get("cadress/export", [EmployeeController::class, "export_cadress"])->name('cadress-export');
+
         Route::get("cadress/create", function () {
             return view('admin.add.cadress-add');
         })->name('add-cadress');

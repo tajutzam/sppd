@@ -238,7 +238,12 @@ class EmployeeController extends Controller
 
     public function export()
     {
-        return Excel::download(new EmployeeExport(), "employees.xlsx");
+        return Excel::download(new EmployeeExport("employee"), "employees.xlsx");
     }
 
+
+    public function export_cadress()
+    {
+        return Excel::download(new EmployeeExport("cadress"), "employees.xlsx");
+    }
 }
