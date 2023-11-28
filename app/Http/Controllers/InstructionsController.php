@@ -346,16 +346,19 @@ class InstructionsController extends Controller
 
         $terbilangAmount = Terbilang::make($data['amount_money'], " Rupiah");
 
+
         $templateProcessor->setValue('total', $this->formatCurrency($total, ));
         $templateProcessor->setValue('activityName', $data['activity_name']);
         $templateProcessor->setValue('departure', Carbon::parse($data['departure_date'])->format('d-m-Y'));
+        $templateProcessor->setValue('departureDate', Carbon::parse($data['departure_date'])->format('d-m-Y'));
         $templateProcessor->setValue('headName', $head[0]['name']);
-        $templateProcessor->setValue('category', $data['categories']['name']);
+        $templateProcessor->setValue('category', str_replace('Perjalanan' , '' , $data['categories']['name']));
         $templateProcessor->setValue('year', date('Y'));
         $templateProcessor->setValue('headNip', $head[0]['nip']);
         $templateProcessor->setValue('headRank', $head[0]['rank']);
         $templateProcessor->setValue('now', Carbon::now()->format('d-m-Y'));
         $templateProcessor->setValue('to', $data['destination_to']['place']['name']);
+        $templateProcessor->setValue('placeTo', $data['destination_to']['place']['name']);
         $templateProcessor->setValue('employeeFirst', $data['employees'][0]['employee']['name']);
         $templateProcessor->setValue('employeeNipFirst', $data['employees'][0]['employee']['nip']);
         $templateProcessor->setValue('present_in', $data['present_in']);
@@ -370,6 +373,7 @@ class InstructionsController extends Controller
         $templateProcessor->setValue('terbilang', Str::upper($terbilangAmount));
         $templateProcessor->setValue('tresurer', $data['treasurer']['name']);
         $templateProcessor->setValue('tresurerNip', $data['treasurer']['nip']);
+        $templateProcessor->setValue('sub_component', $data['sub_component']);
 
         $temporaryPath = tempnam(sys_get_temp_dir(), 'word_temp');
         $templateProcessor->saveAs($temporaryPath);
@@ -413,6 +417,7 @@ class InstructionsController extends Controller
         $templateProcessor->setValue('placeFrom', $data['destination_from']['place']['name']);
         $templateProcessor->setValue('placeTo', $data['destination_to']['place']['name']);
         $templateProcessor->setValue('travel_time', $data['travel_time']);
+        $templateProcessor->setValue('sub_component', $data['sub_component']);
         $templateProcessor->setValue('placeFrom', $data['destination_from']['place']['name']);
 
 

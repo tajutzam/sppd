@@ -36,10 +36,10 @@
                         <h2 class="card-title " style="font-weight: bold; font-size: 25px">Data SPT</h2>
                         <div>
 
-                            <a class="btn me-2 btn-dark" {{ route('spt') }}>Kembali</a>
+                            <a class="btn me-2 btn-dark mb-3" href="{{ route('spt') }}">Kembali</a>
 
 
-                            <a href="{{ route('spt-export', ['id' => $data['id']]) }}" class="btn me-2 btn-success">Cetak
+                            <a href="{{ route('spt-export', ['id' => $data['id']]) }}" class="btn me-2 btn-success mb-3">Cetak
                                 SPT,
                                 Laporan &
                                 Kuitansi</a>

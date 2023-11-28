@@ -245,8 +245,20 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Pegawai Ditugaskan</label>
                                     <select class="js-example-basic-multiple" name="users[]" multiple="multiple">
-                                        @foreach ($employees as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                        @foreach ($employees as $key => $item)
+                                            @php
+                                                $selected = false;
+                                                foreach ($data['employees'] as $valueEmployee) {
+                                                    # code...
+                                                    if ($valueEmployee['employee']['id'] == $item['id']) {
+                                                        $selected = true;
+                                                    }
+                                                }
+                                            @endphp
+                                            <option value="{{ $item['id'] }}"
+                                                @if ($selected) selected @endif>
+                                                {{ $item['name'] }}
+                                            </option>
                                         @endforeach
                                     </select>
 
