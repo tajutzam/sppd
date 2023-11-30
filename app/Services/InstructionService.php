@@ -40,6 +40,7 @@ class InstructionService
     public function create($request)
     {
 
+        $this->employeeService->validateRole($request['users']);
 
         foreach ($request['users'] as $key => $value) {
             # code...
@@ -92,11 +93,12 @@ class InstructionService
     public function update($request, $id)
     {
         $instructions = $this->instructions->where('id', $id)->first();
-        if (!isset($instructions)) {dd($id);
+        if (!isset($instructions)) {
+            dd($id);
             throw new WebException("Spt tidak ditemukan");
         }
 
-        
+
         $this->employeeService->deleteEmployeesInstructions($id);
 
 

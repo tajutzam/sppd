@@ -506,7 +506,7 @@
                 <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                     align="left" valign=bottom>
                     <font color="#000000">
-                        {{ \Carbon\Carbon::createFromTimestamp($item['instructions'][0]['created_at'])->format('Y-m-d') }}
+                        {{ \Carbon\Carbon::parse($item['instructions'][0]['created_at'])->format('Y-m-d') }}
                     </font>
                 </td>
                 <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
@@ -536,20 +536,20 @@
                 <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                     align="left" valign=bottom>
                     <font color="#000000">
-                        {{ \Carbon\Carbon::createFromTimestamp($item['instructions'][0]['instructions']['departure_date'])->format('Y-m-d') }}
+                        {{ \Carbon\Carbon::parse($item['instructions'][0]['instructions']['departure_date'])->format('Y-m-d') }}
                     </font>
                 </td>
                 <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                     align="left" valign=bottom>
-                    {{ \Carbon\Carbon::createFromTimestamp($item['instructions'][0]['instructions']['return_date'])->format('Y-m-d') }}
+                    {{ \Carbon\Carbon::parse($item['instructions'][0]['instructions']['return_date'])->format('Y-m-d') }}
                     <font color="#000000"></font>
                 </td>
                 <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                     align="right" valign=bottom sdval="1" sdnum="1033;">
                     <font color="#000000">
                         @php
-                            $departureDate = \Carbon\Carbon::createFromTimestamp($item['instructions'][0]['instructions']['departure_date']);
-                            $returnDate = \Carbon\Carbon::createFromTimestamp($item['instructions'][0]['instructions']['return_date']);
+                            $departureDate = \Carbon\Carbon::parse($item['instructions'][0]['instructions']['departure_date']);
+                            $returnDate = \Carbon\Carbon::parse($item['instructions'][0]['instructions']['return_date']);
 
                             // Memastikan bahwa diffInDays minimal 1 jika departure_date dan return_date sama
                             $diffInDays = $departureDate->eq($returnDate) ? 1 : $departureDate->diffInDays($returnDate);

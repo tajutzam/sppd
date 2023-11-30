@@ -101,8 +101,8 @@ class InstructionsController extends Controller
             'activity_name' => 'required',
             'sub_activity_name' => 'required',
             'category_id' => 'required',
-            'departure_date' => 'required|date|after:yesterday',
-            'return_date' => 'required|date|after:yesterday',
+            'departure_date' => 'required|date',
+            'return_date' => 'required|date',
             'users' => 'required|array|min:1',
             'transportation_id' => 'required',
             'place_from' => 'required',
@@ -146,8 +146,6 @@ class InstructionsController extends Controller
             "description.required" => "Deskripsi Tidak boleh kosong",
             'users.required' => 'Pegawai Harus Di isi',
             'other' => 'Lain Lain Harus Diisi',
-            'departure_date.after' => 'Tanggal Berangkat Tidak Valid',
-            'return_date.after' => 'Tanggal Kembali Tidak Valid',
             'tresurer_id.required' => 'Petugas Bendahara Tidak Boleh Kosong'
         ];
         $data = $this->validate($request, $rules, $messages);
@@ -213,8 +211,8 @@ class InstructionsController extends Controller
             'activity_name' => 'required',
             'sub_activity_name' => 'required',
             'category_id' => 'required',
-            'departure_date' => 'required|date|after:yesterday',
-            'return_date' => 'required|date|after:yesterday',
+            'departure_date' => 'required',
+            'return_date' => 'required',
             'users' => 'required|array|min:1',
             'transportation_id' => 'required',
             'place_from' => 'required',
@@ -298,9 +296,6 @@ class InstructionsController extends Controller
         }
 
         $templateProcessor->cloneRow('rowEmployee', sizeof($data['employees']));
-        // $templateProcessor->cloneRow('rankRow', sizeof($data['employees']));
-        // $templateProcessor->cloneRow('nipRow', sizeof($data['employees']));
-        // $templateProcessor->cloneRow('positionRow', sizeof($data['employees']));
         $templateProcessor->cloneRow('employeeRow', sizeof($data['employees']));
         $templateProcessor->cloneRow('rowCost', sizeof($data['employees']));
 
@@ -318,7 +313,15 @@ class InstructionsController extends Controller
         $categoryName = $data['categories']['name'];
         if ($categoryName == 'Perjalanan Kurang Dari 8 Jam') {
             $transportation = 60000;
+        } else {
+            $transportation = (int) $data['amount_money'] / sizeof($data['employees']);
         }
+
+
+
+        usort($data['employees'], function ($a, $b) {
+            return $a['employee']['role'] === 'employee' ? -1 : 1;
+        });
 
         $total = 0;
         foreach ($data['employees'] as $key => $value) {
@@ -344,22 +347,29 @@ class InstructionsController extends Controller
             $templateProcessor->setValue('costName#' . $index, $value['employee']['name']);
         }
 
-        $terbilangAmount = Terbilang::make($data['amount_money'], " Rupiah");
+        $terbilangAmount = Terbilang::make($total, " Rupiah");
 
+        $employeeFirst = "";
+        foreach ($data['employees'] as $key => $value) {
+            # code...
+            if ($value['employee']['role'] == 'employee') {
+                $employeeFirst = $value['employee']['name'];
+            }
+        }
 
         $templateProcessor->setValue('total', $this->formatCurrency($total, ));
         $templateProcessor->setValue('activityName', $data['activity_name']);
         $templateProcessor->setValue('departure', Carbon::parse($data['departure_date'])->format('d-m-Y'));
         $templateProcessor->setValue('departureDate', Carbon::parse($data['departure_date'])->format('d-m-Y'));
         $templateProcessor->setValue('headName', $head[0]['name']);
-        $templateProcessor->setValue('category', str_replace('Perjalanan' , '' , $data['categories']['name']));
+        $templateProcessor->setValue('category', str_replace('Perjalanan', '', $data['categories']['name']));
         $templateProcessor->setValue('year', date('Y'));
         $templateProcessor->setValue('headNip', $head[0]['nip']);
         $templateProcessor->setValue('headRank', $head[0]['rank']);
         $templateProcessor->setValue('now', Carbon::now()->format('d-m-Y'));
         $templateProcessor->setValue('to', $data['destination_to']['place']['name']);
         $templateProcessor->setValue('placeTo', $data['destination_to']['place']['name']);
-        $templateProcessor->setValue('employeeFirst', $data['employees'][0]['employee']['name']);
+        $templateProcessor->setValue('employeeFirst', $employeeFirst);
         $templateProcessor->setValue('employeeNipFirst', $data['employees'][0]['employee']['nip']);
         $templateProcessor->setValue('present_in', $data['present_in']);
         $templateProcessor->setValue('briefings', $data['briefings']);
@@ -369,7 +379,7 @@ class InstructionsController extends Controller
         $templateProcessor->setValue('account_number', $data['bank_account']['account_number']);
         $templateProcessor->setValue('accept_from', $data['accept_from']);
         $templateProcessor->setValue('sub_activity_name', $data['sub_activity_name']);
-        $templateProcessor->setValue('amount_money', $this->formatCurrency($data['amount_money']));
+        $templateProcessor->setValue('amount_money', $this->formatCurrency($total));
         $templateProcessor->setValue('terbilang', Str::upper($terbilangAmount));
         $templateProcessor->setValue('tresurer', $data['treasurer']['name']);
         $templateProcessor->setValue('tresurerNip', $data['treasurer']['nip']);

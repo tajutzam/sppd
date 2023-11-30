@@ -26,6 +26,7 @@ class BkuExport implements FromView, WithEvents
         //
         $data = $this->instructionService->bkuFindAll();
         // dd($data);
+        // dd($data);
         return view('exports.bku-export', ['data' => $data]);
     }
 

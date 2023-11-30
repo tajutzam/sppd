@@ -223,11 +223,10 @@
                                         <div class="input-group " data-placement="left" data-align="top"
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input type="date" id="berangkat" min="<?php echo date('Y-m-d'); ?>"
+                                            <input type="date" id="berangkat" 
                                                 class="form-control input-default custom-border" name="departure_date"
                                                 value="{{ old('departure_date') }}">
                                         </div>
-
                                     </div>
                                     <div class="col mt-2 mt-sm-0 " id="tanggalakhir">
                                         <label class="text-label form-label ps-2"
@@ -236,19 +235,23 @@
                                         <div class="input-group " data-placement="left" data-align="top"
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input type="date" min="<?php echo date('Y-m-d'); ?>"
+                                            <input type="date" 
                                                 class="form-control input-default custom-border" name="return_date"
                                                 value="{{ old('return_date') }}">
                                         </div>
                                     </div>
                                 </div>
 
+                               
+
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Pegawai Ditugaskan</label>
                                     <select class="js-example-basic-multiple" name="users[]" multiple="multiple">
                                         @foreach ($employees as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                            <option value=" {{ $item['id'] }} "
+                                                {{ collect(old('users'))->contains($item['id']) ? 'selected' : '' }}>
+                                                {{ $item['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -408,7 +411,7 @@
                                     <input type="text" class="form-control input-default custom-border"
                                         placeholder="Masukkan Keterangan" name="description" value=" -">
                                 </div>
-                                <button type="submit" class="btn me-2 btn-dark">Kembali</button>
+                                <a href="{{ route('spt') }}" class="btn me-2 btn-dark">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Simpan</button>
                             </form>
 
