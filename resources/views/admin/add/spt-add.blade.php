@@ -206,7 +206,8 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Kategori
                                         Perjalanan</label>
-                                    <select class="js-example-category custom-border" name="category_id">
+                                    <select class="js-example-category custom-border" name="category_id"
+                                        id="categorySelect">
 
                                         @foreach ($categories as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
@@ -223,7 +224,7 @@
                                         <div class="input-group " data-placement="left" data-align="top"
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input type="date" id="berangkat" 
+                                            <input type="date" id="berangkat"
                                                 class="form-control input-default custom-border" name="departure_date"
                                                 value="{{ old('departure_date') }}">
                                         </div>
@@ -235,19 +236,19 @@
                                         <div class="input-group " data-placement="left" data-align="top"
                                             data-autobtn-close="true">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input type="date" 
-                                                class="form-control input-default custom-border" name="return_date"
-                                                value="{{ old('return_date') }}">
+                                            <input type="date" class="form-control input-default custom-border"
+                                                name="return_date" value="{{ old('return_date') }}">
                                         </div>
                                     </div>
                                 </div>
 
-                               
+
 
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Pegawai Ditugaskan</label>
-                                    <select class="js-example-basic-multiple" name="users[]" multiple="multiple">
+                                    <select class="js-example-basic-multiple" name="users[]" multiple="multiple"
+                                        id="employeeSelect">
                                         @foreach ($employees as $item)
                                             <option value=" {{ $item['id'] }} "
                                                 {{ collect(old('users'))->contains($item['id']) ? 'selected' : '' }}>
@@ -351,7 +352,7 @@
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
                                         placeholder="Masukkan Jumlah Uang" name="ammount_money"
-                                        value="{{ old('ammount_money') }}">
+                                        value="{{ old('ammount_money') }}" id="amount_money">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
@@ -431,6 +432,34 @@
         });
 
         $(document).ready(function() {
+
+            $('#employeeSelect').change(function() {
+                // Get the number of selected options
+                updateAmountMoney();
+            });
+
+            $('#categorySelect').change(function() {
+                // Get the number of selected options
+                updateAmountMoney();
+            });
+
+            function updateAmountMoney() {
+                var employeeSelectedCount = $('#employeeSelect option:selected').length;
+                var selectedCategory = $('#categorySelect').val();
+                console.log(selectedCategory);
+                var categories = {!! json_encode($categories) !!};
+                const filteredCategories = categories.filter(category => category.name.toLowerCase()
+                    .includes('kurang'));
+                var perEmployeeMoney = 0;
+                if (selectedCategory === filteredCategories[0].id) {
+                    var perEmployeeMoney = 60000;
+                } else {
+                    var perEmployeeMoney = 0;
+                }
+                var amountMoney = employeeSelectedCount * perEmployeeMoney;
+                $('#amount_money').val(amountMoney);
+            }
+
 
             $(".js-example-basic-multiple").select2({
                 placeholder: "Pilih Pegawai"

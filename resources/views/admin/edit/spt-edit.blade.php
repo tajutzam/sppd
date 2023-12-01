@@ -199,7 +199,8 @@
                                     <label class="text-label form-label ps-2"
                                         style="font-size: 19px; font-weight: 500">Kategori
                                         Perjalanan</label>
-                                    <select class="js-example-category custom-border" name="category_id">
+                                    <select class="js-example-category custom-border" name="category_id"
+                                        id="categorySelect">
                                         @foreach ($categories as $item)
                                             <option value="{{ $item['id'] }}"
                                                 {{ $item['id'] == $data['category_id'] ? 'selected' : '' }}>
@@ -207,7 +208,6 @@
                                             </option>
                                         @endforeach
                                     </select>
-
                                 </div>
 
                                 {{-- @dd($data) --}}
@@ -244,7 +244,8 @@
                                 <div class="form-unit form-divided mb-3">
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Pegawai Ditugaskan</label>
-                                    <select class="js-example-basic-multiple" name="users[]" multiple="multiple">
+                                    <select class="js-example-basic-multiple" name="users[]" multiple="multiple"
+                                        id="employeeSelect">
                                         @foreach ($employees as $key => $item)
                                             @php
                                                 $selected = false;
@@ -378,7 +379,7 @@
                                     </label>
                                     <input type="number" class="form-control input-default custom-border"
                                         placeholder="Masukkan Jumlah Uang" name="ammount_money"
-                                        value="{{ $data['amount_money'] }}">
+                                        value="{{ $data['amount_money'] }}" id="amount_money">
                                 </div>
 
                                 <div class="form-unit form-divided mb-3">
@@ -578,6 +579,34 @@
 
     <script>
         $(document).ready(function() {
+
+
+            $('#employeeSelect').change(function() {
+                // Get the number of selected options
+                updateAmountMoney();
+            });
+
+            $('#categorySelect').change(function() {
+                // Get the number of selected options
+                updateAmountMoney();
+            });
+
+            function updateAmountMoney() {
+                var employeeSelectedCount = $('#employeeSelect option:selected').length;
+                var selectedCategory = $('#categorySelect').val();
+                console.log(selectedCategory);
+                var categories = {!! json_encode($categories) !!};
+                const filteredCategories = categories.filter(category => category.name.toLowerCase()
+                    .includes('kurang'));
+                var perEmployeeMoney = 0;
+                if (selectedCategory === filteredCategories[0].id) {
+                    var perEmployeeMoney = 60000;
+                } else {
+                    var perEmployeeMoney = 0;
+                }
+                var amountMoney = employeeSelectedCount * perEmployeeMoney;
+                $('#amount_money').val(amountMoney);
+            }
 
             $(".js-example-bank-account").select2({
                 placeholder: "Pilih Nomor Rekening"
