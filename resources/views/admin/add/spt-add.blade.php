@@ -271,7 +271,6 @@
                                     <label class="text-label form-label ps-2" style="font-size: 19px; font-weight: 500">
                                         Tempat Berangkat</label>
                                     <select class="js-example-place custom-border" name="place_from">
-
                                         @foreach ($places as $item)
                                             <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
                                         @endforeach

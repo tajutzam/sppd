@@ -131,8 +131,7 @@
     <script>
         $(document).ready(function() {
             // Capture click event on the delete button
-            $('.btn-delete').on('click', function() {
-                // Retrieve the data-id attribute from the clicked button
+            $(document).on('click', '.btn-delete', function() {
                 var id = $(this).data('id');
                 var name = $(this).data('name');
 
